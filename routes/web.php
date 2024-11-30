@@ -2,6 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\UserController;
+
+
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,10 +18,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->middleware(['auth' , 'employee']);
-
 Auth::routes();
 
+
+
+// <!--==========================================  (HOME)  ========================================================================================================================-->
+Route::get('/', function () {
+    return view('welcome');
+});
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+// <!--==========================================  (Dashboard)  ============================================================================================================================-->
+Route::get('/dashboard', function () {
+    return view('layouts.dashboard_master');
+})->name('dashboard')->middleware(['auth' , 'role']);
+
+
+
+
+// <!--==========================================  (Users)  ===============================================================================================================-->
+Route::resource('users', UserController::class)->middleware(['auth' , 'manager']);
+
