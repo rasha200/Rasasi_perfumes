@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SubCategoryController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
 
 
@@ -24,13 +27,11 @@ Auth::routes();
 
 
 // <!--==========================================  (HOME)  ========================================================================================================================-->
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-
+Route::get('/', [HomeController::class, 'index']);
 // <!--==========================================  (Dashboard)  ============================================================================================================================-->
 Route::get('/dashboard', function () {
     return view('layouts.dashboard_master');
@@ -73,3 +74,19 @@ Route::middleware(['auth', 'role'])->group(function () {
 // Route::get('/contact', function () {
 //     return view('contact');
 // })->name("contact");
+// <!--==========================================  (Categories)  =================================================================================================================-->
+Route::resource('categories', CategoryController::class)->middleware(['auth' , 'role']);
+
+
+
+
+
+// <!--==========================================  (Sub Categories)  =================================================================================================================-->
+Route::resource('subCategories', SubCategoryController::class)->middleware(['auth' , 'role']);
+
+
+
+
+// <!--==========================================  (Contacts)  ==================================================================================================================-->
+
+// Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');
