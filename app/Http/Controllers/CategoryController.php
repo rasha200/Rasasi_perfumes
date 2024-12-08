@@ -101,7 +101,7 @@ class CategoryController extends Controller
 
         return to_route('categories.index')->with('success', 'Category updated successfully');
     }
-
+//test
     /**
      * Remove the specified resource from storage.
      */
