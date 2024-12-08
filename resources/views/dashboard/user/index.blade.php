@@ -63,7 +63,7 @@
                         @foreach($users as $user)
                         <tr>
                           <td>{{$user->id}}</td>
-                          <td title="view">
+                          <td>
                             <a href="{{ route('users.show', $user->id) }}" 
                               style="color:#000000;"
                                onmouseover="this.style.color='#0dcaf0';" 
@@ -128,13 +128,14 @@
                           
 
 
-           
+                  </div>
 
 <!-- Custom Pagination -->
 
 
 
-             
+                </div>
+              </div>
 
 <!-- Custom Confirmation Modal -->
 <div id="confirmationModal"
