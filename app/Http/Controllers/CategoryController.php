@@ -112,5 +112,3 @@ class CategoryController extends Controller
         return to_route('categories.index')->with('success', 'Category deleted');
     }
 }
-
-// conflict
