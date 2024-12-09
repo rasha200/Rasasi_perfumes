@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Category;
+use App\Models\SubCategory;
+use App\Models\Product;
 
 use Illuminate\Http\Request;
 
@@ -23,6 +26,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+
+        $categories = Category::with('subCategories')->get();
+       $products = Product::with('product_images')->get();
+        
+
+        return view('landing_page', ['categories'=>$categories ,'products'=>$products ]);
     }
 }

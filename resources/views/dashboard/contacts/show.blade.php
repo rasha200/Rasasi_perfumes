@@ -17,6 +17,12 @@
             <hr class="my-3">
         </div>
 
+        <!-- Mobile Email -->
+        <div class="mb-4">
+            <p class="fw-bold text-secondary"><i class="bi bi-telephone-fill"></i> <strong>Mobile:</strong> {{$contact->mobile}}</p>
+            <hr class="my-3">
+        </div>
+
         <!-- User Email -->
         <div class="mb-4">
             <p class="fw-bold text-secondary"><i class="bi bi-envelope"></i> <strong>User Email:</strong> {{$contact->email}}</p>
