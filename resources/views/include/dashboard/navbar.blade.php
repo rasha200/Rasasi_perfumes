@@ -3,8 +3,8 @@
 
     <div class="d-flex align-items-center justify-content-between">
       <div class="logo d-flex align-items-center">
-        <img src="{{asset("assets/img/Pukka nich Perfume logo-1.jpg")}}" alt="">
-        <span class="d-none d-lg-block">Pukka nich</span>
+        <img src="{{asset("assets/img/logo.jpg")}}" alt="">
+        
       </div>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->

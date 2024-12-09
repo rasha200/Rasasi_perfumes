@@ -7,7 +7,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
-
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductImageController;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -32,6 +33,8 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/', [HomeController::class, 'index']);
+
+
 // <!--==========================================  (Dashboard)  ============================================================================================================================-->
 Route::get('/dashboard', function () {
     return view('layouts.dashboard_master');
@@ -59,6 +62,16 @@ Route::resource('subCategories', SubCategoryController::class)->middleware(['aut
 
 
 
-// <!--==========================================  (Contacts)  ==================================================================================================================-->
+// <!--==========================================  (Products)  ===================================================================================================================-->
+Route::resource('products', ProductController::class)->middleware(['auth' , 'role']);
+Route::delete('/product_images/{product_image}', [productImageController::class, 'destroy'])->name('product_images.destroy')->middleware(['auth' , 'role']);
+Route::get('/subcategory/{id}', [ProductController::class, 'productsBySubCategory'])->name('products.bySubCategory');
+Route::get('/category/{id}', [ProductController::class, 'productsByCategory'])->name('products.byCategory');
 
-Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');
+
+
+
+
+
+
+

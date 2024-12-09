@@ -17,7 +17,7 @@
         <p><strong>Role:</strong> {{ $user->role }}</p>
 
     
-        <a href="{{ route('users.index') }}" class="btn btn-outline-info btn-fw">Back to list</a>
+        <a href="{{ route('users.index') }}" class="btn btn-info btn-fw">Back to list</a>
        
     </div>
 </div>

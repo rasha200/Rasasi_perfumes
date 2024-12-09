@@ -10,12 +10,16 @@
         </a>
       </li><!-- End Dashboard Nav -->
 
+
+      @if(Auth::user()->role == 'manager')
       <li class="nav-item">
         <a class="nav-link " href="{{route('users.index')}}">
           <i class="bi bi-person"></i>
           <span>Users</span>
         </a>
       </li>
+      @endif
+
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{route('categories.index')}}">
@@ -27,28 +31,28 @@
 
 
       <li class="nav-item">
-        <a class="nav-link collapsed"  href="{{route('subCategories.index')}}">
+        <a class="nav-link collapsed" href="{{route('subCategories.index')}}">
           <i class="bi bi-journal-text"></i><span>Sub Categories</span></i>
         </a>
     
       </li><!-- End Forms Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+        <a class="nav-link collapsed" href="{{route('products.index')}}">
           <i class="bi bi-layout-text-window-reverse"></i><span>Products</span></i>
         </a>
      
       </li><!-- End Tables Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
+        <a class="nav-link collapsed" href="#">
           <i class="bi bi-bar-chart"></i><span>Orders</span></i>
         </a>
   
       </li><!-- End Charts Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
+        <a class="nav-link collapsed" href="#">
           <i class="bi bi-gem"></i><span>Contact us</span></i>
         </a>
   

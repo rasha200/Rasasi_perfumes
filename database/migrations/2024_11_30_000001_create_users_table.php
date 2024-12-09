@@ -17,10 +17,11 @@ return new class extends Migration
             $table->string('Lname');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('mobile');
-            $table->string('password');
             $table->enum('role', ['user', 'employee', 'manager'])->default('user');
 
+            $table->string('mobile');
+            $table->string('password');
+           
             $table->softDeletes(); 
             $table->rememberToken();
             $table->timestamps();

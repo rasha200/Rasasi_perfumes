@@ -1208,7 +1208,7 @@ table tr:last-child td, table tr:last-child th {
 	font-size: 24px;
 	line-height: 1;
 	color: #f5f5f5;
-	background-color: #ab8e66;
+	background-color: #900A07;
 	z-index: 1;
 	cursor: pointer;
 	border-radius: 50%;
@@ -1281,7 +1281,7 @@ table tr:last-child td, table tr:last-child th {
 	left: -2px;
 	right: -2px;
 	bottom: -2px;
-	border: 2px solid #ab8e66;
+	border: 2px solid #900A07;
 	border-radius: 50%;
 }
 .slick-dots li button {
@@ -1950,7 +1950,7 @@ table tr:last-child td, table tr:last-child th {
 	position: absolute;
 	left: 0;
 	bottom: 0;
-	border-bottom: 2px solid #ab8e66;
+	border-bottom: 2px solid #900A07;
 	width: 30px;
 }
 .mega-menu .stelina-custommenu ul {
@@ -2677,7 +2677,7 @@ blockquote .author .desc {
 	margin-bottom: 10px;
 }
 .stelina-iconbox-wrapp.default {
-	background: #ab8e66;
+	background: #900A07;
 	padding: 50px 0;
 }
 .stelina-iconbox-wrapp.layout2 .stelina-iconbox.default .iconbox-inner .content .title {
@@ -3434,7 +3434,7 @@ blockquote .author .desc {
 	display: block;
 }
 .backtotop:hover {
-	background: #ab8e66;
+	background: #900A07;
 	color: #fff !important;
 }
 /*coppyright*/
@@ -3443,7 +3443,7 @@ blockquote .author .desc {
 	padding: 5px 0;
 }
 .coppyright a {
-	color: #ab8e66;
+	color: #900A07;
 }
 /*stelina-payment*/
 .footer-end .stelina-payment {
@@ -3600,7 +3600,7 @@ blockquote .author .desc {
 .pagination .page-numbers.current, .pagination .page-numbers:hover {
 	color: #fff;
 	border-color: transparent;
-	background-color: #ab8e66;
+	background-color: #900A07;
 }
 .pagination .page-numbers .icon {
 	font-weight: 600;
@@ -3645,7 +3645,7 @@ blockquote .author .desc {
 .widget .widgettitle::before {
 	content: "";
 	width: 25px;
-	border-top: 2px solid #ab8e66;
+	border-top: 2px solid #900A07;
 	position: absolute;
 	display: inline-block;
 	left: 0;
@@ -3802,7 +3802,7 @@ blockquote .author .desc {
 	border: none;
 }
 .widget_filter_price .ui-slider .ui-slider-range {
-	background: #ab8e66;
+	background: #900A07;
 }
 .widget_filter_price .ui-slider .ui-slider-handle {
 	width: 0;
@@ -3815,13 +3815,13 @@ blockquote .author .desc {
 	outline: 0 none;
 	position: absolute;
 	z-index: 2;
-	border-color: #ab8e66 transparent;
+	border-color: #900A07 transparent;
 }
 .widget_filter_price .ui-slider .ui-slider-handle::before {
 	content: '';
 	border-style: solid;
 	border-width: 8px 6px 0 6px;
-	border-color: #ab8e66 transparent;
+	border-color: #900A07 transparent;
 }
 .widget_filter_price .price-slider-amount {
 	margin-top: 25px;
@@ -4088,7 +4088,7 @@ blockquote .author .desc {
 	vertical-align: top;
 }
 .grid-view-mode .modes-mode.active {
-	color: #ab8e66;
+	color: #900A07;
 }
 .grid-view-mode .modes-mode.mode-grid::before {
 	content: "\f118";
@@ -4125,7 +4125,7 @@ ul.list-products {
 }
 .product-item:hover .product-inner {
 	z-index: 2;
-	border-color: #ab8e66;
+	border-color: #900A07;
 }
 .product-item .product-top {
 	overflow: hidden;
@@ -4147,7 +4147,7 @@ ul.list-products {
 	min-width: 44px;
 	padding: 0 5px;
 	text-align: center;
-	background-color: #ab8e66;
+	background-color: #900A07;
 	color: #fff;
 	position: relative;
 }
@@ -4217,7 +4217,7 @@ ul.list-products {
 	font-weight: 500;
 	margin: 0;
 	margin-bottom: 4px;
-	color: #ab8e66;
+	color: #900A07;
 }
 .product-item.style-list .product-name {
 	font-size: 22px;
@@ -4232,7 +4232,7 @@ ul.list-products {
 	transform: translate(-50%, -50%);
 	left: 50%;
 	text-align: center;
-	background-color: #ab8e66;
+	background-color: #900A07;
 	border-radius: 46px;
 	width: 148px;
 	opacity: 0;
@@ -4721,7 +4721,7 @@ ul.list-products {
 .stelina-contact-info .item .icon {
 	display: inline-block;
 	float: left;
-	border: 1px solid #ab8e66;
+	border: 1px solid #900A07;
 	border-radius: 50%;
 	width: 42px;
 	height: 42px;
@@ -4732,7 +4732,7 @@ ul.list-products {
 .stelina-contact-info .item .icon::before {
 	font-family: 'FontAwesome';
 	font-size: 20px;
-	color: #ab8e66;
+	color: #900A07;
 	display: inline-block;
 	text-align: center;
 }
@@ -5020,7 +5020,7 @@ ul.list-products {
 	left: 3px;
 	font-size: 60px;
 	bottom: 20px;
-	color: #ab8e66;
+	color: #900A07;
 }
 .stelina-iconbox .content .title {
 	font-size: 15px;
@@ -5209,7 +5209,7 @@ ul.list-products {
 	position: absolute;
 	left: 0;
 	bottom: 0;
-	border-bottom: 2px solid #ab8e66;
+	border-bottom: 2px solid #900A07;
 	width: 30px;
 }
 .shipping-address .form-row:not(.form-row-last) {
@@ -5440,7 +5440,7 @@ ul.list-products {
 	border-radius: 0;
 }
 .details-thumd .thumbnails_carousel .owl-item a.active::before {
-	border-color: #ab8e66;
+	border-color: #900A07;
 }
 .details-thumd .thumbnails_carousel .owl-item img {
 	margin: 0 auto;
@@ -5808,7 +5808,7 @@ ul.list-products {
 	position: absolute;
 	content: '';
 	width: 70px;
-	border-bottom: 4px solid #ab8e66;
+	border-bottom: 4px solid #900A07;
 	bottom: 0;
 	left: 50%;
 	-webkit-transform: translateX(-50%);
@@ -5883,7 +5883,7 @@ ul.list-products {
 	overflow: hidden;
 }
 .slider-item .title-small {
-	color: #ab8e66;
+	color: #900A07;
 	font-size: 16px;
 	letter-spacing: 0.05em;
 	font-weight: 600;
@@ -5933,7 +5933,7 @@ ul.list-products {
 .slider-item .price .number-price {
 	text-transform: uppercase;
 	font-size: 28px;
-	color: #ab8e66;
+	color: #900A07;
 	font-weight: 600;
 	position: relative;
 }
@@ -5979,7 +5979,7 @@ ul.list-products {
 .slider-item .slider-infor .button:hover {
 	background: none;
 	border-color: transparent;
-	color: #ab8e66;
+	color: #900A07;
 }
 .slider-item.style1 .slider-inner {
 	background-image: url(../images/slider-thumb1.jpg);
@@ -6002,7 +6002,7 @@ ul.list-products {
 }
 .slider-item.style2 .title-big span {
 	position: relative;
-	color: #ab8e66;
+	color: #900A07;
 }
 .slider-item.style3 .slider-inner {
 	background-image: url(../images/slider-thumb3.jpg);
@@ -6112,7 +6112,7 @@ ul.list-products {
 	display: inline-block;
 }
 .stelina-tabs .tab-link li.active a {
-	background-color: #ab8e66;
+	background-color: #900A07;
 	color: #fff;
 }
 /*stelina-blog*/
@@ -6140,7 +6140,7 @@ ul.list-products {
 	position: absolute;
 	content: '';
 	width: 70px;
-	border-bottom: 4px solid #ab8e66;
+	border-bottom: 4px solid #900A07;
 	bottom: 0;
 	left: 50%;
 	-webkit-transform: translateX(-50%);
@@ -6327,7 +6327,7 @@ ul.list-products {
 .stelina-blog-item.style2 .post-top > a {
 	color: #fff;
 	padding: 3px 10px;
-	background-color: #ab8e66;
+	background-color: #900A07;
 	font-size: 11px;
 	letter-spacing: 0.1em;
 }
@@ -6404,7 +6404,7 @@ ul.list-products {
 -----------------home 02------------------
 =========================================*/
 .top-bar {
-	background: #ab8e66;
+	background: #900A07;
 	padding: 10px 0;
 	color: #fff;
 }
@@ -6466,7 +6466,7 @@ ul.list-products {
 	color: #000;
 }
 .header.style2 .header-nav-container {
-	background: #ab8e66;
+	background: #900A07;
 }
 .header.style2 .main-menu {
 	margin: 0 auto;
@@ -6677,7 +6677,7 @@ ul.list-products {
 	position: relative;
 }
 .slider-inner .when-code .number-code {
-	color: #ab8e66;
+	color: #900A07;
 	font-size: 18px;
 	font-weight: 600;
 }
@@ -7104,7 +7104,7 @@ body.vertical-menu-open .vertical-menu-overlay {
 	position: absolute;
 	content: '';
 	width: 70px;
-	border-bottom: 4px solid #ab8e66;
+	border-bottom: 4px solid #900A07;
 	bottom: 0;
 	left: 50%;
 	-webkit-transform: translateX(-50%);
@@ -7130,7 +7130,7 @@ body.vertical-menu-open .vertical-menu-overlay {
 .stelina-newsletter.style3 .submit-newsletter {
 	min-width: 139px;
 	margin-left: 5px;
-	background-color: #ab8e66;
+	background-color: #900A07;
 	color: #ffffff;
 	vertical-align: top;
 	font-size: 14px;
@@ -7437,7 +7437,7 @@ body.vertical-menu-open .vertical-menu-overlay {
 	margin: 0 25px;
 }
 .vertical-menu .menu-item a:hover {
-	color: #ab8e66;
+	color: #900A07;
 }
 .vertical-menu .menu-item:last-child a {
 	border: none;
@@ -7569,7 +7569,7 @@ body.vertical-menu-open .vertical-menu-overlay {
 	vertical-align: middle;
 	padding: 5px 15px;
 	min-width: 103px;
-	background-color: #ab8e66;
+	background-color: #900A07;
 	font-size: 13px;
 	border-radius: 30px;
 }
@@ -7610,7 +7610,7 @@ body.vertical-menu-open .vertical-menu-overlay {
 	list-style: none;
 	display: inline-block;
 	padding: 0 10px;
-	background: #ab8e66;
+	background: #900A07;
 	min-width: 77px;
 	height: 26px;
 	line-height: 26px;
@@ -7654,7 +7654,7 @@ body.vertical-menu-open .vertical-menu-overlay {
 	color: rgba(255, 255, 255, 0.8);
 }
 .stelina-product.layout1 {
-	background: #ab8e66;
+	background: #900A07;
 	padding: 70px 0 35px;
 }
 .stelina-product.layout1 .container-wapper {
@@ -7686,7 +7686,7 @@ body.vertical-menu-open .vertical-menu-overlay {
 	-ms-transform: translateX(50%);
 	-o-transform: translateX(50%);
 	transform: translateX(50%);
-	border-bottom: 2px solid #ab8e66;
+	border-bottom: 2px solid #900A07;
 }
 .stelina-product.layout1 .head .subtitle {
 	font-size: 15px;
@@ -7708,7 +7708,7 @@ body.vertical-menu-open .vertical-menu-overlay {
 	text-align: center;
 	line-height: 47px;
 	top: 52%;
-	color: #ab8e66;
+	color: #900A07;
 	background-color: #fff;
 	border-radius: 50%;
 }
@@ -7716,7 +7716,7 @@ body.vertical-menu-open .vertical-menu-overlay {
 	left: 70px;
 }
 .slick-slider.nav-center-left .slick-arrow:hover {
-	color: #ab8e66;
+	color: #900A07;
 }
 /*stelina-testimonials*/
 .stelina-testimonials.default {
@@ -7737,7 +7737,7 @@ body.vertical-menu-open .vertical-menu-overlay {
 	border-radius: 50%;
 	overflow: hidden;
 	margin-top: 9px;
-	border: 3px solid #ab8e66;
+	border: 3px solid #900A07;
 }
 .testimonial-item .info {
 	display: block;
@@ -7763,7 +7763,7 @@ body.vertical-menu-open .vertical-menu-overlay {
 .testimonial-item .info .name span {
 	display: block;
 	font-size: 13px;
-	color: #ab8e66;
+	color: #900A07;
 }
 .stelina-testimonials.default .owl-slick .slick-list {
 	margin: 0 !important;
@@ -7787,7 +7787,7 @@ body.vertical-menu-open .vertical-menu-overlay {
 .instagram-wrapp .custommenu-title-blog i {
 	display: block;
 	font-size: 60px;
-	color: #ab8e66;
+	color: #900A07;
 	font-weight: normal;
 }
 .stelina-instagram {
@@ -8420,7 +8420,7 @@ body.vertical-menu-open .vertical-menu-overlay {
 	padding-bottom: 70px;
 }
 .item-banner .stelina-subtitle {
-	color: #ab8e66;
+	color: #900A07;
 	font-size: 14px;
 	font-weight: 600;
 	padding: 0 0 5px;
@@ -8450,7 +8450,7 @@ body.vertical-menu-open .vertical-menu-overlay {
 }
 .item-banner .when-code .code {
 	font-size: 18px;
-	color: #ab8e66;
+	color: #900A07;
 	position: relative;
 }
 .item-banner .button {
@@ -8479,7 +8479,7 @@ body.vertical-menu-open .vertical-menu-overlay {
 	margin-right: 0;
 }
 .item-banner .button:hover {
-	color: #ab8e66;
+	color: #900A07;
 	background: none;
 }
 .item-banner .button:hover::before {
@@ -8509,7 +8509,7 @@ body.vertical-menu-open .vertical-menu-overlay {
 .item-banner .hot-price .price-number {
 	font-size: 30px;
 	letter-spacing: -0.05em;
-	color: #ab8e66;
+	color: #900A07;
 	text-transform: uppercase;
 	font-weight: 600;
 	position: relative;
@@ -8602,7 +8602,7 @@ body.vertical-menu-open .vertical-menu-overlay {
 }
 .item-banner.style5 .code span {
 	font-weight: 600;
-	color: #ab8e66;
+	color: #900A07;
 	position: relative;
 }
 .item-banner.style6 .inner {
@@ -8657,7 +8657,7 @@ body.vertical-menu-open .vertical-menu-overlay {
 	font-size: 23px;
 	font-weight: 600;
 	line-height: 28px;
-	color: #ab8e66;
+	color: #900A07;
 	position: relative;
 }
 /*banner video*/
@@ -8712,7 +8712,7 @@ iframe {
 }
 .item-banner.style9 .code .nummer-code {
 	font-size: 18px;
-	color: #ab8e66;
+	color: #900A07;
 	font-weight: 600;
 	position: relative;
 }
@@ -8928,7 +8928,7 @@ iframe {
 	margin-bottom: 23px;
 }
 .item-banner.style21 .start-from span {
-	color: #ab8e66;
+	color: #900A07;
 	font-weight: 600;
 }
 .item-banner.style21 .group-pinap .btn-pinmap-1 {
@@ -9042,7 +9042,7 @@ iframe {
 }
 .item-banner.style14 .code .nummer-code {
 	font-size: 18px;
-	color: #ab8e66;
+	color: #900A07;
 	position: relative;
 }
 .item-banner.style15 .inner {
@@ -9122,7 +9122,7 @@ iframe {
 }
 .item-banner.style17 .number-price {
 	font-size: 30px;
-	color: #ab8e66;
+	color: #900A07;
 	font-weight: 600;
 	position: relative;
 }
@@ -9218,7 +9218,7 @@ iframe {
 }
 .footer .menu .menu-item > a > span {
 	padding-right: 5px;
-	color: #ab8e66;
+	color: #900A07;
 }
 .stelina-newsletter.style1 {
 	margin-bottom: 10px;
@@ -9289,7 +9289,7 @@ iframe {
 .stelina-newsletter.style1 .newsletter-form-wrap .submit-newsletter {
 	color: #fff;
 	width: 100%;
-	background: #ab8e66;
+	background: #900A07;
 	height: 56px;
 	line-height: 56px;
 	padding: 0 15px;
@@ -9465,7 +9465,7 @@ iframe {
 	color: #ffffff;
 }
 .footer .stelina-newsletter .newsletter-form-wrap .input-text:focus {
-	border-color: #ab8e66 !important;
+	border-color: #900A07 !important;
 }
 /*footer style 10*/
 .footer.style10 .stelina-newsletter.style1 .newsletter-form-wrap .submit-newsletter {
@@ -11020,7 +11020,7 @@ iframe {
 .shopcart-description .actions .button-viewcart:hover, .kt-popup-quickview .mfp-close, .stelina-newsletter.style2 .newsletter-form-wrap .submit-newsletter:hover,
 .product-item.style-6 .loop-form-add-to-cart .button, .pinmap-buttom, .header-nav-wapper .vertical-wapper,
 .list-category .category-item:hover {
-	background-color: #ab8e66;
+	background-color: #900A07;
 	
 }
 .product-item .button:hover,
@@ -11051,11 +11051,11 @@ a:hover, a:focus, a:active,
 .details-infor .group-button .yith-wcwl-add-to-wishlist div a:hover::before, .details-infor .group-button .size-chart-wrapp .btn-size-chart a:hover::before,
 .tab-details-product .tab-link li.active a, .review_form .comment-form-review .stars a.active, .review_form .comment-form-review .stars a:hover,
 .related .slick-slider.nav-center > .slick-arrow:hover, .up-sells .slick-slider.nav-center > .slick-arrow:hover, .slider-item .button:hover, .slick-slider.nav-center > .slick-arrow:hover {
-	color: #ab8e66;
+	color: #900A07;
 	
 }
 .details-thumd .thumbnails_carousel .owl-item .active img {
-	border-color: #ab8e66;
+	border-color: #900A07;
 }
 @media (min-width: 1367px) {
 	.home-slider.fullwidth.rows-space-60 {

@@ -54,7 +54,7 @@
 
                       <div class="text-center">
                       <button type="submit" class="btn btn-info">Create</button>
-                      <a href="{{route('subCategories.index')}}" class="btn btn-outline-secondary">Cancel</a>
+                      <a href="{{route('subCategories.index')}}" class="btn btn-secondary">Cancel</a>
                       </div>
                     </form>
                   </div>
