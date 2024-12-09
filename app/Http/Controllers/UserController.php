@@ -34,7 +34,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $validation = $request->validate([
             'Fname' => 'required|string|min:3',
             'Lname' => 'required|string|min:3',
@@ -53,7 +53,7 @@ class UserController extends Controller
             'role'=>$request->input('role'),
         ]);
 
-       
+
 
         return to_route('users.index')->with('success', 'User created successfully');
     }
@@ -73,35 +73,35 @@ class UserController extends Controller
     {
         $user = auth()->user();
 
-        
+
         if ($user->role === 'user') {
 
             $adoptionRequests = $user->toAdoupt()->with('pet.pet_images')->get();
-            $UserAppointments = $user->appointments()->with('service.service_images')->get(); 
-           
+            $UserAppointments = $user->appointments()->with('service.service_images')->get();
+
             foreach ($UserAppointments as $appointment) {
 
                 // Calculate the total time for the appointment (in minutes)
                 $averageTime = $appointment->service->average_time;
                 $petNumber = $appointment->pet_number;
                 $totalMinutes = $averageTime * $petNumber;
-    
+
                 // Calculate hours and minutes
                 $hours = floor($totalMinutes / 60);
                 $minutes = $totalMinutes % 60;
-    
+
                 // Format the duration (e.g., "1h 30m")
                 $appointment->formattedDuration = ($hours > 0 ? $hours . 'h ' : '') . $minutes . 'm';
             }
 
             return view('profile', [
-                'user'=> $user , 
+                'user'=> $user ,
                 'adoptionRequests'=> $adoptionRequests,
                 'UserAppointments' => $UserAppointments,
             ]);
 
         } elseif (in_array($user->role, ['receptionist', 'store_manager', 'veterinarian', 'manager'])) {
-            
+
             return redirect()->route('profile_dash.show');
         }
 
@@ -110,7 +110,7 @@ class UserController extends Controller
 
     public function show_profile_dash()
     {
-        return view('dashboard.profile');
+        return view('dashboard.profile.profile');
     }
 
     /**
@@ -153,18 +153,18 @@ class UserController extends Controller
 
     public function update_profile(Request $request)
     {
-       
+
         $validation = $request->validate([
             'Fname' => 'required|string|min:3',
             'Lname' => 'required|string|min:3',
             'email' => 'required|email|unique:users,email,' . auth()->id(), // Ensure unique email except for current user
             'mobile' => 'required|numeric',
         ]);
-    
+
         // Get the authenticated user
         $user = auth()->user();
-    
-      
+
+
         $user->update([
             'Fname' => $request->input('Fname'),
             'Lname' => $request->input('Lname'),
@@ -172,10 +172,10 @@ class UserController extends Controller
             'mobile' => $request->input('mobile'),
             'password' => $user->password, // Keeps the existing password unchanged
         ]);
-    
+
         return back()->with('success', 'Profile updated successfully');
     }
-    
+
 
 
 
@@ -185,8 +185,8 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         $user = User::findOrFail($id);
-        $user->delete(); 
-        
+        $user->delete();
+
         return to_route('users.index')->with('success', 'User deleted');
     }
 
