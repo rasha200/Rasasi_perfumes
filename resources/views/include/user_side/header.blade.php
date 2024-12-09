@@ -5,7 +5,7 @@
                 <div class="header-message">
                     Welcome to our online store!
                 </div>
-                
+
             </div>
             <div class="top-bar-right">
                 <div class="header-language">
@@ -46,9 +46,9 @@
             <div class="row">
                 <div class="col-lg-3 col-sm-4 col-md-3 col-xs-7 col-ts-12 header-element">
                     <div class="logo">
-                       
+
                             <img src="{{asset("assets/img/logo.jpg")}}" alt="img" style="width:150px;">
-                       
+
                     </div>
                 </div>
                 <div class="col-lg-7 col-sm-8 col-md-6 col-xs-5 col-ts-12">
@@ -86,7 +86,7 @@
 										</span>
                             </a>
 
-                            
+
                         <!-- include side bar start -->
                          @include("include/user_side/cart")
                         <!-- include side bar end -->
@@ -169,7 +169,7 @@
 							</span>
                         <span class="text">All Categories</span>
                     </div>
-                
+
                 </div>
                 <div class="header-nav">
                     <div class="container-wapper">
@@ -177,67 +177,53 @@
                             <li class="menu-item  menu-item">
                                 <a href="{{ route('home') }}" class="stelina-menu-item-title" title="Home">Home</a>
                                 <span class="toggle-submenu"></span>
-                               
+
                             </li>
-
-
-                    
-
-                        
-
-
                             @foreach($categories as $category)
-<li class="menu-item menu-item-has-children item-megamenu" onmouseover="showSubcategories({{ $category->id }})" onmouseout="hideSubcategories({{ $category->id }})">
-    <a href="{{ route('products.byCategory', $category->id) }}" class="stelina-menu-item-title">{{ $category->name }}</a>
-    <span class="toggle-submenu"></span>
-
-                    <ul id="subcategory-{{ $category->id }}" class="submenu">
-                        @foreach($category->subcategories->chunk(5) as $subcategoryChunk) {{-- Group subcategories in batches of 5 --}}
-                            <li class="menu-item-group"> {{-- Container for each group of subcategories --}}
-                                @foreach($subcategoryChunk as $subcategory)
-                                    <li class="menu-item">
-                                        <a href="{{ route('products.bySubCategory', $subcategory->id) }}">{{ $subcategory->name }}</a>
-                                    </li>
-                                @endforeach
+                            <li class="menu-item menu-item-has-children item-megamenu" onmouseover="showSubcategories({{ $category->id }})" onmouseout="hideSubcategories({{ $category->id }})">
+                                <a href="{{ route('products.byCategory', $category->id) }}" class="stelina-menu-item-title">{{ $category->name }}</a>
+                                <span class="toggle-submenu"></span>
+                                <ul id="subcategory-{{ $category->id }}" class="submenu">
+                                    @foreach($category->subcategories->chunk(5) as $subcategoryChunk) {{-- Group subcategories in batches of 5 --}}
+                                        <li class="menu-item-group"> {{-- Container for each group of subcategories --}}
+                                            @foreach($subcategoryChunk as $subcategory)
+                                                <li class="menu-item">
+                                                    <a href="{{ route('products.bySubCategory', $subcategory->id) }}">{{ $subcategory->name }}</a>
+                                                </li>
+                                            @endforeach
+                                        </li>
+                                    @endforeach
+                                </ul>
                             </li>
-                        @endforeach
-                    </ul>
-       
-</li>
-@endforeach
+                            @endforeach
+                                <script>
+                                function showSubcategories(categoryId) {
+                                    document.getElementById(`subcategory-${categoryId}`).style.display = 'block';
+                                }
+
+                                function hideSubcategories(categoryId) {
+                                    document.getElementById(`subcategory-${categoryId}`).style.display = 'none';
+                                }
+
+                                 </script>
 
 
+                                <style>
 
-<script>
-function showSubcategories(categoryId) {
-    document.getElementById(`subcategory-${categoryId}`).style.display = 'block';
-}
+                                .submenu {
+                                    display: none;
+                                    opacity: 0;
+                                    transition: opacity 0.3s ease-in-out;
+                                }
 
-function hideSubcategories(categoryId) {
-    document.getElementById(`subcategory-${categoryId}`).style.display = 'none';
-}
+                                .submenu.show {
+                                    display: block;
+                                    opacity: 1;
+                                }
 
- </script>
-
-
-<style>
-
-.submenu {
-    display: none;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-}
-
-.submenu.show {
-    display: block;
-    opacity: 1;
-}
-
-</style>
-                          
-                           
+                                </style>
                             <li class="menu-item">
-                                <a href="" class="stelina-menu-item-title" title="About">Contact</a>
+                                <a href="/contact" class="stelina-menu-item-title" title="About">Contact</a>
                             </li>
                         </ul>
                     </div>

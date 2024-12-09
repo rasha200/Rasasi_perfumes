@@ -69,14 +69,31 @@ Route::middleware(['auth', 'role'])->group(function () {
     Route::get('/contacts/{contact}', [ContactController::class, 'show'])->name('contacts.show'); // Show
     Route::delete('/contacts/{contact}', [ContactController::class, 'destroy'])->name('contacts.destroy'); // Delete
 });
+
 // Public routes
 // Route::get('/contacts/create', [ContactController::class, 'create'])->name('contacts.create'); // Create form (user side)
 // Route::post('/contacts', [ContactController::class, 'store'])->name('contacts.store'); // Create
+Route::get('/contact', [ContactController::class, 'landing'])->name('contact');
 
 
 // Route::get('/contact', function () {
 //     return view('contact');
 // })->name("contact");
+
+
+
+
+// لعرض صفحة الاتصال
+Route::get('/contact', [ContactController::class, 'landing'])->name('contact.landing');
+
+// لمعالجة البيانات المُرسلة من النموذج
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
+// لعرض الرسائل في لوحة التحكم
+Route::get('/dashboard/contacts', [ContactController::class, 'index'])->name('contacts.index');
+
+
+
 // <!--==========================================  (Categories)  =================================================================================================================-->
 Route::resource('categories', CategoryController::class)->middleware(['auth' , 'role']);
 
@@ -102,5 +119,3 @@ Route::get('/category/{id}', [ProductController::class, 'productsByCategory'])->
 
 
 
-
-// Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');
