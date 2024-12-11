@@ -102,12 +102,10 @@
                     </span>
         </div>
         <div class="actions">
-            <a class="button button-viewcart" href="shoppingcart.html">
-                <span>View Bag</span>
+            <a class="button button-viewcart" href="{{ route('cart.index') }}">
+                <span>View cart</span>
             </a>
-            <a href="checkout.html" class="button button-checkout">
-                <span>Checkout</span>
-            </a>
+            
         </div>
     </div>
 </div>

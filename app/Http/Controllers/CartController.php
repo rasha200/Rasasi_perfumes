@@ -26,6 +26,8 @@ class CartController extends Controller
             return $item['user_id'] === $userId;
         }) : [];
 
+        
+
         return view('cart', compact('cart','userCart'));
     }
 

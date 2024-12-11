@@ -67,7 +67,7 @@
 
                             <h2 class="widgettitle"> Contact us:</h2>
                             <li class="menu-item">
-                                <a href="/contact" target="_blank"><i class="icon fa fa-comment"></i> Contact</a>
+                                <a href="/contact"><i class="icon fa fa-comment"></i> Contact</a>
                             </li>
                            
                             

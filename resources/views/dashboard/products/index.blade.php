@@ -55,6 +55,7 @@
                           <th>Name</th>
                           <th>Image</th>
                           <th>Price</th>
+                          <th>Discount</th>
                           <th>Quantity</th>
                           <th>Brand</th>
                           <th></th>
@@ -85,6 +86,13 @@
                         @endif
                         </td> 
                           <td>{{$product->price}}</td>
+                          
+                          @if($product->discount)
+                          <td>{{$product->discount}}%</td>
+                          @else
+                          <td></td>
+                          @endif
+
                           <td>{{$product->quantity}}</td>
                           <td>{{$product->subCategory->category->name}} - {{$product->subCategory->name}}</td>
 

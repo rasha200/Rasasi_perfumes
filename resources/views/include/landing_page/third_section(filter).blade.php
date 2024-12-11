@@ -6,12 +6,7 @@
                         <li class="active">
                             <a data-toggle="tab" aria-expanded="true" href="#bestseller">Bestseller</a>
                         </li>
-                        <li class="">
-                            <a data-toggle="tab" aria-expanded="true" href="#new_arrivals">New Arrivals </a>
-                        </li>
-                        <li class="">
-                            <a data-toggle="tab" aria-expanded="true" href="#top-rated">Top Rated</a>
-                        </li>
+                        
                     </ul>
                 </div>
                 <div class="tab-container">

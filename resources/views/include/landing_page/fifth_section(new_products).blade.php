@@ -1,7 +1,7 @@
 <div class="product-in-stock-wrapp">
     <div class="container">
         <h3 class="custommenu-title-blog white">
-            Our New Products
+            New Arrivals
         </h3>
         <div class="stelina-product style3">
             <ul class="row list-products auto-clear equal-container product-grid">
@@ -34,7 +34,7 @@
                                 @endif
                                 </a>
                             </div>
-                            <a href="#" class="button quick-wiew-button" tabindex="0">Quick View</a>
+                           
                         </div>
                         <div class="product-info">
                             <h5 class="product-name product_title">
@@ -62,7 +62,7 @@
                                         <a href="#" class="btn-number qtyplus quantity-plus">+</a>
                                     </div>
                                 </div>
-                                <button class="add_to_cart_button button" tabindex="0">Shop now</button>
+                                <a href="{{ route('product_details', $product->id) }}" class="add_to_cart_button button" tabindex="0">Shop now</a>
                             </div>
                         </div>
                     </div>

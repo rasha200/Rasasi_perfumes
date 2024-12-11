@@ -10,7 +10,7 @@
 
 
 {{--include flash-sale start--}}
-@include("include/landing_page/first_section(flash_sale)")
+@include("include/landing_page/first_section(discount)")
 {{--include flash-sale end--}}
 
 

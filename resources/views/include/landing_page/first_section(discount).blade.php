@@ -1,7 +1,7 @@
 <div class="stelina-product produc-featured rows-space-65">
     <div class="container">
         <h3 class="custommenu-title-blog">
-            Flash sale
+            Discount
         </h3>
         <div class="owl-products owl-slick equal-container nav-center"
              data-slick='{"autoplay":false, "autoplaySpeed":1000, "arrows":false, "dots":true, "infinite":false, "speed":800, "rows":1}'

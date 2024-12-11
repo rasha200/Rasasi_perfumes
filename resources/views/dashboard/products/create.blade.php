@@ -50,18 +50,21 @@
                         <textarea class="form-control" id="description" placeholder="Description" name="description" required>{{ old('description') }}</textarea>
                       </div>
 
-                  
+                      <div class="col-12">
+                        <label for="exampleInputEmail3">Old price</label>
+                        <input type="text" class="form-control" id="old_price" placeholder="Old price" name="old_price" value="{{ old('old_price') }}" >
+                      </div>
 
                       <div class="col-12">
                         <label for="exampleInputEmail3">Price</label>
                         <input type="text" class="form-control" id="price" placeholder="Price" name="price" value="{{ old('price') }}" required>
                       </div>
 
-
                       <div class="col-12">
-                        <label for="exampleInputEmail3">Old price</label>
-                        <input type="text" class="form-control" id="old_price" placeholder="Old price" name="old_price" value="{{ old('old_price') }}" >
+                        <label for="exampleInputEmail3">Discount (%)</label>
+                        <input type="number" class="form-control" id="old_price" placeholder="Discount" name="discount" value="{{ old('discount', $product->discount ?? '') }}" min="0" max="100" >
                       </div>
+                     
 
                       <div class="col-12">
                         <label for="exampleInputName1" class="form-label">Quantity</label>

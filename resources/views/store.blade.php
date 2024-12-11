@@ -65,8 +65,17 @@
                                         </a>
                                         <div class="thumb-group">
                                           
-                                            <a href="#" class="button quick-wiew-button">Quick View</a>
-                                           
+                                            <a href="#quickviewModal" class="button quick-wiew-button mfp-inline" 
+                                                data-image="{{ asset($product->product_images->first()->image ?? '/images/default-product.jpg') }}" 
+                                                data-title="{{ $product->name }}" 
+                                                data-oldprice="{{ $product->old_price }} JOD"
+                                                data-price="{{ $product->price }} JOD"
+                                                data-availability="In Stock" 
+                                                data-smallDescription="{{ $product->small_description }}" 
+                                                data-category="{{$product->subCategory->category->name}}" 
+                                                data-subCategory="{{ $product->subCategory->name }} ">
+                                                    <i class="fa fa-eye"></i>
+                                                </a>
                                         </div>
                                     </div>
                                 </div>
@@ -293,7 +302,66 @@
     </div>
 </div>
 
+{{--include third_section(filter) start--}}
+@include("include/modal/modal")
+{{--include third_section(filter) end--}}
 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const modal = document.getElementById('quickviewModal');
+
+    // Attach event listeners to all quick-view buttons
+    document.querySelectorAll('.quick-wiew-button').forEach(button => {
+        button.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            // Extract data attributes from the button
+            const title = this.getAttribute('data-title');
+            const oldPrice = this.getAttribute('data-oldprice');
+            const price = this.getAttribute('data-price');
+            const availability = this.getAttribute('data-availability');
+            const smallDescription = this.getAttribute('data-smallDescription');
+            const category = this.getAttribute('data-category');
+            const subCategory = this.getAttribute('data-subCategory');
+            const image = this.getAttribute('data-image'); // Get first image
+
+            // Update modal content
+            document.getElementById('modalTitle').textContent = title || 'No Title';
+            document.getElementById('modalPrice').textContent = price || 'N/A';
+            document.getElementById('modalOldPrice').textContent = oldPrice || '';
+            document.getElementById('modalAvailability').textContent = availability || 'N/A';
+            document.getElementById('modalSmallDescription').textContent = smallDescription || 'No Description';
+            document.getElementById('modalCategory').textContent = category || 'No Category';
+            document.getElementById('modalSubCategory').textContent = subCategory || 'No Subcategory';
+
+            // Clear previous images from the modal
+            const sliderFor = document.querySelector('.slider-for');
+            const sliderNav = document.querySelector('.slider-nav');
+            sliderFor.innerHTML = '';
+            sliderNav.innerHTML = '';
+
+            // Add the first image (or fallback) to the modal
+            const imgSrc = image || '/images/default-product.jpg'; // Fallback image
+            const imgFor = document.createElement('div');
+            imgFor.classList.add('details-item');
+            imgFor.innerHTML = `<img src="${imgSrc}" alt="Product Image">`;
+            sliderFor.appendChild(imgFor);
+
+            const imgNav = document.createElement('div');
+            imgNav.classList.add('details-item');
+            imgNav.innerHTML = `<img src="${imgSrc}" alt="Product Thumbnail">`;
+            sliderNav.appendChild(imgNav);
+        });
+    });
+
+    // Initialize Magnific Popup for inline modal display
+    $(".mfp-inline").magnificPopup({
+        type: 'inline',
+        midClick: true
+    });
+});
+
+</script>
 
 
 @endsection
