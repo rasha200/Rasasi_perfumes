@@ -66,20 +66,29 @@
                     </div>
                 </div>
             </div>
+
+
             <div class="col-lg-4 banner-wrapp">
+                
                 <div class="banner">
+
                     <div class="item-banner style7">
                         <div class="inner">
-                            <div class="banner-content">
+                            @foreach($categories->slice(0, 1) as $category)
+                            <div class="banner-content" style="background-image: url({{ asset('uploads/category/' . $category->image) }}) !important">
                                 <h3 class="title">Pick Your <br/>Items</h3>
                                 <div class="description">
-                                    Adipiscing elit curabitur senectus sem
+                                    Discover the special collection of {{ $category->name }}
                                 </div>
-                                <a href="#" class="button btn-lets-do-it">Shop now</a>
+                                <a href="{{ route('products.byCategory', $category->id) }}" class="button btn-lets-do-it">Shop now</a>
                             </div>
+                            @endforeach
                         </div>
                     </div>
+
                 </div>
+
+
                 <div class="banner">
                     <div class="item-banner style8">
                         <div class="inner">
@@ -93,6 +102,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

@@ -1,7 +1,7 @@
 <div class="stelina-product produc-featured rows-space-65">
     <div class="container">
         <h3 class="custommenu-title-blog">
-            Deal of the day
+            Flash sale
         </h3>
         <div class="owl-products owl-slick equal-container nav-center"
              data-slick='{"autoplay":false, "autoplaySpeed":1000, "arrows":false, "dots":true, "infinite":false, "speed":800, "rows":1}'
@@ -10,15 +10,7 @@
              @foreach ($products->slice(0, 7) as $product)
              <div class="product-item style-5">
                 <div class="product-inner equal-element">
-                    <div class="product-top">
-                        <div class="flash">
-                            <span class="onnew">
-                                <span class="text">
-                                    new
-                                </span>
-                            </span>
-                        </div>
-                    </div>
+                  
                     <div class="product-thumb">
                         <div class="thumb-inner">
                             <a href="#">

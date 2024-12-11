@@ -57,6 +57,12 @@
                         <input type="text" class="form-control" id="price" placeholder="Price" name="price" value="{{ old('price') }}" required>
                       </div>
 
+
+                      <div class="col-12">
+                        <label for="exampleInputEmail3">Old price</label>
+                        <input type="text" class="form-control" id="old_price" placeholder="Old price" name="old_price" value="{{ old('old_price') }}" >
+                      </div>
+
                       <div class="col-12">
                         <label for="exampleInputName1" class="form-label">Quantity</label>
                         <input type="number" class="form-control" id="quantity" placeholder="Quantity" name="quantity" value="{{ old('quantity') }}" min="1" step="1">

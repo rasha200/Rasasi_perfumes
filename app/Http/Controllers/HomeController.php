@@ -16,7 +16,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+       //
     }
 
     /**
@@ -29,8 +29,8 @@ class HomeController extends Controller
 
         $categories = Category::with('subCategories')->get();
        $products = Product::with('product_images')->get();
-        
+       $latestProduct = Product::latest()->take(9)->get();
 
-        return view('landing_page', ['categories'=>$categories ,'products'=>$products ]);
+        return view('landing_page', ['categories'=>$categories ,'products'=>$products ,'latestProduct'=>$latestProduct ]);
     }
 }

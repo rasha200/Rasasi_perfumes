@@ -85,7 +85,7 @@
                         @endif
                         </td> 
                           <td>{{$product->price}}</td>
-                          <td>{{$product->total_quantity}}</td>
+                          <td>{{$product->quantity}}</td>
                           <td>{{$product->subCategory->category->name}} - {{$product->subCategory->name}}</td>
 
                           <td> 

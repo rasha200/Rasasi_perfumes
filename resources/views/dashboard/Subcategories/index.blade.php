@@ -63,13 +63,18 @@
                         <tr>
                           <td>{{$Subcategory->id}}</td>
                           <td title="view">
-                            <a href="{{ route('subCategories.show', $Subcategory->id) }}" 
-                              style="color:#000000;"
-                              onmouseover="this.style.color='#0dcaf0';" 
-                             onmouseout="this.style.color='#000000';"
-                              title="View">
+                            <a href="#" 
+                            class="view-subcategory" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#subcategoryDetailsModal" 
+                            data-name="{{ $Subcategory->name }}" 
+                            data-image="{{ asset('uploads/subcategory/' . $Subcategory->image) }}"
+                            data-category="{{ $Subcategory->category->name }}"
+                            style="color:#000000;" 
+                            onmouseover="this.style.color='#0dcaf0';" 
+                            onmouseout="this.style.color='#000000';">
                              {{$Subcategory->name}}
-                            </a>
+                         </a>
                             </td>
 
                           <td>
@@ -112,6 +117,63 @@
             </div>
             
           </section>
+
+
+
+  <!-- View modal -->        
+  <div class="modal fade" id="subcategoryDetailsModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="subcategoryModalTitle">Subcategory Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Subcategory Name:</strong> <span id="subcategoryName"></span></p>
+                <p><strong>Category:</strong> <span id="subcategoryCategory"></span></p>
+                <div id="subcategoryImageContainer">
+                    <img id="subcategoryImage" src="" alt="Subcategory Image" style="width: 100%; border-radius: 8px;">
+                </div>
+                <span id="noImageText" style="color: #666; font-style: italic; display: none;">No image</span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('.view-subcategory').forEach(link => {
+          link.addEventListener('click', function () {
+              // Get subcategory data
+              const name = this.getAttribute('data-name');
+              const image = this.getAttribute('data-image');
+              const category = this.getAttribute('data-category');
+
+              // Populate modal fields
+              document.getElementById('subcategoryName').textContent = name;
+              document.getElementById('subcategoryCategory').textContent = category;
+
+              const subcategoryImage = document.getElementById('subcategoryImage');
+              const noImageText = document.getElementById('noImageText');
+              const subcategoryImageContainer = document.getElementById('subcategoryImageContainer');
+
+              if (image && !image.includes('No image')) {
+                  subcategoryImage.src = image;
+                  subcategoryImageContainer.style.display = 'block';
+                  noImageText.style.display = 'none';
+              } else {
+                  subcategoryImageContainer.style.display = 'none';
+                  noImageText.style.display = 'block';
+              }
+          });
+      });
+  });
+</script>
+
 
 
 

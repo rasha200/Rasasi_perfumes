@@ -9,6 +9,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductImageController;
+use App\Http\Controllers\CartController;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -69,6 +70,8 @@ Route::middleware(['auth', 'role'])->group(function () {
     Route::get('/contacts/{contact}', [ContactController::class, 'show'])->name('contacts.show'); // Show
     Route::delete('/contacts/{contact}', [ContactController::class, 'destroy'])->name('contacts.destroy'); // Delete
 });
+
+
 // Public routes
 // Route::get('/contacts/create', [ContactController::class, 'create'])->name('contacts.create'); // Create form (user side)
 // Route::post('/contacts', [ContactController::class, 'store'])->name('contacts.store'); // Create
@@ -77,6 +80,10 @@ Route::middleware(['auth', 'role'])->group(function () {
 // Route::get('/contact', function () {
 //     return view('contact');
 // })->name("contact");
+
+
+
+
 // <!--==========================================  (Categories)  =================================================================================================================-->
 Route::resource('categories', CategoryController::class)->middleware(['auth' , 'role']);
 
@@ -95,12 +102,18 @@ Route::resource('products', ProductController::class)->middleware(['auth' , 'rol
 Route::delete('/product_images/{product_image}', [productImageController::class, 'destroy'])->name('product_images.destroy')->middleware(['auth' , 'role']);
 Route::get('/subcategory/{id}', [ProductController::class, 'productsBySubCategory'])->name('products.bySubCategory');
 Route::get('/category/{id}', [ProductController::class, 'productsByCategory'])->name('products.byCategory');
+Route::get('/product_details/{id}',[ProductController::class, 'show_user_side'])->name("product_details");
+
+
+
+// <!--==========================================  (Cart)  ===================================================================================================================-->
+Route::get('cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('cart/add', [CartController::class, 'addToCart'])->name('cart.add');
+Route::post('cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
+Route::post('cart/delete/{id}', [CartController::class, 'deleteCartItem'])->name('cart.delete');
+Route::get('cart/clear', [CartController::class, 'clear'])->name('cart.clear');
 
 
 
 
 
-
-
-
-// Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');

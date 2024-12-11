@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('small_description');
             $table->text('description');
             $table->float('price');
-            $table->unsignedInteger('quantity')->nullable();
+            $table->float('old_price')->nullable();
+            $table->unsignedInteger('quantity');
             
             $table->unsignedBigInteger('subCategory_id');
             $table->foreign('subCategory_id')->references('id')->on('sub_categories')->onDelete('cascade');
