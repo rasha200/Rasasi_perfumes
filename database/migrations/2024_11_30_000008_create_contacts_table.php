@@ -15,10 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('Fname');
             $table->string('Lname');
+            $table->string('mobile');
             $table->string('email');
             $table->string('subject');
             $table->string('message');
-            
+
             $table->softDeletes();
             $table->timestamps();
         });

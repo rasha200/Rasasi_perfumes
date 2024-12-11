@@ -20,9 +20,9 @@ class ContactController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function landing()
     {
-        //
+        return view('contact');
     }
 
     /**
@@ -33,6 +33,7 @@ class ContactController extends Controller
         $validation = $request->validate([
             'Fname' => 'required|string',
             'Lname' => 'required|string',
+            'mobile' => 'required|numeric',
             'email' => 'required|email',
             'subject' => 'required|string',
             'message' => 'required',
@@ -41,6 +42,7 @@ class ContactController extends Controller
         Contact::create([
             'Fname'=>$request->input('Fname'),
             'Lname'=>$request->input('Lname'),
+            'mobile'=>$request->input('mobile'),
             'email'=>$request->input('email'),
             'subject'=>$request->input('subject'),
             'message'=>$request->input('message'),

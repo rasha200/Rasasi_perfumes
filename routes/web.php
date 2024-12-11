@@ -72,18 +72,16 @@ Route::middleware(['auth', 'role'])->group(function () {
 });
 
 
+
 // Public routes
 // Route::get('/contacts/create', [ContactController::class, 'create'])->name('contacts.create'); // Create form (user side)
 // Route::post('/contacts', [ContactController::class, 'store'])->name('contacts.store'); // Create
+Route::get('/contact', [ContactController::class, 'landing'])->name('contact');
 
 
 // Route::get('/contact', function () {
 //     return view('contact');
 // })->name("contact");
-
-
-
-
 // <!--==========================================  (Categories)  =================================================================================================================-->
 Route::resource('categories', CategoryController::class)->middleware(['auth' , 'role']);
 
