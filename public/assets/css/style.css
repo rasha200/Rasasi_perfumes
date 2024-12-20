@@ -9,23 +9,73 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
+/* Ensure the body and html take up the full height */
+html, body {
+  height: 100%; /* Full viewport height */
+  margin: 0;    /* Remove default margin */
+}
+
+/* Body acts as a flex container */
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Distributes content, footer stays at the bottom */
+}
+
+/* Content section takes up the remaining space */
+.content {
+  flex: 1; /* This ensures that content takes up the remaining space */
+}
+
+/* Footer styling */
+#footer {
+ 
+  color: #fff;            /* Footer text color */
+  padding: 20px;
+  text-align: center;
+  margin-top: auto; /* This pushes the footer to the bottom of the page */
+}
+
+.copyright, .credits {
+  margin: 0;
+  padding: 0;
+}
+.btn-info {
+  background-color: #10db8c !important; /* اللون الأساسي */
+}
+
+.btn-info:hover {
+  background-color: #2eb97a !important; /* اللون عند التمرير */
+}
+
+.btn-outline-info {
+  background-color: transparent !important; /* الخلفية شفافة */
+  border: 2px solid #10db8c !important; /* اللون الأساسي للحدود */
+  color: #10db8c !important; /* لون النص الأساسي */
+}
+
+.btn-outline-info:hover {
+  background-color: #10db8c !important; /* اللون عند التمرير */
+  border-color: #2eb97a !important; /* تغيير لون الحدود عند التمرير */
+  color: #444444 !important; /* لون النص عند التمرير */
+}
 :root {
   scroll-behavior: smooth;
 }
 
 body {
   font-family: "Open Sans", sans-serif;
-  background: #f6f9ff;
+  background: #e1e3e6;
   color: #444444;
 }
 
 a {
-  color: #4154f1;
+  color: #db1010;
   text-decoration: none;
 }
 
 a:hover {
-  color: #717ff5;
+  color: #db1010c5;
   text-decoration: none;
 }
 
@@ -64,7 +114,7 @@ h6 {
   font-size: 24px;
   margin-bottom: 0;
   font-weight: 600;
-  color: #012970;
+  color: #252525;
 }
 
 /*--------------------------------------------------------------
@@ -354,9 +404,31 @@ h6 {
 /*--------------------------------------------------------------
 # Header
 --------------------------------------------------------------*/
-.logo {
-  line-height: 1;
+/* تقليل حجم الصورة لتناسب مساحة nav */
+.logo-img {
+  max-height: 40px; /* تقليل الارتفاع لجعل الصورة صغيرة */
+  width: auto; /* الحفاظ على نسبة العرض/الارتفاع تلقائيًا */
+  margin-right: 5px; /* تقليل المسافة بين الشعار والعناصر المجاورة */
+  object-fit: contain; /* لضمان عدم تمدد الصورة خارج المساحة */
 }
+
+/* تحسين تصميم الـ header */
+#header {
+  height: 60px; /* تقليل ارتفاع الـ header */
+  padding: 5px 20px; /* ضبط المسافات الداخلية */
+  background: #252525; /* لون خلفية بسيط */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* ظل خفيف للـ header */
+}
+
+/* محاذاة الشعار والعناصر */
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
 
 @media (min-width: 1200px) {
   .logo {
@@ -364,10 +436,7 @@ h6 {
   }
 }
 
-.logo img {
-  max-height: 26px;
-  margin-right: 6px;
-}
+
 
 .logo span {
   font-size: 26px;
@@ -391,7 +460,7 @@ h6 {
   font-size: 32px;
   padding-left: 10px;
   cursor: pointer;
-  color: #012970;
+  color: #a6a6a6;
 }
 
 .header .search-bar {
@@ -468,13 +537,13 @@ h6 {
 
 .header-nav .nav-icon {
   font-size: 22px;
-  color: #012970;
+  color: #a6a6a6;
   margin-right: 25px;
   position: relative;
 }
 
 .header-nav .nav-profile {
-  color: #012970;
+  color: #a6a6a6;
 }
 
 .header-nav .nav-profile img {
@@ -610,9 +679,16 @@ h6 {
   scrollbar-width: thin;
   scrollbar-color: #aab7cf transparent;
   box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1);
-  background-color: #fff;
+  background-color: #252525;
+}
+.sidebar .nav-link.active {
+  background-color: #252525 !important; /* اللون الأحمر */
+  color: #db1010 !important; /* لون النص */
 }
 
+.sidebar .nav-link.active i {
+  color: #db1010 !important; /* لون الأيقونة */
+}
 @media (max-width: 1199px) {
   .sidebar {
     left: -300px;
@@ -684,9 +760,9 @@ h6 {
   align-items: center;
   font-size: 15px;
   font-weight: 600;
-  color: #4154f1;
+  color: #a6a6a6;
   transition: 0.3;
-  background: #f6f9ff;
+  background: #252525;
   padding: 10px 15px;
   border-radius: 4px;
 }
@@ -694,25 +770,25 @@ h6 {
 .sidebar-nav .nav-link i {
   font-size: 16px;
   margin-right: 10px;
-  color: #4154f1;
+  color: #a6a6a6;
 }
 
 .sidebar-nav .nav-link.collapsed {
-  color: #012970;
-  background: #fff;
+  color: #a6a6a6;
+  background: #252525;
 }
 
 .sidebar-nav .nav-link.collapsed i {
-  color: #899bbd;
+  color: #a6a6a6;
 }
 
 .sidebar-nav .nav-link:hover {
-  color: #4154f1;
-  background: #f6f9ff;
+  color: #db1010;
+  background: #252525;
 }
 
 .sidebar-nav .nav-link:hover i {
-  color: #4154f1;
+  color: #db1010;
 }
 
 .sidebar-nav .nav-link .bi-chevron-down {
@@ -735,7 +811,7 @@ h6 {
   align-items: center;
   font-size: 14px;
   font-weight: 600;
-  color: #012970;
+  color: #a6a6a6;
   transition: 0.3;
   padding: 10px 0 10px 40px;
   transition: 0.3s;
@@ -750,7 +826,7 @@ h6 {
 
 .sidebar-nav .nav-content a:hover,
 .sidebar-nav .nav-content a.active {
-  color: #4154f1;
+  color: #db1010;
 }
 
 .sidebar-nav .nav-content a.active i {
@@ -1217,17 +1293,11 @@ h6 {
   padding: 20px 0;
   font-size: 14px;
   transition: all 0.3s;
-  border-top: 1px solid #cddfff;
+  border-top: 1px solid #939498;
 }
 
 .footer .copyright {
   text-align: center;
-  color: #012970;
+  color: #444444;
 }
 
-.footer .credits {
-  padding-top: 5px;
-  text-align: center;
-  font-size: 13px;
-  color: #012970;
-}
