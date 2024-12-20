@@ -18,4 +18,17 @@ class Category extends Model
     {
         return $this->hasMany(SubCategory::class);
     }
+
+    protected static function booted()
+{
+    static::deleting(function ($category) {
+        foreach ($category->subCategories as $subCategory) {
+            $subCategory->delete(); // This triggers SubCategory's deleting logic
+        }
+
+        if ($category->isForceDeleting()) {
+            $category->subCategories()->forceDelete();
+        }
+    });
+}
 }

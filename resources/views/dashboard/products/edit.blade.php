@@ -77,12 +77,22 @@
                         <textarea class="form-control" id="description" placeholder="Description" name="description" required>{{ $product->description }}</textarea>
                       </div>
 
+                      <div class="col-12">
+                        <label for="exampleInputName1" class="form-label">Old price</label>
+                        <input type="text" class="form-control" id="old_price" placeholder="Old price" name="old_price" value="{{$product->old_price}}">
+                      </div>
 
           
                       <div class="col-12">
                         <label for="exampleInputName1" class="form-label">Price</label>
                         <input type="text" class="form-control" id="price" placeholder="Price" name="price" value="{{$product->price}}" required>
                       </div>
+
+                      <div class="col-12">
+                        <label for="exampleInputName1" class="form-label">Discount (%)</label>
+                        <input type="number" class="form-control" id="discount" placeholder="Discount" name="discount" value="{{$product->discount}}" >
+                      </div>
+
 
                       <div class="col-12">
                         <label for="exampleInputName1" class="form-label">Quantity</label>

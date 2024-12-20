@@ -65,7 +65,7 @@ class SubCategoryController extends Controller
      */
     public function show(SubCategory $subCategory)
     {
-        return view('dashboard.Subcategories.show' , ['subCategory'=> $subCategory]);
+        //
     }
 
     /**

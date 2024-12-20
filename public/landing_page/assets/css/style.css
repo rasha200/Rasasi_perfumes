@@ -35,6 +35,9 @@ REPONSIVE
 /*==========================================================================
   1.0 COMPONENT STYLES
 ============================================================================ */
+
+
+
 body {
 	font-family: 'Jost', sans-serif;
 	font-size: 16px;
@@ -1404,7 +1407,7 @@ table tr:last-child td, table tr:last-child th {
 
 /*header-style-1*/
 .header .main-header {
-	padding: 50px 0;
+	padding: 20px 0;
 }
 .social-header, .header-language {
 	display: inline-block;
@@ -3424,7 +3427,7 @@ blockquote .author .desc {
 	color: #fff;
 	border-radius: 50%;
 	position: fixed;
-	bottom: 50px;
+	bottom: 110px;
 	right: 25px;
 	text-align: center;
 	line-height: 50px;
@@ -3549,7 +3552,7 @@ blockquote .author .desc {
 }
 /*---------BREADCRUMB-----------*/
 .breadcrumb {
-	padding: 34px 0 30px;
+	padding: 3px 0 30px;
 	background: #ffffff;
 	margin: 0;
 }
@@ -7841,6 +7844,7 @@ body.vertical-menu-open .vertical-menu-overlay {
 	-moz-transition: all 0.4s ease 0s;
 	-o-transition: all 0.4s ease 0s;
 	transition: all 0.4s ease 0s;
+	cursor: pointer;
 }
 .instagram .item-instagram:hover::after, .instagram .item-instagram.active::after {
 	opacity: 1;
@@ -9096,7 +9100,7 @@ iframe {
 	padding-top: 5px;
 }
 .item-banner.style17 .inner {
-	background-image: url(../images/banner-home-15.jpg);
+	background-image: url(../images/perfume.png);
 }
 .item-banner.style17 .banner-content {
 	padding-top: 48px;

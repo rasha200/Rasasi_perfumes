@@ -63,13 +63,26 @@
                         @foreach($users as $user)
                         <tr>
                           <td>{{$user->id}}</td>
+
                           <td title="view">
-                            <a href="{{ route('users.show', $user->id) }}" 
-                              style="color:#000000;"
-                               onmouseover="this.style.color='#0dcaf0';" 
-                              onmouseout="this.style.color='#000000';">{{$user->Fname}} {{$user->Lname}}
-                            </a>
+                            <a href="#" 
+                            class="view-user" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#userDetailsModal" 
+                            data-id="{{ $user->id }}" 
+                            data-fname="{{ $user->Fname }}" 
+                            data-lname="{{ $user->Lname }}" 
+                            data-email="{{ $user->email }}" 
+                            data-mobile="{{ $user->mobile }}" 
+                            data-role="{{ $user->role }}"
+                            style="color:#000000;" 
+                            onmouseover="this.style.color='#0dcaf0';" 
+                            onmouseout="this.style.color='#000000';">
+                             {{$user->Fname}} {{$user->Lname}}
+                         </a>
                           </td>
+
+
 
                           
                           <td>{{$user->email}}</td>
@@ -130,7 +143,51 @@
 
            
 
-<!-- Custom Pagination -->
+<!-- View modal -->
+<div class="modal fade" id="userDetailsModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="userModalTitle">User Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p><strong>First Name:</strong> <span id="userFname"></span></p>
+                <p><strong>Last Name:</strong> <span id="userLname"></span></p>
+                <p><strong>Email:</strong> <span id="userEmail"></span></p>
+                <p><strong>Phone Number:</strong> <span id="userMobile"></span></p>
+                <p><strong>Role:</strong> <span id="userRole"></span></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+      // Attach event listeners to user links
+      document.querySelectorAll('.view-user').forEach(link => {
+          link.addEventListener('click', function () {
+              // Get user data from data attributes
+              const fname = this.getAttribute('data-fname');
+              const lname = this.getAttribute('data-lname');
+              const email = this.getAttribute('data-email');
+              const mobile = this.getAttribute('data-mobile');
+              const role = this.getAttribute('data-role');
+
+              // Populate modal with user data
+              document.getElementById('userFname').textContent = fname;
+              document.getElementById('userLname').textContent = lname;
+              document.getElementById('userEmail').textContent = email;
+              document.getElementById('userMobile').textContent = mobile;
+              document.getElementById('userRole').textContent = role;
+          });
+      });
+  });
+</script>
 
 
 

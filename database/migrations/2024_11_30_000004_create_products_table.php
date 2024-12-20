@@ -16,8 +16,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('small_description');
             $table->text('description');
+            $table->float('old_price')->nullable();
             $table->float('price');
-            $table->unsignedInteger('quantity')->nullable();
+            $table->integer('discount')->nullable();
+            $table->unsignedInteger('quantity');
             
             $table->unsignedBigInteger('subCategory_id');
             $table->foreign('subCategory_id')->references('id')->on('sub_categories')->onDelete('cascade');

@@ -3,23 +3,26 @@
         <div class="container">
             <div class="top-bar-left">
                 <div class="header-message">
+
                     Welcome to our online store!
                 </div>
 
             </div>
             <div class="top-bar-right">
+               
+
                 <div class="header-language">
                     <div class="stelina-language stelina-dropdown">
                         <a href="#" class="active language-toggle" data-stelina="stelina-dropdown">
 									<span>
-										(JOD)
+										 (JOD)
 									</span>
                         </a>
                         <ul class="stelina-submenu">
                             <li class="switcher-option">
                                 <a href="#">
 											<span>
-												(JOD)
+												 (JOD)
 											</span>
                                 </a>
                             </li>
@@ -33,11 +36,87 @@
                         </ul>
                     </div>
                 </div>
+
+                @guest
+                @if (Route::has('login'))
+                <div class="header-language" style="padding-left: 20px;">
+                    <div class="stelina-language">
+                        <a href="{{ route('login') }}" class="active language-toggle" data-stelina="stelina-dropdown">
+									<span>
+										Login
+									</span>
+                        </a>
+                        
+                    </div>
+                </div>
+                @endif
+
+                @if (Route::has('register'))
                 <ul class="header-user-links">
                     <li>
-                        <a href="login.html">Login or Register</a>
+                        <a href="{{ route('register') }}">Sign up</a>
                     </li>
                 </ul>
+                @endif
+
+                @else
+               
+                <div class="header-language" style="padding-left: 20px;">
+                    <div class="stelina-language">
+                        <a href="#" class="active language-toggle" data-stelina="stelina-dropdown">
+									<span>
+										{{ Auth::user()->Fname }}  {{ Auth::user()->Lname }}
+									</span>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                <div class="header-language" style="padding-left: 20px;">
+                    <div class="stelina-language">
+                        <a href="#" class="active language-toggle" data-stelina="stelina-dropdown">
+									<span class="flaticon-user">
+										
+									</span>
+                        </a>
+                        
+                    </div>
+                </div>
+
+
+
+                @if (Auth::user()->role == 'manager' || Auth::user()->role == 'employee' )
+                <div class="header-language" style="padding-left: 20px;">
+                    <div class="stelina-language">
+                        <a href="{{ route('dashboard') }}" class="active language-toggle" data-stelina="stelina-dropdown">
+									<span>
+										Dashboard
+									</span>
+                        </a>
+                        
+                    </div>
+                </div>
+                @endif
+
+
+               
+                <ul class="header-user-links">
+                    <li>
+                        <a href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
+                           {{ __('Logout') }}
+                       </a>
+                       <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form> 
+
+                    @endguest
+                    </li>
+                </ul>
+
+               
+
             </div>
         </div>
     </div>
@@ -47,34 +126,12 @@
                 <div class="col-lg-3 col-sm-4 col-md-3 col-xs-7 col-ts-12 header-element">
                     <div class="logo">
 
-                            <img src="{{asset("assets/img/logo.jpg")}}" alt="img" style="width:150px;">
+                            <img src="{{asset("assets/img/logoo.jpg")}}" alt="img" style="width:150px;">
 
                     </div>
                 </div>
                 <div class="col-lg-7 col-sm-8 col-md-6 col-xs-5 col-ts-12">
-                    <div class="block-search-block">
-                        <form class="form-search form-search-width-category">
-                            <div class="form-content">
-                                <div class="category">
-                                    <select title="cate" data-placeholder="All Categories" class="chosen-select"
-                                            tabindex="1">
-                                        <option value="United States">Accessories</option>
-                                        <option value="United Kingdom">Accents</option>
-                                        <option value="Afghanistan">Desks</option>
-                                        <option value="Aland Islands">Sofas</option>
-                                        <option value="Albania">New Arrivals</option>
-                                        <option value="Algeria">Bedroom</option>
-                                    </select>
-                                </div>
-                                <div class="inner">
-                                    <input type="text" class="input" name="s" value="" placeholder="Search here">
-                                </div>
-                                <button class="btn-search" type="submit">
-                                    <span class="icon-search"></span>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+                   
                 </div>
                 <div class="col-lg-2 col-sm-12 col-md-3 col-xs-12 col-ts-12">
                     <div class="header-control">
@@ -93,60 +150,10 @@
 
 
                         </div>
-                        <div class="block-account block-header stelina-dropdown">
-                            <a href="javascript:void(0);" data-stelina="stelina-dropdown">
-                                <span class="flaticon-user"></span>
-                            </a>
-                            <div class="header-account stelina-submenu">
-                                <div class="header-user-form-tabs">
-                                    <ul class="tab-link">
-                                        <li class="active">
-                                            <a data-toggle="tab" aria-expanded="true" href="#header-tab-login">Login</a>
-                                        </li>
-                                        <li>
-                                            <a data-toggle="tab" aria-expanded="true" href="#header-tab-rigister">Register</a>
-                                        </li>
-                                    </ul>
-                                    <div class="tab-container">
-                                        <div id="header-tab-login" class="tab-panel active">
-                                            <form method="post" class="login form-login">
-                                                <p class="form-row form-row-wide">
-                                                    <input type="email" placeholder="Email" class="input-text">
-                                                </p>
-                                                <p class="form-row form-row-wide">
-                                                    <input type="password" class="input-text" placeholder="Password">
-                                                </p>
-                                                <p class="form-row">
-                                                    <label class="form-checkbox">
-                                                        <input type="checkbox" class="input-checkbox">
-                                                        <span>
-																	Remember me
-																</span>
-                                                    </label>
-                                                    <input type="submit" class="button" value="Login">
-                                                </p>
-                                                <p class="lost_password">
-                                                    <a href="#">Lost your password?</a>
-                                                </p>
-                                            </form>
-                                        </div>
-                                        <div id="header-tab-rigister" class="tab-panel">
-                                            <form method="post" class="register form-register">
-                                                <p class="form-row form-row-wide">
-                                                    <input type="email" placeholder="Email" class="input-text">
-                                                </p>
-                                                <p class="form-row form-row-wide">
-                                                    <input type="password" class="input-text" placeholder="Password">
-                                                </p>
-                                                <p class="form-row">
-                                                    <input type="submit" class="button" value="Register">
-                                                </p>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
+                        
+
+                      
                         <a class="menu-bar mobile-navigation menu-toggle" href="#">
                             <span></span>
                             <span></span>

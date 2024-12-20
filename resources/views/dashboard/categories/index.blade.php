@@ -16,7 +16,7 @@
       
 </div>
 
-    
+   
  
     
     @if(session('delete'))
@@ -62,15 +62,20 @@
                         @foreach($categories as $category)
                         <tr>
                           <td>{{$category->id}}</td>
+                          
                           <td title="view">
-                            <a href="{{ route('categories.show', $category->id) }}" 
-                              style="color:#000000;"
-                              onmouseover="this.style.color='#0dcaf0';" 
-                             onmouseout="this.style.color='#000000';"
-                              title="View">
-                             {{$category->name}}
+                            <a href="#" 
+                               class="view-category" 
+                               data-bs-toggle="modal" 
+                               data-bs-target="#categoryDetailsModal" 
+                               data-name="{{ $category->name }}" 
+                               data-image="{{ asset('uploads/category/' . $category->image) }}"
+                               style="color:#000000;" 
+                               onmouseover="this.style.color='#0dcaf0';" 
+                               onmouseout="this.style.color='#000000';">
+                                {{$category->name}}
                             </a>
-                            </td>
+                        </td>
 
                           <td>
                           @if($category->image)
@@ -110,6 +115,59 @@
             </div>
             
           </section>
+
+
+<!-- View modal -->
+<div class="modal fade" id="categoryDetailsModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="categoryModalTitle">Category Details</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <p><strong>Category Name:</strong> <span id="categoryName"></span></p>
+              <div id="categoryImageContainer">
+                  <img id="categoryImage" src="" alt="Category Image" style="width: 100%; border-radius: 8px;">
+              </div>
+              <span id="noImageText" style="color: #666; font-style: italic; display: none;">No image</span>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-info" data-bs-dismiss="modal">Close</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('.view-category').forEach(link => {
+          link.addEventListener('click', function () {
+              // Get category data
+              const name = this.getAttribute('data-name');
+              const image = this.getAttribute('data-image');
+
+              // Populate modal fields
+              document.getElementById('categoryName').textContent = name;
+
+              const categoryImage = document.getElementById('categoryImage');
+              const noImageText = document.getElementById('noImageText');
+              const categoryImageContainer = document.getElementById('categoryImageContainer');
+
+              if (image && !image.includes('No image')) {
+                  categoryImage.src = image;
+                  categoryImageContainer.style.display = 'block';
+                  noImageText.style.display = 'none';
+              } else {
+                  categoryImageContainer.style.display = 'none';
+                  noImageText.style.display = 'block';
+              }
+          });
+      });
+  });
+</script>
+
 
 
 

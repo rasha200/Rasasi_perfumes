@@ -362,7 +362,7 @@
   }
   .col-sm-12 {
     flex: 0 0 auto;
-    width: 100%;
+    width: 1000px;
   }
   .offset-sm-0 {
     margin-left: 0;

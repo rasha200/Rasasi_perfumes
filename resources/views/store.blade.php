@@ -9,10 +9,10 @@
                 <div class="breadcrumb-trail breadcrumbs">
                     <ul class="trail-items breadcrumb">
                         <li class="trail-item trail-begin">
-                            <a href="index.html">Home</a>
+                            Home
                         </li>
                         <li class="trail-item trail-end active">
-                            Grid Products
+                            Store
                         </li>
                     </ul>
                 </div>
@@ -35,7 +35,7 @@
                                 <option value="5">6 Products/Page</option>
                             </select>
                         </form>
-                        <form class="filter-choice select-form">s
+                        <form class="filter-choice select-form">
                             <span class="title">Sort by</span>
                             <select title="sort-by" data-placeholder="Price: Low to High" class="chosen-select">
                                 <option value="1">Price: Low to High</option>
@@ -46,33 +46,14 @@
                             </select>
                         </form>
                         <div class="grid-view-mode">
-                            <div class="inner">
-                                <a href="listproducts.html" class="modes-mode mode-list">
-                                    <span></span>
-                                    <span></span>
-                                </a>
-                                <a href="gridproducts.html" class="modes-mode mode-grid  active">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                </a>
-                            </div>
+                            
                         </div>
                     </div>
                     <ul class="row list-products auto-clear equal-container product-grid">
                         @forelse ($products as $product)
                         <li class="product-item  col-lg-4 col-md-6 col-sm-6 col-xs-6 col-ts-12 style-1">
                             <div class="product-inner equal-element">
-                                <div class="product-top">
-                                    <div class="flash">
-											<span class="onnew">
-												<span class="text">
-													new
-												</span>
-											</span>
-                                    </div>
-                                </div>
+                               
                                 <div class="product-thumb">
                                     <div class="thumb-inner">
                                         <a href="#">
@@ -83,22 +64,24 @@
                                         @endif
                                         </a>
                                         <div class="thumb-group">
-                                            <div class="yith-wcwl-add-to-wishlist">
-                                                <div class="yith-wcwl-add-button">
-                                                    <a href="#">Add to Wishlist</a>
-                                                </div>
-                                            </div>
-                                            <a href="#" class="button quick-wiew-button">Quick View</a>
-                                            <div class="loop-form-add-to-cart">
-                                                <button class="single_add_to_cart_button button">Add to cart
-                                                </button>
-                                            </div>
+                                          
+                                            <a href="#quickviewModal" class="button quick-wiew-button mfp-inline" 
+                                                data-image="{{ asset($product->product_images->first()->image ?? '/images/default-product.jpg') }}" 
+                                                data-title="{{ $product->name }}" 
+                                                data-oldprice="{{ $product->old_price }} JOD"
+                                                data-price="{{ $product->price }} JOD"
+                                                data-availability="In Stock" 
+                                                data-smallDescription="{{ $product->small_description }}" 
+                                                data-category="{{$product->subCategory->category->name}}" 
+                                                data-subCategory="{{ $product->subCategory->name }} ">
+                                                    <i class="fa fa-eye"></i>
+                                                </a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="product-info">
                                     <h5 class="product-name product_title">
-                                        <a href="#">{{ $product->name }} </a>
+                                        <a href="{{ route('product_details', $product->id) }}">{{ $product->name }} </a>
                                     </h5>
                                     <div class="group-info">
                                         <div class="stars-rating">
@@ -110,11 +93,17 @@
                                             </div>
                                         </div>
                                         <div class="price">
+
+                                            @if($product->old_price)
                                             <del>
-                                                $65
+                                                {{ $product->old_price }} JOD
                                             </del>
+                                            @else
+                                              <span></span>
+                                            @endif
+
                                             <ins>
-                                                ${{ $product->price }}
+                                               {{ $product->price }} JOD 
                                             </ins>
                                         </div>
                                     </div>
@@ -313,7 +302,66 @@
     </div>
 </div>
 
+{{--include third_section(filter) start--}}
+@include("include/modal/modal")
+{{--include third_section(filter) end--}}
 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const modal = document.getElementById('quickviewModal');
+
+    // Attach event listeners to all quick-view buttons
+    document.querySelectorAll('.quick-wiew-button').forEach(button => {
+        button.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            // Extract data attributes from the button
+            const title = this.getAttribute('data-title');
+            const oldPrice = this.getAttribute('data-oldprice');
+            const price = this.getAttribute('data-price');
+            const availability = this.getAttribute('data-availability');
+            const smallDescription = this.getAttribute('data-smallDescription');
+            const category = this.getAttribute('data-category');
+            const subCategory = this.getAttribute('data-subCategory');
+            const image = this.getAttribute('data-image'); // Get first image
+
+            // Update modal content
+            document.getElementById('modalTitle').textContent = title || 'No Title';
+            document.getElementById('modalPrice').textContent = price || 'N/A';
+            document.getElementById('modalOldPrice').textContent = oldPrice || '';
+            document.getElementById('modalAvailability').textContent = availability || 'N/A';
+            document.getElementById('modalSmallDescription').textContent = smallDescription || 'No Description';
+            document.getElementById('modalCategory').textContent = category || 'No Category';
+            document.getElementById('modalSubCategory').textContent = subCategory || 'No Subcategory';
+
+            // Clear previous images from the modal
+            const sliderFor = document.querySelector('.slider-for');
+            const sliderNav = document.querySelector('.slider-nav');
+            sliderFor.innerHTML = '';
+            sliderNav.innerHTML = '';
+
+            // Add the first image (or fallback) to the modal
+            const imgSrc = image || '/images/default-product.jpg'; // Fallback image
+            const imgFor = document.createElement('div');
+            imgFor.classList.add('details-item');
+            imgFor.innerHTML = `<img src="${imgSrc}" alt="Product Image">`;
+            sliderFor.appendChild(imgFor);
+
+            const imgNav = document.createElement('div');
+            imgNav.classList.add('details-item');
+            imgNav.innerHTML = `<img src="${imgSrc}" alt="Product Thumbnail">`;
+            sliderNav.appendChild(imgNav);
+        });
+    });
+
+    // Initialize Magnific Popup for inline modal display
+    $(".mfp-inline").magnificPopup({
+        type: 'inline',
+        midClick: true
+    });
+});
+
+</script>
 
 
 @endsection

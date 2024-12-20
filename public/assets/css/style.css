@@ -63,6 +63,10 @@ body {
   scroll-behavior: smooth;
 }
 
+.btn-info{
+  background-color: #10db8c !important;
+}
+
 body {
   font-family: "Open Sans", sans-serif;
   background: #e1e3e6;

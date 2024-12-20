@@ -21,58 +21,56 @@
                     <div class="stelina-custommenu default">
                         <h2 class="widgettitle">Quick Menu</h2>
                         <ul class="menu">
+                            @foreach($categories as $category)
                             <li class="menu-item">
-                                <a href="#">New arrivals</a>
+                                <a href="{{ route('products.byCategory', $category->id) }}">{{ $category->name }}</a>
                             </li>
-                            <li class="menu-item">
-                                <a href="#">Life style</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="#">Accents</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="#">Tables</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="#">Dining</a>
-                            </li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
-                <div class="box-footer col-xs-12 col-sm-4 col-md-4 col-lg-4 hidden-xs">
-                    <div class="stelina-newsletter style1">
-                        <div class="newsletter-head">
-                            <h3 class="title">Newsletter</h3>
-                        </div>
-                        <div class="newsletter-form-wrap">
-                            <div class="list">
-                                Sign up for our free video course and <br/> urban garden inspiration
-                            </div>
-                            <input type="email" class="input-text email email-newsletter"
-                                   placeholder="Your email letter">
-                            <button class="button btn-submit submit-newsletter">SUBSCRIBE</button>
-                        </div>
-                    </div>
-                </div>
+            
                 <div class="box-footer col-xs-12 col-sm-4 col-md-4 col-lg-4">
                     <div class="stelina-custommenu default">
                         <h2 class="widgettitle">Information</h2>
                         <ul class="menu">
                             <li class="menu-item">
-                                <a href="#">FAQs</a>
+                                <a href="#" target="_blank">Name: Pukka nich</a>
                             </li>
                             <li class="menu-item">
-                                <a href="#">Track Order</a>
+                                <a href="tel:+962797282485" target="_blank"><i class="icon fa fa-phone"></i> +962797282485</a>
                             </li>
                             <li class="menu-item">
-                                <a href="#">Delivery</a>
+                                <a href="https://wa.me/962797282485" target="_blank"><i class="icon fa fa-whatsapp"></i> +962797282485</a>
                             </li>
                             <li class="menu-item">
-                                <a href="#">Contact Us</a>
+                                <a href="#"><i class="icon fa fa-map-marker"></i> Jordan - Aqaba</a>
                             </li>
                             <li class="menu-item">
-                                <a href="#">Return</a>
+                                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=Mohammad.morad1990@gmail.com&su=Hello+Mohammad&body=I+would+like+to+connect+with+you." target="_blank"><i class="icon fa fa-envelope"></i> Email</a>
                             </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="box-footer col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                    <div class="stelina-custommenu default">
+                        <h2 class="widgettitle"> My Information</h2>
+                        <ul class="menu">
+                            <li class="menu-item">
+                                <a href="#" target="_blank"><i class="icon fa fa-user"></i> My account</a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="#" target="_blank"><i class="icon fa fa-history"></i> Orders history</a>
+                            </li>
+
+                            <h2 class="widgettitle"> Contact us:</h2>
+                            <li class="menu-item">
+                                <a href="/contact"><i class="icon fa fa-comment"></i> Contact</a>
+                            </li>
+                           
+                            
                         </ul>
                     </div>
                 </div>
@@ -83,25 +81,25 @@
                         <div class="stelina-socials">
                             <ul class="socials">
                                 <li>
-                                    <a href="#" class="social-item" target="_blank">
+                                    <a href="https://www.facebook.com/profile.php?id=100063661684576&mibextid=ZbWKwL" class="social-item" target="_blank">
                                         <i class="icon fa fa-facebook"></i>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="social-item" target="_blank">
-                                        <i class="icon fa fa-twitter"></i>
+                                    <a href="https://wa.me/962797282485" class="social-item" target="_blank">
+                                        <i class="icon fa fa-whatsapp"></i>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="social-item" target="_blank">
+                                    <a href="https://www.instagram.com/pukkajo/profilecard/?igsh=MXFyZzZjdmpseTF5bQ==" class="social-item" target="_blank">
                                         <i class="icon fa fa-instagram"></i>
                                     </a>
                                 </li>
                             </ul>
                         </div>
                         <div class="coppyright">
-                            Copyright © 2020
-                            <a href="#">Stelina</a>
+                            Copyright © 2024
+                            <a href="#">Pukka nich</a>
                             . All rights reserved
                         </div>
                     </div>
@@ -149,6 +147,52 @@
         </div>
     </div>
 </div>
+
+<a href="https://wa.me/962797282485" class="whatsapp" target="_blank">
+    <i class="fa fa-whatsapp"></i>
+</a>
+
+<style>
+/*whatsapp*/
+.whatsapp {
+	width: 50px;
+	height: 50px;
+	font-size: 24px;
+	font-weight: 600;
+	background: #900A07;
+	color: #fff;
+	border-radius: 50%;
+	position: fixed;
+	bottom: 50px;
+	right: 25px;
+	text-align: center;
+	line-height: 50px;
+	z-index: 999;
+}
+/* Prevent color change on visit */
+.whatsapp:visited {
+    color: #fff; /* Keep the icon color consistent */
+}
+
+/* Optional hover style to keep consistent */
+.whatsapp:hover {
+    color: #fff; /* Ensure no color change on hover */
+    text-decoration: none; /* Prevent text underlining */
+}
+</style>
+
+<script>
+    // Example: Show WhatsApp button when the user scrolls down
+    window.addEventListener('scroll', function () {
+        const whatsappButton = document.querySelector('.whatsapp');
+        if (window.scrollY > 200) {
+            whatsappButton.classList.add('show');
+        } else {
+            whatsappButton.classList.remove('show');
+        }
+    });
+</script>
+
 <a href="#" class="backtotop">
     <i class="fa fa-angle-double-up"></i>
 </a>

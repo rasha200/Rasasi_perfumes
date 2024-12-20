@@ -15,10 +15,11 @@ class HomeController extends Controller
      * @return void
      */
     public function __construct()
-    {    
 
-        // 
-     }
+    {
+       //
+    }
+
 
     /**
      * Show the application dashboard.
@@ -30,8 +31,8 @@ class HomeController extends Controller
 
         $categories = Category::with('subCategories')->get();
        $products = Product::with('product_images')->get();
-        
+       $latestProduct = Product::latest()->take(9)->get();
 
-        return view('landing_page', ['categories'=>$categories ,'products'=>$products ]);
+        return view('landing_page', ['categories'=>$categories ,'products'=>$products ,'latestProduct'=>$latestProduct ]);
     }
 }

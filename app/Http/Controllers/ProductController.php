@@ -45,7 +45,9 @@ class ProductController extends Controller
             'small_description' => 'required|string',
             'description' => 'required',
             'price' => 'required',
-            'quantity' => 'nullable|integer',
+            'old_price' => 'nullable',
+            'discount' => 'nullable|numeric|min:0|max:100',
+            'quantity' => 'required|integer',
             'image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp,WEBP,AVIF|max:2048',
         ]);
 
@@ -54,6 +56,8 @@ class ProductController extends Controller
             'small_description'=>$request->input('small_description'),
             'description'=>$request->input('description'),
             'price'=>$request->input('price'),
+            'old_price'=>$request->input('old_price'),
+            'discount' => $request->input('discount'), 
             'quantity'=>$request->input('quantity'),
             'subCategory_id'=>$request->input('subCategory_id'),
         ]);
@@ -100,22 +104,16 @@ class ProductController extends Controller
         
         $product = Product::findOrFail($id); 
         $productImages = $product->product_images; 
-        $productVariations = $product->product_variation; 
-        $productfeedbacks = $product->product_feedbacks()->orderBy('created_at', 'desc')->get(); 
-        $averageRating = $product->product_feedbacks()->avg('rating')?? 0;
         $relatedProducts = Product::where('subCategory_id', $product->subCategory_id)
         ->where('id', '!=', $product->id)
         ->inRandomOrder() // Randomize order
-        ->take(8) // Limit the number of related products displayed
+        ->take(12) // Limit the number of related products displayed
         ->get();
 
         return view('product_details' , [
             'product'=> $product,
-            'productVariations' => $productVariations,
-            'productfeedbacks'=> $productfeedbacks,
-            'relatedProducts' => $relatedProducts,
             'productImages'=>$productImages,
-            'averageRating'=>$averageRating,
+            'relatedProducts' => $relatedProducts,
         ]);
     }
 
@@ -144,7 +142,9 @@ class ProductController extends Controller
             'small_description' => 'required|string',
             'description' => 'required',
             'price' => 'required',
-            'quantity' => 'nullable|integer',
+            'old_price' => 'nullable',
+            'discount' => 'nullable|numeric|min:0|max:100',
+            'quantity' => 'required|integer',
             'image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp,WEBP,AVIF|max:2048',
         ]);
 
@@ -155,6 +155,8 @@ class ProductController extends Controller
             'small_description'=>$request->input('small_description'),
             'description'=>$request->input('description'),
             'price'=>$request->input('price'),
+            'old_price'=>$request->input('old_price'),
+            'discount' => $request->input('discount'),
             'quantity'=>$request->input('quantity'),
             'subCategory_id'=>$request->input('subCategory_id'),
         ]);
@@ -191,7 +193,7 @@ class ProductController extends Controller
            $subCategory = SubCategory::findOrFail($id);
 
            // Fetch products with the specific subcategory ID
-           $products = Product::where('subCategory_id', $id)->get();
+           $products = Product::with('product_images')->where('subCategory_id', $id)->orderBy('name', 'asc')->get();
 
            // Pass the products and subcategory to the view
            return view('store', compact('products', 'subCategory'));
@@ -203,9 +205,9 @@ class ProductController extends Controller
          $category = Category::findOrFail($id);
 
          // Fetch products associated with any subcategory under this category
-         $products = Product::whereHas('subCategory', function ($query) use ($id) {
+         $products = Product::with('product_images')->whereHas('subCategory', function ($query) use ($id) {
                $query->where('category_id', $id);
-         })->get();
+         })->orderBy('name', 'asc')->get();
 
          // Pass the category and products to the view
         return view('store', compact('products', 'category'));
