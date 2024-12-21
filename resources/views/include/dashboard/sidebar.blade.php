@@ -4,8 +4,8 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link " href="index.html">
-          <i class="bi bi-grid"></i>
+        <a class="nav-link " href="#">
+          <i class="bi bi-bar-chart"></i>
           <span>Dashboard</span>
         </a>
       </li><!-- End Dashboard Nav -->
@@ -13,8 +13,8 @@
 
       @if(Auth::user()->role == 'manager')
       <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('users.index') ? 'active' : '' }}" href="{{route('users.index')}}">
-          <i class="bi bi-person"></i>
+        <a class="nav-link {{ request()->routeIs('users.index', 'users.create', 'users.edit') ? 'active' : '' }}" href="{{route('users.index')}}">
+          <i class="bi bi-people"></i>
           <span>Users</span>
         </a>
       </li>
@@ -22,8 +22,8 @@
 
 
       <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('categories.index') ? 'active' : '' }} collapsed " href="{{route('categories.index')}}">
-          <i class="bi bi-menu-button-wide"></i><span>Categories</span></i>
+        <a class="nav-link {{ request()->routeIs('categories.index', 'categories.create', 'categories.edit') ? 'active' : '' }} collapsed " href="{{route('categories.index')}}">
+          <i class="bi bi-grid"></i><span>Categories</span></i>
         </a>
       
       </li><!-- End Components Nav -->
@@ -31,29 +31,29 @@
 
 
       <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('subCategories.index') ? 'active' : '' }} collapsed" href="{{route('subCategories.index')}}">
-          <i class="bi bi-journal-text"></i><span>Sub Categories</span></i>
+        <a class="nav-link {{ request()->routeIs('subCategories.index', 'subCategories.create', 'subCategories.edit') ? 'active' : '' }} collapsed" href="{{route('subCategories.index')}}">
+          <i class="bi bi-stack"></i><span>Sub Categories</span></i>
         </a>
     
       </li><!-- End Forms Nav -->
 
       <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('products.index') ? 'active' : '' }} collapsed" href="{{route('products.index')}}">
-          <i class="bi bi-layout-text-window-reverse"></i><span>Products</span></i>
+        <a class="nav-link {{ request()->routeIs('products.index', 'products.create', 'products.edit', 'products.show') ? 'active' : '' }} collapsed" href="{{route('products.index')}}">
+          <i class="bi bi-gift"></i><span>Products</span></i>
         </a>
      
       </li><!-- End Tables Nav -->
 
       <li class="nav-item">
         <a class="nav-link {{ request()->routeIs('#') ? 'active' : '' }} collapsed" href="#">
-          <i class="bi bi-bar-chart"></i><span>Orders</span></i>
+          <i class="bi bi-cart"></i><span>Orders</span></i>
         </a>
   
       </li><!-- End Charts Nav -->
 
       
       <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('contacts.index') ? 'active' : '' }} collapsed" href="/contacts">
+        <a class="nav-link {{ request()->routeIs('contacts.index', 'contacts.show') ? 'active' : '' }} collapsed" href="/contacts">
           <i class="bi bi-envelope"></i>
           <span>Contact Us</span>
         </a>
@@ -65,7 +65,7 @@
       <li class="nav-heading">Pages</li>
 
       <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('.index') ? 'active' : '' }} collapsed" href="">
+        <a class="nav-link {{ request()->routeIs('profile_dash.show') ? 'active' : '' }} collapsed" href="{{ route('profile_dash.show') }}">
           <i class="bi bi-person"></i>
           <span>Profile</span>
         </a>

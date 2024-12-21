@@ -9,7 +9,7 @@
   </div>
   
         <a href="{{ route('products.create') }}">
-            <button type="button" class="btn btn-outline-info">
+            <button type="button" class="btn btn-info">
                 <i class="zmdi zmdi-plus"></i> Add new product
             </button>
         </a>
@@ -69,7 +69,7 @@
                           <td title="view">
                             <a href="{{ route('products.show', $product->id) }}"
                               style="color:#000000;"
-                              onmouseover="this.style.color='#0dcaf0';" 
+                              onmouseover="this.style.color='#10db8c';" 
                              onmouseout="this.style.color='#000000';"  
                             title="View">
                             {{$product->name}}

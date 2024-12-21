@@ -9,7 +9,7 @@
   </div>
   
         <a href="{{ route('users.create') }}">
-            <button type="button" class="btn btn-outline-info">
+            <button type="button" class="btn btn-info">
                 <i class="zmdi zmdi-plus"></i> Add new user
             </button>
         </a>
@@ -76,7 +76,7 @@
                             data-mobile="{{ $user->mobile }}" 
                             data-role="{{ $user->role }}"
                             style="color:#000000;" 
-                            onmouseover="this.style.color='#0dcaf0';" 
+                            onmouseover="this.style.color='#10db8c';" 
                             onmouseout="this.style.color='#000000';">
                              {{$user->Fname}} {{$user->Lname}}
                          </a>

@@ -9,7 +9,7 @@
   </div>
   
         <a href="{{ route('subCategories.create') }}">
-            <button type="button" class="btn btn-outline-info">
+            <button type="button" class="btn btn-info">
                 <i class="zmdi zmdi-plus"></i> Add new sub category
             </button>
         </a>
@@ -73,7 +73,7 @@
                             data-image="{{ asset('uploads/subcategory/' . $Subcategory->image) }}"
                             data-category="{{ $Subcategory->category->name }}"
                             style="color:#000000;" 
-                            onmouseover="this.style.color='#0dcaf0';" 
+                            onmouseover="this.style.color='#10db8c';" 
                             onmouseout="this.style.color='#000000';">
                              {{$Subcategory->name}}
                          </a>

@@ -59,9 +59,9 @@ Route::resource('users', UserController::class)->middleware(['auth' , 'manager']
 
 
 
-Route::get('/profile', [UserController::class, 'show_profile'])->name('profile.show');
+// Route::get('/profile', [UserController::class, 'show_profile'])->name('profile.show');
 Route::get('/profile_dashboard', [UserController::class, 'show_profile_dash'])->name('profile_dash.show')->middleware(['auth' , 'role']);
-Route::put('/profile', [UserController::class, 'update_profile'])->name('profile.update');
+Route::put('/profile_dash_edit', [UserController::class, 'update_profile_dash'])->name('profile_dash.update')->middleware(['auth' , 'role']);
 
 
 // <!--==========================================  (contacts)  ===============================================================================================================-->

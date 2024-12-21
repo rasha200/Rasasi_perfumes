@@ -9,7 +9,7 @@
   </div>
   
         <a href="{{ route('categories.create') }}">
-            <button type="button" class="btn btn-outline-info">
+            <button type="button" class="btn btn-info">
                 <i class="zmdi zmdi-plus"></i> Add new category
             </button>
         </a>
@@ -71,7 +71,7 @@
                                data-name="{{ $category->name }}" 
                                data-image="{{ asset('uploads/category/' . $category->image) }}"
                                style="color:#000000;" 
-                               onmouseover="this.style.color='#0dcaf0';" 
+                               onmouseover="this.style.color='#10db8c';" 
                                onmouseout="this.style.color='#000000';">
                                 {{$category->name}}
                             </a>
@@ -174,7 +174,7 @@
 <!-- Custom Confirmation Modal -->
 <div id="confirmationModal"
     style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center; z-index: 1000;">
-    <div style="background: #313030; padding: 20px; border-radius: 5px; text-align: center;">
+    <div style="background: #fff; padding: 20px; border-radius: 5px; text-align: center;">
         <p>Are you sure you want to delete this category?</p>
         <button id="confirmButton" class="btn btn-outline-danger">Delete</button>
         <button id="cancelButton" class="btn btn-outline-secondary">Cancel</button>

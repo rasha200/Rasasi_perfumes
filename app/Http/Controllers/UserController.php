@@ -68,43 +68,43 @@ class UserController extends Controller
 
 
 
-    public function show_profile()
-    {
-        $user = auth()->user();
+    // public function show_profile()
+    // {
+    //     $user = auth()->user();
 
 
-        if ($user->role === 'user') {
+    //     if ($user->role === 'user') {
 
-            $adoptionRequests = $user->toAdoupt()->with('pet.pet_images')->get();
-            $UserAppointments = $user->appointments()->with('service.service_images')->get();
+    //         $adoptionRequests = $user->toAdoupt()->with('pet.pet_images')->get();
+    //         $UserAppointments = $user->appointments()->with('service.service_images')->get();
 
-            foreach ($UserAppointments as $appointment) {
+    //         foreach ($UserAppointments as $appointment) {
 
-                // Calculate the total time for the appointment (in minutes)
-                $averageTime = $appointment->service->average_time;
-                $petNumber = $appointment->pet_number;
-                $totalMinutes = $averageTime * $petNumber;
+    //             // Calculate the total time for the appointment (in minutes)
+    //             $averageTime = $appointment->service->average_time;
+    //             $petNumber = $appointment->pet_number;
+    //             $totalMinutes = $averageTime * $petNumber;
 
-                // Calculate hours and minutes
-                $hours = floor($totalMinutes / 60);
-                $minutes = $totalMinutes % 60;
+    //             // Calculate hours and minutes
+    //             $hours = floor($totalMinutes / 60);
+    //             $minutes = $totalMinutes % 60;
 
-                // Format the duration (e.g., "1h 30m")
-                $appointment->formattedDuration = ($hours > 0 ? $hours . 'h ' : '') . $minutes . 'm';
-            }
+    //             // Format the duration (e.g., "1h 30m")
+    //             $appointment->formattedDuration = ($hours > 0 ? $hours . 'h ' : '') . $minutes . 'm';
+    //         }
 
-            return view('profile', [
-                'user'=> $user ,
-                'adoptionRequests'=> $adoptionRequests,
-                'UserAppointments' => $UserAppointments,
-            ]);
+    //         return view('profile', [
+    //             'user'=> $user ,
+    //             'adoptionRequests'=> $adoptionRequests,
+    //             'UserAppointments' => $UserAppointments,
+    //         ]);
 
-        } elseif (in_array($user->role, ['receptionist', 'store_manager', 'veterinarian', 'manager'])) {
+    //     } elseif (in_array($user->role, ['receptionist', 'store_manager', 'veterinarian', 'manager'])) {
 
-            return redirect()->route('profile_dash.show');
-        }
+    //         return redirect()->route('profile_dash.show');
+    //     }
 
-    }
+    // }
 
 
     public function show_profile_dash()
@@ -150,7 +150,7 @@ class UserController extends Controller
 
 
 
-    public function update_profile(Request $request)
+    public function update_profile_dash(Request $request)
     {
 
         $validation = $request->validate([

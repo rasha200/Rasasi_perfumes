@@ -3,7 +3,7 @@
 
     <div class="d-flex align-items-center justify-content-between">
       <div class="logo d-flex align-items-center">
-        <img src="{{asset('assets/img/logo2.png')}}" alt="Logo" class="logo-img">
+        <img src="{{asset('assets/img/logo2.png')}}" alt="Logo" class="logo-img" style="margin-left: 15px;">
       </div>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
@@ -37,7 +37,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="/profile">
+              <a class="dropdown-item d-flex align-items-center" href="{{ route('profile_dash.show') }}">
                 <i class="bi bi-person"></i>
                 <span>My Profile</span>
               </a>
@@ -71,7 +71,7 @@
                 @csrf
                 <button type="submit" class="dropdown-item d-flex align-items-center">
                   <i class="bi bi-box-arrow-right"></i>
-                  <span>Sign Out</span>
+                  <span>Logout</span>
                 </button>
               </form>
             </li>

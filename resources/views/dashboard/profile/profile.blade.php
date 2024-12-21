@@ -32,7 +32,7 @@
             <div class="card">
                 <div class="card-body pt-3">
                     <h5>Edit Profile</h5>
-                    <form id="profileForm" action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
+                    <form id="profileForm" action="{{ route('profile_dash.update') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="form-group mb-3">
@@ -56,17 +56,10 @@
                         </div>
 
                          <!-- Profile Image Upload -->
-                        <div class="row mb-3">
-                            <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Test Profile Image</label>
-                            <div class="col-md-8 col-lg-9">
-                                <div class="pt-2">
-                                    <input type="file" name="profile_image" class="form-control-file">
-                                </div>
-                            </div>
-                        </div>
+                        
 
                         <div class="text-center">
-                            <button type="button" class="btn btn-outline-info" onclick="confirmUpdate(event)">Save Changes</button>
+                            <button type="button" class="btn btn-info" onclick="confirmUpdate(event)">Save Changes</button>
                         </div>
                     </form>
                 </div>
@@ -79,8 +72,8 @@
 <div id="confirmationModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center;">
     <div style="background: #fff; padding: 20px; border-radius: 5px; text-align: center;">
         <h5>Are you sure you want to update your profile?</h5>
-        <button id="confirmButton" class="btn btn-outline-info">Confirm</button>
-        <button id="cancelButton" class="btn btn-outline-secondary">Cancel</button>
+        <button id="confirmButton" class="btn btn-info">Confirm</button>
+        <button id="cancelButton" class="btn btn-secondary">Cancel</button>
     </div>
 </div>
 

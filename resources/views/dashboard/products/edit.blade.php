@@ -136,8 +136,8 @@ style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100
 style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center; z-index: 1000;">
 <div style="background: #fff; padding: 20px; border-radius: 5px; text-align: center;">
     <h5>Are you sure you want to edit this product?</h5>
-    <button id="confirmButtonUpdate" class="btn btn-outline-info btn-fw">Edit</button>
-    <button id="cancelButtonUpdate" class="btn btn-outline-secondary">Cancel</button>
+    <button id="confirmButtonUpdate" class="btn btn-info btn-fw">Edit</button>
+    <button id="cancelButtonUpdate" class="btn btn-secondary">Cancel</button>
 </div>
 </div>
 
