@@ -131,7 +131,13 @@
                     </div>
                 </div>
                 <div class="col-lg-7 col-sm-8 col-md-6 col-xs-5 col-ts-12">
-                   
+                  
+                    @php
+                    $cartItems = json_decode(Cookie::get('cart', json_encode([])), true);
+                    $cartCount = array_reduce($cartItems, function ($carry, $item) {
+                        return $carry + $item['quantity'];
+                    }, 0);
+                    @endphp
                 </div>
                 <div class="col-lg-2 col-sm-12 col-md-3 col-xs-12 col-ts-12">
                     <div class="header-control">
@@ -139,7 +145,7 @@
                             <a href="javascript:void(0);" class="shopcart-icon" data-stelina="stelina-dropdown">
                                 Cart
                                 <span class="count">
-										0
+                                    {{ $cartCount }}
 										</span>
                             </a>
 

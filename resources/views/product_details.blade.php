@@ -81,14 +81,21 @@
                                 <a href="#">in Stock</a>
                             </div>
                             <div class="price">
+                                @if($product->discount)
+                                <del class="old-price" style="opacity: 50%;">
+                                    <span id="modalOldPrice">  {{ $product->price }} JOD</span>
+                                </del>
+                                <span>{{ number_format($product->price * (1 - $product->discount / 100), 2) }} JOD</span>
+                                @else
                                 @if($product->old_price)
                                 <del class="old-price" style="opacity: 50%;">
-                                    <span id="modalOldPrice"> {{ $product->old_price }} JOD</span>
+                                    <span id="modalOldPrice">  {{ $product->old_price }} JOD</span>
                                 </del>
                                 @else
                                 <span></span>
-                              @endif
+                               @endif
                                 <span>{{ $product->price }} JOD</span>
+                                @endif
                             </div>
                             <div class="product-details-description">
                                 <ul>
@@ -111,20 +118,38 @@
                                                     <input type="hidden" name="product_id" value="{{$product->id}}" >
                                                     <input type="hidden" name="name" value="{{$product->name}}">
                                                     <input type="hidden" name="price" value="{{$product->price}}">
+                                                    <input type="hidden" name="discount" value="{{$product->discount}}">
+                                                    <input type="hidden" name="final_price" value="{{ $product->discount > 0 ? $product->price * (1 - $product->discount / 100) : $product->price }}">
+
                                                     <input type="hidden" name="small_description" value="{{$product->small_description}}">
+                                                   
+
                                                     <div class="quantity">
                                                         <div class="control">
                                                             <a class="btn-number qtyminus quantity-minus" href="#">-</a>
-                                                            <input type="number" name="quantity" data-step="1" data-min="1" value="1" title="Qty" max="{{$product->quantity}}"
-                                                                   class="input-qty qty" size="4">
+                                                            <input 
+                                                                type="text"  
+                                                                name="quantity" 
+                                                                min="1" 
+                                                                max="{{ $product->quantity }}" 
+                                                                value="1" 
+                                                                data-step="1" 
+                                                                title="Qty" 
+                                                                class="input-qty qty" 
+                                                                size="4"
+                                                                readonly> <!-- Keep the input readonly to prevent manual editing -->
                                                             <a href="#" class="btn-number qtyplus quantity-plus">+</a>
                                                         </div>
                                                     </div>
+                                                    
+                                                    
                                                     
                                                     <button class="single_add_to_cart_button button">Add to cart</button>
                                             </div>
                                         </div>
                                     </form>
+
+                                   
 
 
                                   
@@ -153,6 +178,11 @@
                         <h2 class="product-grid-title">You may also like</h2>
                         <div class="owl-products owl-slick equal-container nav-center"  data-slick ='{"autoplay":false, "autoplaySpeed":1000, "arrows":true, "dots":false, "infinite":true, "speed":800, "rows":1}' data-responsive='[{"breakpoint":"2000","settings":{"slidesToShow":3}},{"breakpoint":"1200","settings":{"slidesToShow":2}},{"breakpoint":"992","settings":{"slidesToShow":2}},{"breakpoint":"480","settings":{"slidesToShow":1}}]'>
                             
+
+
+
+        <!------------------------- Related Products ------------------------------>
+
                             @foreach($relatedProducts as $product)
                             <div class="product-item style-1">
                                 <div class="product-inner equal-element">
@@ -182,20 +212,29 @@
                                                     (3)
                                                 </div>
                                             </div>
-                                            <div class="price">
-                                                
-                                               @if($product->old_price)
-                                                <del>
-                                                    {{ $product->old_price }} JOD
-                                                </del>
+                                            @if($product->discount)
+                                                <div class="price">
+                                                    <del>
+                                                        {{ $product->price }} JOD
+                                                    </del>
+                                                    <ins>
+                                                        {{ number_format($product->price * (1 - $product->discount / 100), 2) }} JOD
+                                                    </ins>
+                                                </div>
                                                 @else
-                                                  <span></span>
+                                                <div class="price">
+                                                    @if($product->old_price)
+                                                    <del>
+                                                        {{ $product->old_price }} JOD
+                                                    </del>
+                                                    @else
+                                                     <span></span>
+                                                    @endif
+                                                    <ins>
+                                                        {{ $product->price }} JOD
+                                                    </ins>
+                                                </div>
                                                 @endif
-
-                                                <ins>
-                                                    {{ $product->price }} JOD 
-                                                </ins>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -210,61 +249,41 @@
 </div>
 
   <!------------------------- Success & error modal ------------------------------>
-  @if (Session::get('success'))
+  @if (Session::get('success') || Session::get('error'))
+    <div id="customModal" class="custom-modal-overlay">
+        <div class="custom-modal">
+            <div class="modal-header">
+                <div class="icon-container">
+                    <i class="fa fa-check-circle success-icon"></i> <!-- Success icon -->
+                </div>
+            </div>
+            <div class="modal-body">
+                <h2> Successfully </h2>
+                <p id="modalMessage">{{ Session::get('success') ?? Session::get('error') }}</p>
+            </div>
+            <div class="modal-footer">
+                <button class="close-modal-btn">OK</button>
+            </div>
+        </div>
+    </div>
 
-  <div class="swal-overlay swal-overlay--show-modal" tabindex="-1">
-      <div class="swal-modal">
-          <div class="swal-icon swal-icon--success">
-              <span class="swal-icon--success__line swal-icon--success__line--long"></span>
-              <span class="swal-icon--success__line swal-icon--success__line--tip"></span>
-              <div class="swal-icon--success__ring"></div>
-              <div class="swal-icon--success__hide-corners"></div>
-          </div>
-  
-          <div class="swal-title" style="">{{ Session::get('success') }}</div>
-  
-          <div class="swal-footer">
-              <div class="swal-button-container">
-                  <a href="{{ route('product_details', ['id' => $product->id]) }}" class="swal-button swal-button--confirm">OK</a>
-                  <div class="swal-button__loader">
-                      <div></div>
-                      <div></div>
-                      <div></div>
-                      <div></div>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
+    <script>
+        $(document).ready(function() {
+            // Show the modal
+            $('#customModal').fadeIn();
 
+            // Set the modal title and message
+            var isSuccess = '{{ Session::get("success") }}' ? true : false;
+            $('#modalTitle').text(isSuccess ? 'Success' : 'Error');
+            $('#modalMessage').text('{{ Session::get("success") ?? Session::get("error") }}');
+        });
 
-@elseif (Session::get('error'))
-   <div class="swal-overlay swal-overlay--show-modal" tabindex="-1">
-      <div class="swal-modal">
-          <div class="swal-icon swal-icon--error">
-              <div class="swal-icon--error__x-mark">
-                  <span class="swal-icon--error__line swal-icon--error__line--left"></span>
-                  <span class="swal-icon--error__line swal-icon--error__line--right"></span>
-              </div>
-          </div>
-          
-  
-          <div class="swal-title" style="">{{ Session::get('error') }}</div>
-  
-          <div class="swal-footer">
-              <div class="swal-button-container">
-                  <a href="{{ route('login') }}" class="swal-button swal-button--confirm">Login</a>
-                  <div class="swal-button__loader">
-                      <div></div>
-                      <div></div>
-                      <div></div>
-                      <div></div>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
-@endif   
+        // Close the modal when the user clicks "OK"
+        $('.close-modal-btn').click(function() {
+            $('#customModal').fadeOut();
+        });
+    </script>
+@endif
 
 
 

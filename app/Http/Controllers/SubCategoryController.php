@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\SubCategory;
+use App\Models\Product;
 use App\Models\category;
 use Illuminate\Http\Request;
 
@@ -49,11 +50,13 @@ class SubCategoryController extends Controller
             $file->move($path, $filename);
         }
 
-        SubCategory::create([
+        $subCategory = SubCategory::create([
             'name'=>$request->input('name'),
             'image'=>$filename,
             'category_id'=> $request->input('category_id'),
         ]);
+
+       
 
        
 
@@ -85,6 +88,7 @@ class SubCategoryController extends Controller
         $validation = $request->validate([
             'name' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'discount' => 'nullable|numeric|min:0|max:100',
             'category_id' => 'required|exists:categories,id',
 
         ]);
@@ -101,9 +105,13 @@ class SubCategoryController extends Controller
         $subCategory->update([
             'name'=>$request->input('name'),
             'image'=>$filename,
+            'discount' => $request->input('discount'), 
             'category_id'=> $request->input('category_id'),
         ]);
 
+        Product::where('subCategory_id', $subCategory->id)->update([
+            'discount' => $request->input('discount'),
+        ]);
        
 
         return to_route('subCategories.index')->with('success', 'Sub category updated successfully');

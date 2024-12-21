@@ -20,9 +20,9 @@
 {{--include secound_section(static_categories) end--}}
 
 
-{{--include third_section(filter) start--}}
-@include("include/landing_page/third_section(filter)")
-{{--include third_section(filter) end--}}
+{{--include third_section(bestseller) start--}}
+@include("include/landing_page/third_section(bestseller)")
+{{--include third_section(bestseller) end--}}
 
  
 

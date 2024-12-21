@@ -53,8 +53,10 @@
                         <tr>
                           <th>Id</th>
                           <th>Name</th>
-                          <th>Image</th>
                           <th>Category name</th>
+                          <th>Image</th>
+                          <th>Discount</th>
+                          
                           <th></th>
                         </tr>
                       </thead>
@@ -76,6 +78,7 @@
                              {{$Subcategory->name}}
                          </a>
                             </td>
+                            <td>{{$Subcategory->category->name}}</td>
 
                           <td>
                           @if($Subcategory->image)
@@ -85,7 +88,13 @@
                               <span>No Image</span>
                           @endif
 
-                          <td>{{$Subcategory->category->name}}</td>
+                          @if($Subcategory->discount)
+                          <td>{{$Subcategory->discount}}%</td>
+                          @else
+                          <td></td>
+                          @endif
+
+                          
                           <td> 
 
                           

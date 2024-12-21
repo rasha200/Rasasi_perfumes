@@ -24,5 +24,8 @@
     <link rel="stylesheet" href="{{asset("landing_page/assets/css/mobile-menu.css")}}">
     <link rel="stylesheet" href="{{asset("landing_page/assets/fonts/flaticon/flaticon.css")}}">
     <link rel="stylesheet" href="{{asset("landing_page/assets/css/style.css")}}">
+    <script src="{{asset("https://code.jquery.com/jquery-3.6.0.min.js")}}"></script>
+    
+
 </head>
 <body class="home">

@@ -13,6 +13,39 @@
   scroll-behavior: smooth;
 }
 
+/* Ensure the body and html take up the full height */
+html, body {
+  height: 100%; /* Full viewport height */
+  margin: 0;    /* Remove default margin */
+}
+
+/* Body acts as a flex container */
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Distributes content, footer stays at the bottom */
+}
+
+/* Content section takes up the remaining space */
+.content {
+  flex: 1; /* This ensures that content takes up the remaining space */
+}
+
+/* Footer styling */
+#footer {
+ 
+  color: #fff;            /* Footer text color */
+  padding: 20px;
+  text-align: center;
+  margin-top: auto; /* This pushes the footer to the bottom of the page */
+}
+
+.copyright, .credits {
+  margin: 0;
+  padding: 0;
+}
+
+
 .btn-info{
   background-color: #10db8c !important;
 }

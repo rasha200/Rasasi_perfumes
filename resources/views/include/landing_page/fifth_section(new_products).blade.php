@@ -17,15 +17,11 @@
                                             </span>
                                         </span>
                                 </div>
-                                <div class="yith-wcwl-add-to-wishlist">
-                                    <div class="yith-wcwl-add-button">
-                                        <a href="#" tabindex="0">Add to Wishlist</a>
-                                    </div>
-                                </div>
+                               
                             </div>
                             <div class="thumb-inner ">
                                
-                                <a href="#" tabindex="0">
+                                <a href="{{ route('product_details', $product->id) }}" tabindex="0">
                                     <div class="new-label">New</div>
                                     @if($product->product_images->isNotEmpty())
                                     <img src="{{ asset($product->product_images[0]->image) }}" alt="img" style="height: 140px; width:140px">
@@ -38,7 +34,7 @@
                         </div>
                         <div class="product-info">
                             <h5 class="product-name product_title">
-                                <a href="#" tabindex="0">Suction Return</a>
+                                <a href="{{ route('product_details', $product->id) }}" tabindex="0">{{ $product->name }}</a>
                             </h5>
                             <div class="group-info">
                                 <div class="stars-rating">
@@ -50,7 +46,7 @@
                                     </div>
                                 </div>
                                 <div class="price">
-                                    <span>$375</span>
+                                    <span>{{ $product->price }} JOD</span>
                                 </div>
                             </div>
                             <div class="group-buttons">

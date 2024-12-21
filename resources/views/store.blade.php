@@ -55,8 +55,20 @@
                             <div class="product-inner equal-element">
                                
                                 <div class="product-thumb">
+                                    @if($product->discount)
+                                    <div class="product-top">
+                                        <div class="flash">
+                                                <span class="onnew">
+                                                    <span class="text">
+                                                        {{ $product->discount }}%
+                                                    </span>
+                                                </span>
+                                        </div>
+                                       
+                                    </div>
+                                    @endif
                                     <div class="thumb-inner">
-                                        <a href="#">
+                                        <a href="{{ route('product_details', $product->id) }}">
                                             @if($product->product_images->isNotEmpty())
                                             <img src="{{ asset($product->product_images[0]->image) }}" alt="img" style="height: 250px;">
                                             @else
@@ -65,7 +77,7 @@
                                         </a>
                                         <div class="thumb-group">
                                           
-                                            <a href="#quickviewModal" class="button quick-wiew-button mfp-inline" 
+                                            {{-- <a href="#quickviewModal" class="button quick-wiew-button mfp-inline" 
                                                 data-image="{{ asset($product->product_images->first()->image ?? '/images/default-product.jpg') }}" 
                                                 data-title="{{ $product->name }}" 
                                                 data-oldprice="{{ $product->old_price }} JOD"
@@ -74,8 +86,8 @@
                                                 data-smallDescription="{{ $product->small_description }}" 
                                                 data-category="{{$product->subCategory->category->name}}" 
                                                 data-subCategory="{{ $product->subCategory->name }} ">
-                                                    <i class="fa fa-eye"></i>
-                                                </a>
+                                                  
+                                                </a> --}}
                                         </div>
                                     </div>
                                 </div>
@@ -92,20 +104,29 @@
                                                 (3)
                                             </div>
                                         </div>
-                                        <div class="price">
-
-                                            @if($product->old_price)
-                                            <del>
-                                                {{ $product->old_price }} JOD
-                                            </del>
-                                            @else
-                                              <span></span>
-                                            @endif
-
-                                            <ins>
-                                               {{ $product->price }} JOD 
-                                            </ins>
-                                        </div>
+                                        @if($product->discount)
+                                                <div class="price">
+                                                    <del>
+                                                        {{ $product->price }} JOD
+                                                    </del>
+                                                    <ins>
+                                                        {{ number_format($product->price * (1 - $product->discount / 100), 2) }} JOD
+                                                    </ins>
+                                                </div>
+                                                @else
+                                                <div class="price">
+                                                    @if($product->old_price)
+                                                    <del>
+                                                        {{ $product->old_price }} JOD
+                                                    </del>
+                                                    @else
+                                                     <span></span>
+                                                    @endif
+                                                    <ins>
+                                                        {{ $product->price }} JOD
+                                                    </ins>
+                                                </div>
+                                                @endif
                                     </div>
                                 </div>
                             </div>
@@ -303,7 +324,7 @@
 </div>
 
 {{--include third_section(filter) start--}}
-@include("include/modal/modal")
+{{-- @include("include/modal/modal") --}}
 {{--include third_section(filter) end--}}
 
 <script>

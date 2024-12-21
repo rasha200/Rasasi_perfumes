@@ -19,19 +19,19 @@
     </div>
 
     <style>
-        /* إزالة السلايدر الثانوي */
+       
 .slider-nav {
     display: none;
 }
 
-/* عرض السلايدر الرئيسي فقط */
+
 .slider-for .details-item {
-    display: block; /* تأكد من أن الصورة تعرض فقط في السلايدر الرئيسي */
+    display: block; 
 }
 
-/* تعيين حجم الصورة داخل المودال */
+
 #modalImage {
-    width: 100%; /* تأكد من أن الصورة لا تتجاوز حجم الإطار */
+    width: 100%; 
     height: auto;
 }
 
@@ -77,14 +77,30 @@
         <div class="group-button">
             
             <div class="quantity-add-to-cart">
-                <div class="quantity">
-                    <div class="control">
-                        <a class="btn-number qtyminus quantity-minus" href="#">-</a>
-                        <input type="text" data-step="1" data-min="0" value="1" title="Qty" class="input-qty qty" size="4">
-                        <a href="#" class="btn-number qtyplus quantity-plus">+</a>
+               
+                <form class="pd-detail__form"  action="{{ route('cart.add') }}" method="POST" enctype="multipart/form-data">
+                    <div class="pd-detail-inline-2">
+
+                        <div class="u-s-m-b-15">
+                                @csrf 
+                                <input type="hidden" name="product_id" value="{{$product->id}}" >
+                                <input type="hidden" name="name" value="{{$product->name}}">
+                                <input type="hidden" name="price" value="{{$product->price}}">
+                                <input type="hidden" name="small_description" value="{{$product->small_description}}">
+                                <div class="quantity">
+                                    <div class="control">
+                                        <a class="btn-number qtyminus quantity-minus" href="#">-</a>
+                                        <input type="number" name="quantity" data-step="1" data-min="1" value="1" title="Qty" max="{{$product->quantity}}"
+                                               class="input-qty qty" size="4">
+                                        <a href="#" class="btn-number qtyplus quantity-plus">+</a>
+                                    </div>
+                                </div>
+                                
+                                <button class="single_add_to_cart_button button">Add to cart</button>
+                        </div>
                     </div>
-                </div>
-                <button class="single_add_to_cart_button button">Add to cart</button>
+                </form>
+
             </div>
         </div>
     </div>

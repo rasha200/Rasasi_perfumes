@@ -41,6 +41,8 @@
                             <input type="file" name="image" id="image" class="form-control">
                       </div>
 
+                      
+
                       <div class="col-12">
                         <label for="exampleSelectGender" class="form-label">Category name</label>
 

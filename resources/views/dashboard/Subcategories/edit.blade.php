@@ -39,7 +39,7 @@
                         <label for="exampleSelectGender" class="form-label">Category name</label>
                         <select  class="form-control form-control-sm" id="category_id" name="category_id">
                             @foreach ($categories as $category)
-                            <option @selected($subCategory->id == $subCategory->category_id) value="{{$category->id}}">{{$category->name}}</option>
+                            <option @selected($category->id == $subCategory->category_id) value="{{$category->id}}">{{$category->name}}</option>
                             @endforeach
                            
                         </select>
@@ -57,6 +57,11 @@
                       <div class="col-12">
                             <label for="image" class="form-label">Upload new image</label>
                             <input type="file" name="image" id="image" class="form-control">
+                      </div>
+
+                      <div class="col-12">
+                        <label for="exampleInputName1" class="form-label">Discount (%)</label>
+                        <input type="number" class="form-control" id="discount" placeholder="Discount" name="discount" value="{{$subCategory->discount}}" >
                       </div>
 
 

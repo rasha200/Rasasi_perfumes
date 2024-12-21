@@ -36,6 +36,80 @@ REPONSIVE
   1.0 COMPONENT STYLES
 ============================================================================ */
 
+ /* Icon container for centering the icon */
+ .icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Font Awesome Success Icon (Circle) */
+.success-icon {
+    font-size: 70px; /* Adjust the size of the icon */
+    color: #28a745; /* Success color (Green) */
+    background-color: white;
+    border-radius: 50%; /* Makes it circular */
+    padding: 15px; /* Adds space inside the circle */
+  
+}
+
+  /* Modal Background Overlay */
+.custom-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center;     /* Centers vertically */
+    z-index: 9999;
+}
+
+/* Modal Container */
+.custom-modal {
+    background-color: #fff;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 500px; /* Max width to ensure it doesn't overflow on smaller screens */
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative; /* Added relative positioning to keep the modal inside the overlay */
+}
+
+/* Modal Title */
+.custom-modal .modal-header h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* Modal Body */
+.custom-modal .modal-body p {
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+/* Modal Footer with button */
+.custom-modal .modal-footer {
+    text-align: center;
+}
+
+.custom-modal .modal-footer .close-modal-btn {
+    padding: 10px 20px;
+    background-color: #900A07;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.custom-modal .modal-footer .close-modal-btn:hover {
+    background-color: #900A07;
+}
 
 
 body {

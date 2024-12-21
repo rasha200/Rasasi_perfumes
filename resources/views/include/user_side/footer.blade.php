@@ -197,7 +197,7 @@
     <i class="fa fa-angle-double-up"></i>
 </a>
 
-
+<script src="{{asset("https://code.jquery.com/jquery-3.6.0.min.js")}}"></script>
 <script src="{{asset("landing_page/assets/js/jquery-1.12.4.min.js")}}"></script>
 <script src="{{asset("landing_page/assets/js/jquery.plugin-countdown.min.js")}}"></script>
 <script src="{{asset("landing_page/assets/js/jquery-countdown.min.js")}}"></script>

@@ -4,66 +4,26 @@
             <div class="col-lg-8 silider-wrapp">
                 <div class="home-slider">
                     <div class="slider-owl owl-slick equal-container nav-center"
-                         data-slick='{"autoplay":true, "autoplaySpeed":9000, "arrows":false, "dots":true, "infinite":true, "speed":1000, "rows":1}'
-                         data-responsive='[{"breakpoint":"2000","settings":{"slidesToShow":1}}]'>
-                        <div class="slider-item style7">
-                            <div class="slider-inner equal-element">
-                                <div class="slider-infor">
-                                    <h5 class="title-small">
-                                        Sale up to 40% off!
-                                    </h5>
-                                    <h3 class="title-big">
-                                        Spring Summer <br/>Collection
-                                    </h3>
-                                    <div class="price">
-                                        New Price:
-                                        <span class="number-price">
-                                                $270.00
-                                            </span>
-                                    </div>
-                                    <a href="#" class="button btn-shop-the-look bgroud-style">Shop now</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="slider-item style8">
-                            <div class="slider-inner equal-element">
-                                <div class="slider-infor">
-                                    <h5 class="title-small">
-                                        Take A perfume
-                                    </h5>
-                                    <h3 class="title-big">
-                                        Up to 25% Off <br/>order now
-                                    </h3>
-                                    <div class="price">
-                                        Save Price:
-                                        <span class="number-price">
-                                                $170.00
-                                            </span>
-                                    </div>
-                                    <a href="#" class="button btn-shop-product">Shop now</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="slider-item style9">
-                            <div class="slider-inner equal-element">
-                                <div class="slider-infor">
-                                    <h5 class="title-small">
-                                        Stelina Best Collection
-                                    </h5>
-                                    <h3 class="title-big">
-                                        A range of <br/>perfume
-                                    </h3>
-                                    <div class="price">
-                                        New Price:
-                                        <span class="number-price">
-                                                $250.00
-                                            </span>
-                                    </div>
-                                    <a href="#" class="button btn-chekout">Shop now</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+     data-slick='{"autoplay":true, "autoplaySpeed":4000, "arrows":false, "dots":true, "infinite":true, "speed":1000, "rows":1}'
+     data-responsive='[{"breakpoint":"2000","settings":{"slidesToShow":1}}]'>
+    
+    @foreach($discountedSubCategories as $subcategory)
+        <div class="slider-item style7">
+            <div class="slider-inner equal-element" style="background-image: url({{ asset('uploads/subcategory/' . $subcategory->image) }});   ">
+                <div class="slider-infor" style="height:625px !important;">
+                    <h5 class="title-small">
+                        Sale up to {{ $subcategory->discount }}% off!
+                    </h5>
+                    <h3 class="title-big">
+                        {{ $subcategory->name }} Collection
+                    </h3>
+                    <a href="{{ route('products.bySubCategory', $subcategory->id) }}" class="button btn-shop-the-look bgroud-style" >Shop now</a>
+                </div>
+            </div>
+        </div>
+    @endforeach
+</div>
+
                 </div>
             </div>
 
@@ -92,13 +52,14 @@
                 <div class="banner">
                     <div class="item-banner style8">
                         <div class="inner">
-                            <div class="banner-content">
-                                <h3 class="title">Best Of<br/>Products</h3>
+                            @foreach ($products->slice(25, 1) as $product)
+                            <div class="banner-content" style="background-image: url('{{ asset($product->product_images[0]->image) }}') !important;">                                <h3 class="title">Best Of<br/>Products</h3>
                                 <div class="description">
                                     Cras pulvinar loresum dolor conse
                                 </div>
                                 <span class="price">$379.00</span>
                             </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>

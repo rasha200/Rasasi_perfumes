@@ -104,8 +104,9 @@ Route::get('/product_details/{id}',[ProductController::class, 'show_user_side'])
 Route::get('cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('cart/add', [CartController::class, 'addToCart'])->name('cart.add');
 Route::post('cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
-Route::post('cart/delete/{id}', [CartController::class, 'deleteCartItem'])->name('cart.delete');
-Route::get('cart/clear', [CartController::class, 'clear'])->name('cart.clear');
+Route::post('/cart/delete/{product_id}', [CartController::class, 'deleteCartItem'])->name('cart.delete');
+
+Route::post('cart/clear', [CartController::class, 'clear'])->name('cart.clear');
 
 
 

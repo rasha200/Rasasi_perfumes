@@ -22,13 +22,13 @@
                 </ul>
             </div>
             <div class="row">
-                <div class="main-content-cart main-content col-sm-12">
+                <div class="main-content-cart main-content col-sm-12" >
                     <h3 class="custom_blog_title">
                         Shopping Cart
                     </h3>
                     <div class="page-main-content">
                         <div class="shoppingcart-content">
-                            <form action="shoppingcart.html" class="cart-form">
+                            <form action="shoppingcart.html" class="cart-form" style="border: none !important;">
                                 <table class="shop_table">
                                     <thead>
                                     <tr>
@@ -41,121 +41,131 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr class="cart_item">
+
+
+                                    @foreach ($cart as $item)
+                                      
+                                    @php
+                                       $product = \App\Models\product::find($item['product_id']);
+
+                                    @endphp   
+                                    <tr class="cart_item" style="border: 1px solid #f1f1f1;">
                                         <td class="product-remove">
-                                            <a href="#" class="remove"></a>
+                                            <form action="{{ route('cart.delete',$product->id ) }}" method="POST" style="display: inline;">
+                                                @csrf
+                                              <button type="submit" class="remove" style="background: none; border: none; padding: 0; cursor: pointer;"><i class="fa fa-trash-o" aria-hidden="true" style="color:grey; font-size:22px;" onmouseover="this.style.color='brown';" 
+                                                onmouseout="this.style.color='grey';" title="Delete"></i> </button>
+                                            </form>
                                         </td>
                                         <td class="product-thumbnail">
-                                            <a href="#">
-                                                <img src="assets/images/cart-item-2.jpg" alt="img"
+                                            <a href="{{ route('product_details', $product->id) }}">
+                                                <img src="{{ asset($product->product_images->first()->image ?? '/images/default-product.jpg') }}" alt="img"
                                                      class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image">
                                             </a>
                                         </td>
                                         <td class="product-name" data-title="Product">
-                                            <a href="#" class="title">Mini swing dress</a>
-                                            <span class="attributes-select attributes-color">Black,</span>
-                                            <span class="attributes-select attributes-size">XXL</span>
+                                            <a href="{{ route('product_details', $product->id) }}" class="title">{{ $product->name }}</a>
+                                            <span class="attributes-select attributes-color">{{ $product->small_description }}</span>
+                                            
                                         </td>
                                         <td class="product-quantity" data-title="Quantity">
-                                            <div class="quantity">
-                                                <div class="control">
-                                                    <a class="btn-number qtyminus quantity-minus" href="#">-</a>
-                                                    <input type="text" data-step="1" data-min="0" value="1" title="Qty"
-                                                           class="input-qty qty" size="4">
-                                                    <a href="#" class="btn-number qtyplus quantity-plus">+</a>
+                                            <form action="{{ route('cart.update', $item['product_id']) }}" method="POST" style="display: flex; align-items: center; margin-left: 30px;">
+                                                @csrf
+                                                <div class="quantity">
+                                                    <div class="control">
+                                                        <input 
+                                                            type="number" 
+                                                            name="quantity" 
+                                                            data-step="1" 
+                                                            data-min="1" 
+                                                            min="1" 
+                                                            max="{{ $product->quantity }}" 
+                                                            value="{{ $item['quantity'] }}" 
+                                                            title="Qty" 
+                                                            class="input-qty qty" 
+                                                            size="4">
+                                                    </div>
                                                 </div>
-                                            </div>
+                                                <button type="submit" class="btn-update" style="margin-left: 10px;">Update</button>
+                                            </form>
+                                            
+                                            
+                                            
+                                            <style>
+                                        .quantity .control {
+                                          display: flex;
+                                          flex-direction: column; /* Stack the input and button vertically */
+                                          align-items: flex-start; /* Align items to the left */
+                                          gap: 10px; /* Space between the input and button */
+                                        }
+
+                                        .input-qty {
+                                          width: 70px; /* Fixed width for the input */
+                                          padding: 5px; /* Padding for the input */
+                                        }
+
+                                        .btn-update {
+                                          background-color: white; /* Button color */
+                                          color: #900A07; /* Text color */
+                                          
+                                          border-radius: 0px;
+                                          padding-bottom: 0px !important;
+                                          padding: 5px 2px; /* Button padding */
+                                          font-size: 14px;
+                                          cursor: pointer;
+                                          transition: background-color 0.3s ease;
+                                        }
+
+                                        
+
+
+
+                                            </style>
+                                            
+
+                                           
                                         </td>
                                         <td class="product-price" data-title="Price">
-													<span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">
-															$
-														</span>
-														45
-													</span>
+                                            @if($product->discount)
+                                            <!-- Display the original price in del -->
+                                            <del style="opacity: 50%; font-size:16px;">
+                                                {{ number_format($product->price, 2) }} JOD
+                                            </del>
+                                    
+                                            <!-- Display the discounted price in span -->
+                                            <span class="woocommerce-Price-amount amount" style="font-size:16px; color:red;">
+                                                <span class="woocommerce-Price-currencySymbol" style="font-size:16px;">
+                                                    {{ number_format($product->price * (1 - $product->discount / 100), 2) }} 
+                                                </span>
+                                                JOD
+                                            </span>
+                                        @else 
+                                            <!-- Display regular price if no discount -->
+                                            <span class="woocommerce-Price-amount amount" style="font-size:16px;">
+                                                <span class="woocommerce-Price-currencySymbol">
+                                                    {{ number_format($product->price, 2) }}
+                                                </span>
+                                                JOD
+                                            </span> 
+                                        @endif
                                         </td>
                                     </tr>
-                                    <tr class="cart_item">
-                                        <td class="product-remove">
-                                            <a href="#" class="remove"></a>
-                                        </td>
-                                        <td class="product-thumbnail">
-                                            <a href="#">
-                                                <img src="assets/images/cart-item-3.jpg" alt="img"
-                                                     class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image">
-                                            </a>
-                                        </td>
-                                        <td class="product-name" data-title="Product">
-                                            <a href="#" class="title">Square neck top</a>
-                                            <span class="attributes-select attributes-color">White,</span>
-                                            <span class="attributes-select attributes-size">M</span>
-                                        </td>
-                                        <td class="product-quantity" data-title="Quantity">
-                                            <div class="quantity">
-                                                <div class="control">
-                                                    <a class="btn-number qtyminus quantity-minus" href="#">-</a>
-                                                    <input type="text" data-step="1" data-min="0" value="1" title="Qty"
-                                                           class="input-qty qty" size="4">
-                                                    <a href="#" class="btn-number qtyplus quantity-plus">+</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="product-price" data-title="Price">
-													<span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">
-															$
-														</span>
-														45
-													</span>
-                                        </td>
-                                    </tr>
-                                    <tr class="cart_item">
-                                        <td class="product-remove">
-                                            <a href="#" class="remove"></a>
-                                        </td>
-                                        <td class="product-thumbnail">
-                                            <a href="#">
-                                                <img src="assets/images/cart-item-1.jpg" alt="img"
-                                                     class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image">
-                                            </a>
-                                        </td>
-                                        <td class="product-name" data-title="Product">
-                                            <a href="#" class="title">Melody Eau</a>
-                                            <span class="attributes-select attributes-color">Brown,</span>
-                                            <span class="attributes-select attributes-size">XS</span>
-                                        </td>
-                                        <td class="product-quantity" data-title="Quantity">
-                                            <div class="quantity">
-                                                <div class="control">
-                                                    <a class="btn-number qtyminus quantity-minus" href="#">-</a>
-                                                    <input type="text" data-step="1" data-min="0" value="1" title="Qty"
-                                                           class="input-qty qty" size="4">
-                                                    <a href="#" class="btn-number qtyplus quantity-plus">+</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="product-price" data-title="Price">
-													<span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">
-															$
-														</span>
-														45
-													</span>
-                                        </td>
-                                    </tr>
+                                    @endforeach
                                     <tr>
-                                        <td class="actions">
-                                            <div class="coupon">
-                                                <label class="coupon_code">Coupon Code:</label>
-                                                <input type="text" class="input-text" placeholder="Promotion code here">
-                                                <a href="#" class="button"></a>
-                                            </div>
+                                        <td class="actions" style="border: 1px solid #f1f1f1;">
+                                            @php
+                                            // Calculate the total, taking discounts into account
+                                            $total = collect($cart)->sum(function($item) {
+                                                // Use the final_price stored in the cart instead of applying the discount again
+                                                return $item['final_price'] * $item['quantity'];
+                                            });
+                                        @endphp
                                             <div class="order-total">
 														<span class="title">
 															Total Price:
 														</span>
                                                 <span class="total-price">
-															$95
+                                                    {{ number_format($total, 2) }} JOD
 														</span>
                                             </div>
                                         </td>
@@ -163,14 +173,19 @@
                                     </tbody>
                                 </table>
                             </form>
-                            <div class="control-cart">
-                                <button class="button btn-continue-shopping">
-                                    Continue Shopping
-                                </button>
-                                <button class="button btn-cart-to-checkout">
+                           
+                                <form action="{{ route('cart.clear') }}" method="POST" class="control-cart" >
+                                 @csrf
+                                  <button type="submit" class="button btn-continue-shopping">
+                                      Delete cart
+                                  </button>
+
+                                  <button class="button btn-cart-to-checkout">
                                     Checkout
                                 </button>
-                            </div>
+                                </form>
+                               
+                           
                         </div>
                     </div>
                 </div>
@@ -178,4 +193,6 @@
         </div>
     </main>
 </div>
+
+{{-- <pre>{{ print_r($cart, true) }}</pre> --}}
 @endsection

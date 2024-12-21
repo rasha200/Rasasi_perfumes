@@ -16,20 +16,19 @@ class CartController extends Controller
     public function index()
     {
         
-        $userId = Auth::check() ? Auth::id() : null;
+      
 
         // Get cart items from cookie, default to an empty array if not set
         $cart = json_decode(Cookie::get('cart', json_encode([])), true);
 
         // Filter cart items for the authenticated user
-        $userCart = $userId ? array_filter($cart, function ($item) use ($userId) {
-            return $item['user_id'] === $userId;
-        }) : [];
+       
 
         
 
-        return view('cart', compact('cart','userCart'));
+        return view('cart', compact('cart'));
     }
+
 
 
     public function addToCart(Request $request)
@@ -39,26 +38,27 @@ class CartController extends Controller
             'name' => 'required|string',
             'price' => 'required|numeric',
             'quantity' => 'required|integer|min:1',
+            'discount' => 'nullable|numeric|min:0|max:100',
+            'final_price' => 'required|numeric',
+            'small_description' => 'required|string',
         ]);
 
         $cart = json_decode(Cookie::get('cart', json_encode([])), true);
 
-        // Retrieve the product's store ID
         $product = \App\Models\Product::find($request->product_id);
 
         if (!$product) {
             return redirect()->back()->with('error', 'Product not found!');
         }
 
-       
-        // Add or update the product in the cart
         $cartItem = [
             'product_id' => $request->product_id,
             'name' => $request->name,
             'price' => $request->price,
             'quantity' => $request->quantity,
-            'user_id' => Auth::user()->id,
-           
+            'discount' => $request->discount, 
+            'final_price' => $request->final_price,
+            'small_description' => $request->small_description,
         ];
 
         if (isset($cart[$cartItem['product_id']])) {
@@ -71,6 +71,8 @@ class CartController extends Controller
         return redirect()->back()->with('success', 'Product added to cart successfully!')
             ->cookie('cart', json_encode($cart), 60 * 24 * 7); // Set cookie for 1 week
     }
+
+    
 
 
 
@@ -98,16 +100,15 @@ class CartController extends Controller
     }
 
 
-    public function deleteCartItem($productId)
+    public function deleteCartItem($product_id)
     {
         $cart = json_decode(Cookie::get('cart', json_encode([])), true);
 
-        if (isset($cart[$productId])) {
-            unset($cart[$productId]); // Remove item from cart
+        if (isset($cart[$product_id])) {
+            unset($cart[$product_id]); // Remove item from cart
         }
 
-        return redirect()->back()->with('success', 'Item removed from cart successfully!')
-            ->cookie('cart', json_encode($cart), 60 * 24 * 7);
+        return redirect()->back()->cookie('cart', json_encode($cart), 60 * 24 * 7);
     }
 
     
