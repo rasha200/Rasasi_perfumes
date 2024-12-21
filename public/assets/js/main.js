@@ -317,3 +317,15 @@
   }
 
 })();
+// الحصول على كل الروابط داخل الـ Sidebar
+const navLinks = document.querySelectorAll('.sidebar .nav-link');
+
+// إضافة حدث عند الضغط على أي رابط
+navLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    // إزالة الكلاس "active" من جميع الروابط
+    navLinks.forEach(item => item.classList.remove('active'));
+    // إضافة الكلاس "active" للرابط المضغوط
+    link.classList.add('active');
+  });
+});
