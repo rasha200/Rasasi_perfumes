@@ -88,22 +88,25 @@
                           <td>{{$user->email}}</td>
                           <td>{{$user->mobile}}</td>
 
-                          @if($user->role == 'manager')
-                              <td>{{$user->role}}</td>
+                         
 
-                          @elseif($user->role == 'employee')
-                              <td>{{$user->role}}</td>
-
-
-                          @elseif($user->role == 'user' )
-                            <td>{{$user->role}}</td>
-
-                          @endif
-                          <td> 
-                            
+                          <td>
+                            <span 
+                                class="badge" 
+                                style="background-color: 
+                                    {{ $user->role == 'user' ? '#FFA500' : 
+                                       ($user->role == 'employee' ? '#28A745' : '#000') }};
+                                    color: white; 
+                                    padding: 5px 10px; 
+                                    border-radius: 5px;"
+                            >
+                                {{ $user->role }}
+                            </span>
+                        </td>
                         
 
-                          
+                          <td> 
+                            
                           <a href="{{ route('users.edit', $user->id) }}"  title="Edit">
                           <button type="button" class="btn btn-info">
                             <i class="bi bi-pencil"></i>

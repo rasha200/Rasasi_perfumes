@@ -166,7 +166,17 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        //
+        
+        $validation = $request->validate([
+            'order_status' => 'required|string|in:Processing,Completed',
+        ]);
+    
+        // Update the order status
+        $order->update([
+            'order_status' => $request->input('order_status'),
+        ]);
+    
+        return redirect()->back()->with('success', 'Order status updated successfully');
     }
 
     /**

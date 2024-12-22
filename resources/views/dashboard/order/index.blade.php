@@ -75,7 +75,20 @@
 
                           <td>{{$order->total_price}}</td>
                           
-                          <td>{{$order->order_status}}</td>
+                          <td>
+                            <span 
+                                class="badge" 
+                                style="background-color: 
+                                    {{ $order->order_status == 'Pending' ? '#FFA500' : 
+                                       ($order->order_status == 'Processing' ? '#007BFF' : 
+                                       ($order->order_status == 'Completed' ? '#28A745' : '#000')) }};
+                                    color: white; 
+                                    padding: 5px 10px; 
+                                    border-radius: 5px;"
+                            >
+                                {{ $order->order_status }}
+                            </span>
+                        </td>
 
                           <td> 
 

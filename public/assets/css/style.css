@@ -369,8 +369,8 @@ h6 {
 }
 
 .accordion-button:not(.collapsed) {
-  color: #012970;
-  background-color: #f6f9ff;
+  color: #db1010;
+  background-color: #fff6f6;
 }
 
 .accordion-flush .accordion-button {

@@ -118,7 +118,8 @@ Route::middleware(['auth', 'role'])->group(function () {
     Route::Get('/order' ,[OrderController::class , 'index'])->name('order.index');
     Route::Get('/order/{order}' ,[OrderController::class , 'show'])->name('order.show');
     Route::get('/order/{id}/edit', [OrderController::class, 'edit'])->name('order.edit');
-    Route::PUT('/order/{id}', [OrderController::class, 'update'])->name('order.update');
+    Route::put('/order/{order}', [OrderController::class, 'update'])->name('order.update');
+    
     Route::delete('/order/{order}', [OrderController::class, 'destroy'])->name('order.destroy');
 });
 
@@ -130,5 +131,5 @@ Route::post('/checkout', [OrderController::class, 'store'])->name('order.store')
 
 
 // Route::get('/test', function () {
-//     return view('errors.401');
+//     return view('profile');
 // })->name('test');
