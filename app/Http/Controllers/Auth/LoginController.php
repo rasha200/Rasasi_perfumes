@@ -29,6 +29,16 @@ class LoginController extends Controller
      */
     protected function redirectTo(){
 
+
+
+        if (session()->has('from_checkout')) {
+            // Remove the session variable after use
+            session()->forget('from_checkout');
+            
+            // Redirect to the contact page
+            return route('order.create');
+        }
+
         if (Auth::user()->role == 'manager' || Auth::user()->role == 'employee') {
             return '/dashboard';
             } else {

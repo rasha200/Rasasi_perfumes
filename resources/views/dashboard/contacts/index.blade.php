@@ -3,8 +3,8 @@
 @section('content')
 
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <div class="pagetitle">
-        <h1>Contacts</h1>
+    <div class="pagetitle" style="margin-top: 30px;">
+        <h1><i class="bi bi-envelope"></i> Contacts</h1>
     </div>
 
     <!-- <a href="">

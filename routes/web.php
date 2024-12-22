@@ -10,6 +10,8 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductImageController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
+
 
 use Illuminate\Support\Facades\Auth;
 
@@ -111,4 +113,22 @@ Route::post('cart/clear', [CartController::class, 'clear'])->name('cart.clear');
 
 
 
+// <!--==========================================  (Orders)  ===================================================================================================================-->
+Route::middleware(['auth', 'role'])->group(function () {
+    Route::Get('/order' ,[OrderController::class , 'index'])->name('order.index');
+    Route::Get('/order/{order}' ,[OrderController::class , 'show'])->name('order.show');
+    Route::get('/order/{id}/edit', [OrderController::class, 'edit'])->name('order.edit');
+    Route::PUT('/order/{id}', [OrderController::class, 'update'])->name('order.update');
+    Route::delete('/order/{order}', [OrderController::class, 'destroy'])->name('order.destroy');
+});
 
+
+// Public routes
+Route::Get('/checkoutView', [OrderController::class, 'create'])->name('order.create');
+Route::post('/checkout', [OrderController::class, 'store'])->name('order.store');
+
+
+
+// Route::get('/test', function () {
+//     return view('errors.401');
+// })->name('test');

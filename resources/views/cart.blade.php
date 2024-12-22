@@ -51,8 +51,11 @@
                                     @endphp   
                                     <tr class="cart_item" style="border: 1px solid #f1f1f1;">
                                         <td class="product-remove">
+
+                                           
                                             <form action="{{ route('cart.delete',$product->id ) }}" method="POST" style="display: inline;">
                                                 @csrf
+                                                @method('DELETE')
                                               <button type="submit" class="remove" style="background: none; border: none; padding: 0; cursor: pointer;"><i class="fa fa-trash-o" aria-hidden="true" style="color:grey; font-size:22px;" onmouseover="this.style.color='brown';" 
                                                 onmouseout="this.style.color='grey';" title="Delete"></i> </button>
                                             </form>
@@ -68,8 +71,8 @@
                                             <span class="attributes-select attributes-color">{{ $product->small_description }}</span>
                                             
                                         </td>
-                                        <td class="product-quantity" data-title="Quantity">
-                                            <form action="{{ route('cart.update', $item['product_id']) }}" method="POST" style="display: flex; align-items: center; margin-left: 30px;">
+                                        <td class="product-quantity" data-title="Quantity" >
+                                            <form action="{{ route('cart.update', $item['product_id']) }}" method="POST" style="align-items: center; margin-left: 30px; display: flex; flex-direction: column;">
                                                 @csrf
                                                 <div class="quantity">
                                                     <div class="control">
@@ -86,7 +89,7 @@
                                                             size="4">
                                                     </div>
                                                 </div>
-                                                <button type="submit" class="btn-update" style="margin-left: 10px;">Update</button>
+                                                <button type="submit" class="btn-update" style="margin-left: 20px;">Update</button>
                                             </form>
                                             
                                             
@@ -154,12 +157,24 @@
                                     <tr>
                                         <td class="actions" style="border: 1px solid #f1f1f1;">
                                             @php
-                                            // Calculate the total, taking discounts into account
-                                            $total = collect($cart)->sum(function($item) {
-                                                // Use the final_price stored in the cart instead of applying the discount again
-                                                return $item['final_price'] * $item['quantity'];
+                                            // Fetch all products for the cart at once to avoid multiple database queries
+                                            $productIds = collect($cart)->pluck('product_id')->toArray();
+                                            $products = \App\Models\Product::whereIn('id', $productIds)->get()->keyBy('id');
+                                        
+                                            // Calculate the total price of the cart with applied discounts
+                                            $total = collect($cart)->sum(function($item) use ($products) {
+                                                // Get the product from the already fetched products
+                                                $product = $products[$item['product_id']];
+                                        
+                                                // Calculate the final price with discount
+                                                $final_price = $product->discount 
+                                                    ? $product->price * (1 - $product->discount / 100) 
+                                                    : $product->price;
+                                        
+                                                // Return the total price for this product with the quantity
+                                                return $final_price * $item['quantity'];
                                             });
-                                        @endphp
+                                          @endphp
                                             <div class="order-total">
 														<span class="title">
 															Total Price:
@@ -174,16 +189,15 @@
                                 </table>
                             </form>
                            
-                                <form action="{{ route('cart.clear') }}" method="POST" class="control-cart" >
-                                 @csrf
-                                  <button type="submit" class="button btn-continue-shopping">
-                                      Delete cart
-                                  </button>
+                               
+                                
 
-                                  <button class="button btn-cart-to-checkout">
-                                    Checkout
-                                </button>
-                                </form>
+                                    <form action="{{ route('order.create') }}" method="GET" class="control-cart">
+                                        <button type="submit" class="button btn-cart-to-checkout">
+                                            Checkout
+                                        </button>
+                                    </form>
+                           
                                
                            
                         </div>
@@ -193,6 +207,81 @@
         </div>
     </main>
 </div>
+
+
+  <!------------------------- Success & error modal ------------------------------>
+
+@if (Session::get('success') )
+<div id="customModal" class="custom-modal-overlay">
+    <div class="custom-modal">
+        <div class="modal-header">
+            <div class="icon-container">
+                <i class="fa fa-check-circle success-icon"></i> <!-- Success icon -->
+            </div>
+        </div>
+        <div class="modal-body">
+            <h2> Successfully </h2>
+            <p id="modalMessage">{{ Session::get('success') }}</p>
+        </div>
+        <div class="modal-footer">
+            <button class="close-modal-btn">OK</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        // Show the modal
+        $('#customModal').fadeIn();
+
+        // Set the modal title and message
+        var isSuccess = '{{ Session::get("success") }}' ? true : false;
+        $('#modalTitle').text(isSuccess ? 'Success' : 'Error');
+        $('#modalMessage').text('{{ Session::get("success") ?? Session::get("error") }}');
+    });
+
+    // Close the modal when the user clicks "OK"
+    $('.close-modal-btn').click(function() {
+        $('#customModal').fadeOut();
+    });
+</script>
+@endif
+
+@if (Session::get('error'))
+ <div id="customModal" class="custom-modal-overlay">
+     <div class="custom-modal">
+        <div class="modal-header">
+            <div class="icon-container">
+                <i class="fa fa-exclamation-circle error-icon"></i> <!-- Error icon -->
+            </div>
+        </div>
+         <div class="modal-body">
+             <h2> Please Login to Proceed </h2>
+             <p id="modalMessage">{{ Session::get('error') }}</p>
+         </div>
+         <div class="modal-footer">
+             <button class="close-modal-btn" onclick="window.location.href='{{ route('login') }}'">Login</button>
+         </div>
+     </div>
+ </div>
+
+ <script>
+     $(document).ready(function() {
+         // Show the modal
+         $('#customModal').fadeIn();
+
+         // Set the modal title and message
+         var isSuccess = '{{ Session::get("success") }}' ? true : false;
+         $('#modalTitle').text(isSuccess ? 'Success' : 'Error');
+         $('#modalMessage').text('{{ Session::get("success") ?? Session::get("error") }}');
+     });
+
+     // Close the modal when the user clicks "OK"
+     $('.close-modal-btn').click(function() {
+         $('#customModal').fadeOut();
+     });
+ </script>
+@endif
 
 {{-- <pre>{{ print_r($cart, true) }}</pre> --}}
 @endsection

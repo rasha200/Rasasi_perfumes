@@ -8,8 +8,17 @@
         <p align="center" style="margin-top: 50px;"><strong>{{ $product->name }}</strong> </p>
         <p><strong>Small Description:</strong> {{ $product->small_description }}</p>
         <p><strong>Description:</strong> {{ $product->description }}</p>
-        <p><strong>Price:</strong> {{ $product->price }}</p>
         <p><strong>Old Price:</strong> {{ $product->old_price }}</p>
+
+        <p><strong>Price:</strong> {{ $product->price }}</p>
+
+        <p><strong>Discount:</strong>  
+            @if($product->discount)
+            {{ $product->discount }}% 
+        @else
+            No Discount
+        @endif</p>
+
         {{-- <p><strong>Quantity:</strong> {{ $product->quantity }}</p> --}}
         <p><strong>Sub category name:</strong> {{$product->subCategory->category->name}} - {{ $product->subCategory->name }}</p> 
         <div class="form-group">

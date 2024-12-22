@@ -4,11 +4,11 @@
 
 <div class="d-flex justify-content-between align-items-center mb-4">
 
-  <div class="pagetitle">
-    <h1>Categories</h1>
+  <div class="pagetitle" style="margin-top: 30px;">
+    <h1><i class="bi bi-grid"></i> Categories</h1>
   </div>
   
-        <a href="{{ route('categories.create') }}">
+        <a href="{{ route('categories.create') }}" style="margin-top: 30px;">
             <button type="button" class="btn btn-info">
                 <i class="zmdi zmdi-plus"></i> Add new category
             </button>
@@ -80,7 +80,7 @@
                           <td>
                           @if($category->image)
                           
-                            <img src="{{ asset('uploads/category/' . $category->image) }}" alt="Category Image" style="width: 50px; border-radius: 50px;"></td>
+                            <img src="{{ asset('uploads/category/' . $category->image) }}" alt="Category Image" style="width: 50px; height: 40px;"></td>
                           @else
                               <span>No Image</span>
                           @endif

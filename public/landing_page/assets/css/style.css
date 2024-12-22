@@ -53,6 +53,23 @@ REPONSIVE
   
 }
 
+/* Icon container for centering the icon */
+.icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Font Awesome Error Icon (Circle) */
+.error-icon {
+    font-size: 70px; /* Adjust the size of the icon */
+    color: #dc3545; /* Error color (Red) */
+    background-color: #f8d7da; /* Light red background color for error */
+    border-radius: 50%; /* Makes it circular */
+    padding: 15px; /* Adds space inside the circle */
+}
+
+
   /* Modal Background Overlay */
 .custom-modal-overlay {
     position: fixed;

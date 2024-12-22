@@ -30,6 +30,7 @@
                 <div class="site-main">
                     <div class="details-product">
                         <div class="details-thumd">
+                            
                             <!-- Main Image Display -->
                             <div class="image-preview-container image-thick-box image_preview_container">
                                 <img id="img_zoom" 
@@ -64,7 +65,7 @@
                             </div>
                         </div>
                         
-                        <div class="details-infor">
+                        <div class="details-infor" style="margin-top:50px;">
                             <h1 class="product-title">
                                 {{ $product->name }} 
                             </h1>
@@ -78,14 +79,19 @@
                             </div>
                             <div class="availability">
                                 availability:
-                                <a href="#">in Stock</a>
+                                @if ($product->quantity > 0)
+                                <a href="#">In Stock</a>
+                            @else
+                            <a href="#">Sold Out</a>
+                            @endif
                             </div>
                             <div class="price">
                                 @if($product->discount)
                                 <del class="old-price" style="opacity: 50%;">
                                     <span id="modalOldPrice">  {{ $product->price }} JOD</span>
                                 </del>
-                                <span>{{ number_format($product->price * (1 - $product->discount / 100), 2) }} JOD</span>
+                                <span style="color:red;">{{ number_format($product->price * (1 - $product->discount / 100), 2) }} JOD</span> 
+                                <span style="color:white; background-color:black; font-size:10px; border: 1px solid black; padding:1px 6px 1px 6px;">{{ $product->discount}}%</span>
                                 @else
                                 @if($product->old_price)
                                 <del class="old-price" style="opacity: 50%;">
@@ -106,7 +112,8 @@
                             </div>
                             
                             <div class="group-button">
-                               
+
+                                @if ($product->quantity > 0)
                                 <div class="quantity-add-to-cart">
                                    
 
@@ -148,12 +155,27 @@
                                             </div>
                                         </div>
                                     </form>
-
-                                   
-
-
-                                  
+ 
                                 </div>
+                                @else
+                                <span class="sold-out-message" style="margin-top: 30px;">Sold Out</span>
+                            @endif
+<style>
+    .sold-out-message {
+    
+    color: #900A07;
+    font-weight: bold;
+    font-size:25px;
+    display: block;
+    margin-top: 10px;
+}
+
+.single_add_to_cart_button[disabled] {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+    </style>
                             </div>
                         </div>
                     </div>
@@ -188,6 +210,18 @@
                                 <div class="product-inner equal-element">
                                     
                                     <div class="product-thumb">
+                                        @if($product->discount)
+                                        <div class="product-top">
+                                            <div class="flash">
+                                                    <span class="onnew">
+                                                        <span class="text">
+                                                            {{ $product->discount }}%
+                                                        </span>
+                                                    </span>
+                                            </div>
+                                           
+                                        </div>
+                                        @endif
                                         <div class="thumb-inner">
                                             <a href="{{ route('product_details', $product->id) }}">
                                                 @if($product->product_images->isNotEmpty())
@@ -249,7 +283,7 @@
 </div>
 
   <!------------------------- Success & error modal ------------------------------>
-  @if (Session::get('success') || Session::get('error'))
+  @if (Session::get('success') )
     <div id="customModal" class="custom-modal-overlay">
         <div class="custom-modal">
             <div class="modal-header">
@@ -259,7 +293,7 @@
             </div>
             <div class="modal-body">
                 <h2> Successfully </h2>
-                <p id="modalMessage">{{ Session::get('success') ?? Session::get('error') }}</p>
+                <p id="modalMessage">{{ Session::get('success') }}</p>
             </div>
             <div class="modal-footer">
                 <button class="close-modal-btn">OK</button>
@@ -283,6 +317,42 @@
             $('#customModal').fadeOut();
         });
     </script>
+@endif
+
+@if (Session::get('error'))
+ <div id="customModal" class="custom-modal-overlay">
+     <div class="custom-modal">
+        <div class="modal-header">
+            <div class="icon-container">
+                <i class="fa fa-exclamation-circle error-icon"></i> <!-- Error icon -->
+            </div>
+        </div>
+         <div class="modal-body">
+             <h2> Error</h2>
+             <p id="modalMessage">{{Session::get('error') }}</p>
+         </div>
+         <div class="modal-footer">
+             <button class="close-modal-btn" >Ok</button>
+         </div>
+     </div>
+ </div>
+
+ <script>
+     $(document).ready(function() {
+         // Show the modal
+         $('#customModal').fadeIn();
+
+         // Set the modal title and message
+         var isSuccess = '{{ Session::get("success") }}' ? true : false;
+         $('#modalTitle').text(isSuccess ? 'Success' : 'Error');
+         $('#modalMessage').text('{{ Session::get("success") ?? Session::get("error") }}');
+     });
+
+     // Close the modal when the user clicks "OK"
+     $('.close-modal-btn').click(function() {
+         $('#customModal').fadeOut();
+     });
+ </script>
 @endif
 
 

@@ -217,5 +217,11 @@
 <script src="{{asset("landing_page/assets/js/owl.thumbs.min.js")}}"></script>
 <script src="{{asset("landing_page/assets/js/jquery.scrollbar.min.js")}}"></script>
 <script src="{{asset("landing_page/assets/js/frontend-plugin.js")}}"></script>
+<!-- jQuery -->
+<script src="{{asset("https://code.jquery.com/jquery-3.6.0.min.js")}}"></script>
+
+<!-- Slick JS -->
+<script type="text/javascript" src="{{asset("https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js")}}"></script>
+
 </body>
 </html>

@@ -39,13 +39,13 @@
 
       <li class="nav-item">
         <a class="nav-link {{ request()->routeIs('products.index', 'products.create', 'products.edit', 'products.show') ? 'active' : '' }} collapsed" href="{{route('products.index')}}">
-          <i class="bi bi-gift"></i><span>Products</span></i>
+          <i class="bi bi-bag "></i><span>Products</span></i>
         </a>
      
       </li><!-- End Tables Nav -->
 
       <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('#') ? 'active' : '' }} collapsed" href="#">
+        <a class="nav-link {{ request()->routeIs('order.index', 'order.show', 'order.edit') ? 'active' : '' }} collapsed" href="{{route('order.index')}}">
           <i class="bi bi-cart"></i><span>Orders</span></i>
         </a>
   

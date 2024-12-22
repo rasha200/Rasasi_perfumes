@@ -1,8 +1,8 @@
 @extends('layouts.dashboard_master')
 
 @section('content')
-<div class="pagetitle">
-    <h1>Profile</h1>
+<div class="pagetitle" style="margin-top: 30px;">
+    <h1><i class="bi bi-person"></i> Profile</h1>
     <!-- <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="">Home</a></li>
@@ -13,15 +13,15 @@
 </div><!-- End Page Title -->
 
 <section class="section profile">
-    <div class="row">
+    <div class="row" >
         <!-- Profile Card -->
-        <div class="col-xl-4">
+        <div class="col-xl-4" >
             <div class="card">
-                <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-                    <img src="{{ auth()->user()->profile_image ? asset('storage/' . auth()->user()->profile_image) : 'assets/img/profile-img.jpg' }}" alt="Profile" class="rounded-circle" style="width: 100px; height: 100px;">
-                    <h2 class="text-start w-50">{{ auth()->user()->Fname }} {{ auth()->user()->Lname }}</h2>
-                    <p class="text-start w-50"><b>Email:</b> {{ auth()->user()->email }}</p>
-                    <p class="text-start w-50"><b>Mobile:</b> {{ auth()->user()->mobile }}</p>
+                <div class="card-body profile-card pt-4 d-flex flex-column align-items-center" style="height: 420px;">
+                    <img src="{{ auth()->user()->profile_image ? asset('storage/' . auth()->user()->profile_image) : 'assets/img/profile-img.jpg' }}" alt="Profile" class="rounded-circle" style="width: 100px; height: 100px; margin-top:40px;margin-right:160px;">
+                    <h2 class="text-start w-70" style="margin-right:100px;">{{ auth()->user()->Fname }} {{ auth()->user()->Lname }}</h2>
+                    <p class="text-start w70" style="margin-top:20px;"><b>Email:</b> {{ auth()->user()->email }}</p>
+                    <p class="text-start w-70" style="margin-top:5px; margin-right:90px;"><b>Mobile:</b> {{ auth()->user()->mobile }}</p>
                 </div>
             </div>
         </div>
@@ -30,7 +30,7 @@
         <!-- Profile Edit Form -->
         <div class="col-xl-8">
             <div class="card">
-                <div class="card-body pt-3">
+                <div class="card-body pt-3" style="height: 420px;">
                     <h5>Edit Profile</h5>
                     <form id="profileForm" action="{{ route('profile_dash.update') }}" method="POST" enctype="multipart/form-data">
                         @csrf

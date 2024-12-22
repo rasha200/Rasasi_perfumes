@@ -12,7 +12,7 @@ class ContactController extends Controller
      */
     public function index()
     {
-        $contacts = Contact::orderBy('created_at', 'desc')->paginate(10);
+        $contacts = Contact::orderBy('created_at', 'desc')->get();
 
         return view('dashboard.contacts.index' , ['contacts'=> $contacts]);
     }

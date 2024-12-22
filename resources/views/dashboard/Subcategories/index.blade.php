@@ -4,11 +4,11 @@
 
 <div class="d-flex justify-content-between align-items-center mb-4">
 
-  <div class="pagetitle">
-    <h1>Sub Categories</h1>
+  <div class="pagetitle" style="margin-top: 30px;">
+    <h1><i class="bi bi-stack"></i> Sub Categories</h1>
   </div>
   
-        <a href="{{ route('subCategories.create') }}">
+        <a href="{{ route('subCategories.create') }}" style="margin-top: 30px;">
             <button type="button" class="btn btn-info">
                 <i class="zmdi zmdi-plus"></i> Add new sub category
             </button>
@@ -72,6 +72,7 @@
                             data-name="{{ $Subcategory->name }}" 
                             data-image="{{ asset('uploads/subcategory/' . $Subcategory->image) }}"
                             data-category="{{ $Subcategory->category->name }}"
+                            data-discount="{{ $Subcategory->discount ?? 'No discount available' }}"
                             style="color:#000000;" 
                             onmouseover="this.style.color='#10db8c';" 
                             onmouseout="this.style.color='#000000';">
@@ -83,7 +84,7 @@
                           <td>
                           @if($Subcategory->image)
                           
-                            <img src="{{ asset('uploads/subcategory/' . $Subcategory->image) }}" alt=" Sub Category Image" style="width: 50px; border-radius: 50px;"></td>
+                            <img src="{{ asset('uploads/subcategory/' . $Subcategory->image) }}" alt=" Sub Category Image" style="width: 50px; height: 40px;"></td>
                           @else
                               <span>No Image</span>
                           @endif
@@ -140,6 +141,7 @@
             <div class="modal-body">
                 <p><strong>Subcategory Name:</strong> <span id="subcategoryName"></span></p>
                 <p><strong>Category:</strong> <span id="subcategoryCategory"></span></p>
+                <p><strong>Discount:</strong> <span id="subcategoryDiscount"></span></p>
                 <div id="subcategoryImageContainer">
                     <img id="subcategoryImage" src="" alt="Subcategory Image" style="width: 100%; border-radius: 8px;">
                 </div>
@@ -161,10 +163,19 @@
               const name = this.getAttribute('data-name');
               const image = this.getAttribute('data-image');
               const category = this.getAttribute('data-category');
+              const discount = this.getAttribute('data-discount');
 
               // Populate modal fields
               document.getElementById('subcategoryName').textContent = name;
               document.getElementById('subcategoryCategory').textContent = category;
+
+              // Check if discount exists and append %
+              const discountElement = document.getElementById('subcategoryDiscount');
+              if (discount && discount.trim() !== "") {
+                  discountElement.textContent = discount + "%";
+              } else {
+                  discountElement.textContent = "No Discount";
+              }
 
               const subcategoryImage = document.getElementById('subcategoryImage');
               const noImageText = document.getElementById('noImageText');
@@ -182,6 +193,7 @@
       });
   });
 </script>
+
 
 
 

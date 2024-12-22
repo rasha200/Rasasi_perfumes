@@ -5,15 +5,10 @@
 <div class="d-flex justify-content-between align-items-center mb-4">
 
   <div class="pagetitle" style="margin-top: 30px;">
-    <h1><i class="bi bi-bag "></i> Products</h1>
+    <h1><i class="bi bi-cart "></i> Orders</h1>
   </div>
   
-        <a href="{{ route('products.create') }}" style="margin-top: 30px;">
-            <button type="button" class="btn btn-info">
-                <i class="zmdi zmdi-plus"></i> Add new product
-            </button>
-        </a>
-      
+        
 </div>
 
     
@@ -52,49 +47,35 @@
                       <thead>
                         <tr>
                           <th>Id</th>
-                          <th>Name</th>
-                          <th>Image</th>
-                          <th>Price</th>
-                          <th>Discount</th>
-                          <th>Quantity</th>
-                          <th>Brand</th>
+                          <th>User Name</th>
+                          <th>Mobile</th>
+                          <th>Total price</th>
+                          <th>Order status</th>
+                         
                           <th></th>
                         </tr>
                       </thead>
                       <tbody>
-                        @foreach($products as $product)
+                        @foreach($orders as $order)
                         <tr>
-                          <td>{{$product->id}}</td>
+                          <td>{{$order->id}}</td>
 
                           <td title="view">
-                            <a href="{{ route('products.show', $product->id) }}"
+                            <a href="{{ route('order.show', $order->id) }}"
                               style="color:#000000;"
                               onmouseover="this.style.color='#10db8c';" 
                              onmouseout="this.style.color='#000000';"  
                             title="View">
-                            {{$product->name}}
+                            {{$order->user->Fname}} {{$order->user->Lname}}
                             </a>
                           </td>
 
 
-                          <td>
-                            @if($product->product_images->isNotEmpty())
-                
-                            <img src="{{ asset($product->product_images[0]->image) }}" alt="{{ $product->name }}" style="width: 50px; height: 40px; " />
-                        @else
-                            <span>No image available</span>
-                        @endif
-                        </td> 
-                          <td>{{$product->price}}</td>
-                          
-                          @if($product->discount)
-                          <td>{{$product->discount}}%</td>
-                          @else
-                          <td></td>
-                          @endif
+                          <td>{{$order->mobile}}</td> 
 
-                          <td>{{$product->quantity}}</td>
-                          <td>{{$product->subCategory->category->name}} - {{$product->subCategory->name}}</td>
+                          <td>{{$order->total_price}}</td>
+                          
+                          <td>{{$order->order_status}}</td>
 
                           <td> 
 
@@ -102,7 +83,7 @@
                          
 
                           
-                          <a href="{{ route('products.edit', $product->id) }}"  title="Edit">
+                          <a href="{{ route('order.edit', $order->id) }}"  title="Edit">
                           <button type="button" class="btn btn-info">
                             <i class="bi bi-pencil"></i>
                           </button>
@@ -112,10 +93,10 @@
 
 
                           
-                          <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline;" title="Delete">
+                          <form action="{{ route('order.destroy', $order->id) }}" method="POST" style="display:inline;" title="Delete">
                             @csrf
                             @method('DELETE')
-                            <button type="button" class="btn btn-danger"  onclick="confirmDeletion(event, '{{ route('products.destroy', $product->id) }}')">
+                            <button type="button" class="btn btn-danger"  onclick="confirmDeletion(event, '{{ route('order.destroy', $order->id) }}')">
                               <i class="bi bi-archive"></i>
                           </button>
                         </form>
@@ -136,7 +117,7 @@
 <div id="confirmationModal"
     style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center; z-index: 1000;">
     <div style="background: #fff; padding: 20px; border-radius: 5px; text-align: center;">
-        <p>Are you sure you want to delete this product?</p>
+        <p>Are you sure you want to delete this order?</p>
         <button id="confirmButton" class="btn btn-outline-danger">Delete</button>
         <button id="cancelButton" class="btn btn-outline-secondary">Cancel</button>
     </div>

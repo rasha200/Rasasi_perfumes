@@ -23,5 +23,19 @@ class Order extends Model
     {
         return $this->hasMany(OrderDetail::class);
     }
+
+
+    protected static function booted()
+    {
+      static::deleting(function ($order) {
+          foreach ($order->orderDetails as $orderDetail) {
+              $orderDetail->delete(); // This triggers SubCategory's deleting logic
+          }
+  
+          if ($order->isForceDeleting()) {
+              $order->subCategories()->forceDelete();
+          }
+      });
+    }
     
 }

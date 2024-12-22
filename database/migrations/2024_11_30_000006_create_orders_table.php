@@ -13,11 +13,16 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->string('city');
+            $table->string('street');
+            $table->string('building_number');
+            $table->string('mobile', 13);
+            $table->string('email')->nullable();
             $table->decimal('total_price', 10, 2);
-            $table->string('order_status');
+            $table->enum('order_status', ['Pending', 'Processing','Completed'])->default('Pending');
             $table->string('note')->nullable();
             $table->enum('payment_method', ['paypal', 'stripe','cashOnDelivery'])->default('cashOnDelivery');
-
+            
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
 

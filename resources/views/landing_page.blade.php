@@ -47,4 +47,43 @@
 {{--include sixth_section(instgram) end--}}
 
 
+
+  <!------------------------- Success & error modal ------------------------------>
+
+@if (Session::get('success'))
+<div id="customModal" class="custom-modal-overlay">
+    <div class="custom-modal">
+        <div class="modal-header">
+            <div class="icon-container">
+                <i class="fa fa-check-circle success-icon"></i> <!-- Success icon -->
+            </div>
+        </div>
+        <div class="modal-body">
+            <h2> Successfully </h2>
+            <p id="modalMessage">{{ Session::get('success') }}</p>
+        </div>
+        <div class="modal-footer">
+            <button class="close-modal-btn">OK</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        // Show the modal
+        $('#customModal').fadeIn();
+
+        // Set the modal title and message
+        var isSuccess = '{{ Session::get("success") }}' ? true : false;
+        $('#modalTitle').text(isSuccess ? 'Success' : 'Error');
+        $('#modalMessage').text('{{ Session::get("success") ?? Session::get("error") }}');
+    });
+
+    // Close the modal when the user clicks "OK"
+    $('.close-modal-btn').click(function() {
+        $('#customModal').fadeOut();
+    });
+</script>
+@endif
+
 @endsection

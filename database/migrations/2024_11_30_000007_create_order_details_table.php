@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('quantity');
             $table->decimal('price', 10, 2);
-            $table->unsignedBigInteger('total_price');
+            $table->integer('discount')->nullable();
+            $table->decimal('total_price', 10, 2);
 
             $table->unsignedBigInteger('order_id');
             $table->foreign('order_id')->references('id')->on('orders');

@@ -4,11 +4,11 @@
 
 <div class="d-flex justify-content-between align-items-center mb-4">
 
-  <div class="pagetitle">
-    <h1>Users</h1>
+  <div class="pagetitle" style="margin-top: 30px;">
+    <h1><i class="bi bi-people"></i> Users</h1>
   </div>
   
-        <a href="{{ route('users.create') }}">
+        <a href="{{ route('users.create') }}" style="margin-top: 30px;">
             <button type="button" class="btn btn-info">
                 <i class="zmdi zmdi-plus"></i> Add new user
             </button>

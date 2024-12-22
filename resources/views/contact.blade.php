@@ -27,13 +27,11 @@
         </div>
     </div>
     <div class="page-main-content">
-        <div class="google-map">
-                <iframe width="100%" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=university%20of%20san%20francisco&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
-        </div>
+        <div class="google-map" style="height: 200px;"></div> 
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="form-contact">
+                    <div class="form-contact" style="height: 680px;">
                         <div class="col-lg-8 no-padding">
                             <div class="form-message">
                                 <h2 class="title">
@@ -84,7 +82,7 @@
                             </div>
                         </div>
                         <div class="col-lg-4 no-padding">
-                            <div class="form-contact-information">
+                            <div class="form-contact-information" style="height: 680px;">
                                 <form action="#" class="stelina-contact-info">
                                     <h2 class="title">
                                         Contact information
@@ -95,15 +93,14 @@
 
 												</span>
                                             <span class="text">
-													 Restfield White City London G12 Ariel Way - United Kingdom
-												</span>
+                                                Jordan - Aqaba												</span>
                                         </div>
                                         <div class="item phone">
 												<span class="icon">
 
 												</span>
                                             <span class="text">
-													(+800) 123 456 7890
+                                                +962797282485
 												</span>
                                         </div>
                                         <div class="item email">
@@ -111,22 +108,22 @@
 
 												</span>
                                             <span class="text">
-													info@stelinaoutfit.co.uk
+                                                Mohammad.morad1990@gmail.com
 												</span>
                                         </div>
                                     </div>
                                     <div class="socials">
-                                        <a href="#" class="social-item" target="_blank">
+                                        <a href="https://www.facebook.com/profile.php?id=100063661684576&mibextid=ZbWKwL" class="social-item" target="_blank">
 												<span class="icon fa fa-facebook">
 
 												</span>
                                         </a>
-                                        <a href="#" class="social-item" target="_blank">
-												<span class="icon fa fa-twitter-square">
+                                        <a href="https://wa.me/962797282485" class="social-item" target="_blank">
+												<span class="icon fa fa-whatsapp">
 
 												</span>
                                         </a>
-                                        <a href="#" class="social-item" target="_blank">
+                                        <a href="https://www.instagram.com/pukkajo/profilecard/?igsh=MXFyZzZjdmpseTF5bQ==" class="social-item" target="_blank">
 												<span class="icon fa fa-instagram">
 
 												</span>
@@ -141,5 +138,44 @@
         </div>
     </div>
 </div>
+
+ <!------------------------- Success & error modal ------------------------------>
+ @if (Session::get('success') )
+ <div id="customModal" class="custom-modal-overlay">
+     <div class="custom-modal">
+         <div class="modal-header">
+             <div class="icon-container">
+                 <i class="fa fa-check-circle success-icon"></i> <!-- Success icon -->
+             </div>
+         </div>
+         <div class="modal-body">
+             <h2> Successfully </h2>
+             <p id="modalMessage">{{ Session::get('success')  }}</p>
+         </div>
+         <div class="modal-footer">
+             <button class="close-modal-btn">OK</button>
+         </div>
+     </div>
+ </div>
+
+ <script>
+     $(document).ready(function() {
+         // Show the modal
+         $('#customModal').fadeIn();
+
+         // Set the modal title and message
+         var isSuccess = '{{ Session::get("success") }}' ? true : false;
+         $('#modalTitle').text(isSuccess ? 'Success' : 'Error');
+         $('#modalMessage').text('{{ Session::get("success") ?? Session::get("error") }}');
+     });
+
+     // Close the modal when the user clicks "OK"
+     $('.close-modal-btn').click(function() {
+         $('#customModal').fadeOut();
+     });
+ </script>
+@endif
+
+
 
 @endsection

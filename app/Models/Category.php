@@ -20,7 +20,7 @@ class Category extends Model
     }
 
     protected static function booted()
-{
+  {
     static::deleting(function ($category) {
         foreach ($category->subCategories as $subCategory) {
             $subCategory->delete(); // This triggers SubCategory's deleting logic
@@ -30,5 +30,5 @@ class Category extends Model
             $category->subCategories()->forceDelete();
         }
     });
-}
+  }
 }

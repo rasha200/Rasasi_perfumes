@@ -25,7 +25,8 @@
     <link rel="stylesheet" href="{{asset("landing_page/assets/fonts/flaticon/flaticon.css")}}">
     <link rel="stylesheet" href="{{asset("landing_page/assets/css/style.css")}}">
     <script src="{{asset("https://code.jquery.com/jquery-3.6.0.min.js")}}"></script>
-    
+    <link rel="stylesheet" type="text/css" href="{{asset("https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css")}}"/>
+    <link rel="stylesheet" type="text/css" href="{{asset("https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css")}}"/>
 
 </head>
 <body class="home">
