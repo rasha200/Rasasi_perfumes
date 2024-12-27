@@ -52,13 +52,14 @@
                                     <tr class="cart_item" style="border: 1px solid #f1f1f1;">
                                         <td class="product-remove">
 
-                                           
-                                            <form action="{{ route('cart.delete',$product->id ) }}" method="POST" style="display: inline;">
+
+                                            <form action="{{ route('cart.delete', $product->id ) }}" method="POST" title="Delete" style="display: inline;">
                                                 @csrf
-                                                @method('DELETE')
-                                              <button type="submit" class="remove" style="background: none; border: none; padding: 0; cursor: pointer;"><i class="fa fa-trash-o" aria-hidden="true" style="color:grey; font-size:22px;" onmouseover="this.style.color='brown';" 
-                                                onmouseout="this.style.color='grey';" title="Delete"></i> </button>
+                                                <button type="submit" class="remove" style="background: none; border: none; padding: 0; cursor: pointer;"><i class="fa fa-times" aria-hidden="true" style="color:grey; font-size:30px;" onmouseover="this.style.color='brown';" 
+                                                    onmouseout="this.style.color='grey';" title="Delete"></i> </button>
                                             </form>
+                                           
+                                        
                                         </td>
                                         <td class="product-thumbnail">
                                             <a href="{{ route('product_details', $product->id) }}">
@@ -283,5 +284,5 @@
  </script>
 @endif
 
-{{-- <pre>{{ print_r($cart, true) }}</pre> --}}
+<pre> {{ print_r($cart, true) }} </pre>
 @endsection

@@ -40,6 +40,16 @@ body {
   margin: 0;
   padding: 0;
 }
+
+
+.btn-dark {
+  background-color: #007BFF !important; /* اللون الأساسي */
+}
+
+.btn-dark:hover {
+  background-color: #006bde !important; /* اللون عند التمرير */
+}
+
 .btn-info {
   background-color: #10db8c !important; /* اللون الأساسي */
 }

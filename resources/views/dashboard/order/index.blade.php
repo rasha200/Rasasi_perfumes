@@ -73,7 +73,7 @@
 
                           <td>{{$order->mobile}}</td> 
 
-                          <td>{{$order->total_price}}</td>
+                          <td>{{$order->total_price}} JOD</td>
                           
                           <td>
                             <span 
@@ -96,17 +96,13 @@
                          
 
                           
-                          <a href="{{ route('order.edit', $order->id) }}"  title="Edit">
-                          <button type="button" class="btn btn-info">
-                            <i class="bi bi-pencil"></i>
-                          </button>
-                          </a>
+                      
                           
                          
 
 
                           
-                          <form action="{{ route('order.destroy', $order->id) }}" method="POST" style="display:inline;" title="Delete">
+                          <form action="{{ route('order.destroy', $order->id) }}" method="POST" style="display:inline;" title="Delete" >
                             @csrf
                             @method('DELETE')
                             <button type="button" class="btn btn-danger"  onclick="confirmDeletion(event, '{{ route('order.destroy', $order->id) }}')">

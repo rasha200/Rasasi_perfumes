@@ -35,7 +35,7 @@
                         <h2 class="widgettitle">Information</h2>
                         <ul class="menu">
                             <li class="menu-item">
-                                <a href="#" target="_blank">Name: Pukka nich</a>
+                                <a href="#" >Name: Pukka nich</a>
                             </li>
                             <li class="menu-item">
                                 <a href="tel:+962797282485" target="_blank"><i class="icon fa fa-phone"></i> +962797282485</a>
@@ -59,10 +59,10 @@
                         <h2 class="widgettitle"> My Information</h2>
                         <ul class="menu">
                             <li class="menu-item">
-                                <a href="#" target="_blank"><i class="icon fa fa-user"></i> My account</a>
+                                <a href="{{ route('profile') }}"><i class="icon fa fa-user"></i> My account</a>
                             </li>
                             <li class="menu-item">
-                                <a href="#" target="_blank"><i class="icon fa fa-history"></i> Orders history</a>
+                                <a href="{{ route('profile') }}" ><i class="icon fa fa-history"></i> Orders history</a>
                             </li>
 
                             <h2 class="widgettitle"> Contact us:</h2>

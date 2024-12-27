@@ -3,15 +3,15 @@
 
     <ul class="sidebar-nav" id="sidebar-nav">
 
+      @if(Auth::user()->role == 'manager')
       <li class="nav-item">
-        <a class="nav-link " href="#">
+        <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{route('dashboard')}}">
           <i class="bi bi-bar-chart"></i>
           <span>Dashboard</span>
         </a>
       </li><!-- End Dashboard Nav -->
 
 
-      @if(Auth::user()->role == 'manager')
       <li class="nav-item">
         <a class="nav-link {{ request()->routeIs('users.index', 'users.create', 'users.edit') ? 'active' : '' }}" href="{{route('users.index')}}">
           <i class="bi bi-people"></i>
@@ -51,14 +51,14 @@
   
       </li><!-- End Charts Nav -->
 
-      
+      @if(Auth::user()->role == 'manager')
       <li class="nav-item">
         <a class="nav-link {{ request()->routeIs('contacts.index', 'contacts.show') ? 'active' : '' }} collapsed" href="/contacts">
           <i class="bi bi-envelope"></i>
           <span>Contact Us</span>
         </a>
       </li><!-- End Contact Page Nav -->
-
+      @endif
   
       </li><!-- End Icons Nav -->
 

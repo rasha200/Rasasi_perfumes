@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\ChartController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubCategoryController;
@@ -39,10 +40,8 @@ Route::get('/', [HomeController::class, 'index']);
 
 
 // <!--==========================================  (Dashboard)  ============================================================================================================================-->
-Route::get('/dashboard', function () {
-    return view('layouts.dashboard_master');
-})->name('dashboard')->middleware(['auth' , 'role']);
 
+Route::get('/dashboard', [ChartController::class, 'index'])->middleware(['auth' , 'manager'])->name('dashboard');
 
 
 
@@ -53,21 +52,21 @@ Route::resource('users', UserController::class)->middleware(['auth' , 'manager']
 
 
 // <!--==========================================  (profile)  ===============================================================================================================-->
-// Route::get('/profile', [UserController::class, 'show_profile_dash'])->name('dashboard.profile.profile');---
-// Route::get('/profile', [UserController::class, 'show_profile_dash'])->name('dashboard.profile.profile')->middleware(['auth' , 'role']);---
-
-// Route::get('/profile', [UserController::class, 'show'])->name('profile.show');---
-// Route::put('/profile', [UserController::class, 'update'])->name('profile.update');---
-
-
-
-// Route::get('/profile', [UserController::class, 'show_profile'])->name('profile.show');
 Route::get('/profile_dashboard', [UserController::class, 'show_profile_dash'])->name('profile_dash.show')->middleware(['auth' , 'role']);
 Route::put('/profile_dash_edit', [UserController::class, 'update_profile_dash'])->name('profile_dash.update')->middleware(['auth' , 'role']);
 
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profile', [UserController::class, 'profile'])->name('profile');
+    Route::put('/profile/update', [UserController::class, 'update_profile'])->name('profile.update');
+    Route::get('/order-details/{id}', [OrderController::class, 'getOrderDetails'])->name('order.details');
+});
+
+
+
+
 // <!--==========================================  (contacts)  ===============================================================================================================-->
-Route::middleware(['auth', 'role'])->group(function () {
+Route::middleware(['auth', 'manager'])->group(function () {
     Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index'); // List all contacts (dashboard)
     Route::get('/contacts/{contact}', [ContactController::class, 'show'])->name('contacts.show'); // Show
     Route::delete('/contacts/{contact}', [ContactController::class, 'destroy'])->name('contacts.destroy'); // Delete
@@ -96,10 +95,14 @@ Route::resource('subCategories', SubCategoryController::class)->middleware(['aut
 // <!--==========================================  (Products)  ===================================================================================================================-->
 Route::resource('products', ProductController::class)->middleware(['auth' , 'role']);
 Route::delete('/product_images/{product_image}', [productImageController::class, 'destroy'])->name('product_images.destroy')->middleware(['auth' , 'role']);
-Route::get('/subcategory/{id}', [ProductController::class, 'productsBySubCategory'])->name('products.bySubCategory');
-Route::get('/category/{id}', [ProductController::class, 'productsByCategory'])->name('products.byCategory');
 Route::get('/product_details/{id}',[ProductController::class, 'show_user_side'])->name("product_details");
 
+
+// <!--==========================================  (Store)  ===================================================================================================================-->
+Route::get('/subcategory/{id}', [ProductController::class, 'productsBySubCategory'])->name('products.bySubCategory');
+Route::get('/category/{id}', [ProductController::class, 'productsByCategory'])->name('products.byCategory');
+Route::get('/subcategory/{id}/filter', [ProductController::class, 'productsBySubCategory'])->name('products.filterSubCategory');
+Route::get('/category/{id}/filter', [ProductController::class, 'productsByCategory'])->name('products.filterCategory');
 
 
 // <!--==========================================  (Cart)  ===================================================================================================================-->
@@ -117,11 +120,13 @@ Route::post('cart/clear', [CartController::class, 'clear'])->name('cart.clear');
 Route::middleware(['auth', 'role'])->group(function () {
     Route::Get('/order' ,[OrderController::class , 'index'])->name('order.index');
     Route::Get('/order/{order}' ,[OrderController::class , 'show'])->name('order.show');
-    Route::get('/order/{id}/edit', [OrderController::class, 'edit'])->name('order.edit');
+    Route::get('/order/{order}/edit', [OrderController::class, 'edit'])->name('order.edit');
     Route::put('/order/{order}', [OrderController::class, 'update'])->name('order.update');
-    
     Route::delete('/order/{order}', [OrderController::class, 'destroy'])->name('order.destroy');
 });
+
+
+
 
 
 // Public routes
@@ -131,5 +136,5 @@ Route::post('/checkout', [OrderController::class, 'store'])->name('order.store')
 
 
 // Route::get('/test', function () {
-//     return view('profile');
+//     return view('dashboard.chart.chart');
 // })->name('test');

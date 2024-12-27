@@ -16,15 +16,8 @@ class CartController extends Controller
     public function index()
     {
         
-      
-
-        // Get cart items from cookie, default to an empty array if not set
         $cart = json_decode(Cookie::get('cart', json_encode([])), true);
 
-        // Filter cart items for the authenticated user
-       
-
-        
 
         return view('cart', compact('cart'));
     }
@@ -67,7 +60,7 @@ class CartController extends Controller
             $cart[$cartItem['product_id']] = $cartItem;
         }
 
-        // Set the updated cart in a cookie
+       
         return redirect()->back()->with('success', 'Product added to cart successfully!')
             ->cookie('cart', json_encode($cart), 60 * 24 * 7); // Set cookie for 1 week
     }
@@ -83,17 +76,17 @@ class CartController extends Controller
             'quantity' => 'required|integer|min:1',
         ]);
 
-        // Get the cart data from the cookie
+       
         $cart = json_decode(Cookie::get('cart', json_encode([])), true);
 
-        // Check if the product exists in the cart
+        
         if (isset($cart[$productId])) {
-            // Update the quantity of the product
+           
             $cart[$productId]['quantity'] = $request->quantity;
 
-            // Save the updated cart back to the cookie
+           
             return redirect()->back()->with('success', 'Cart updated successfully!')
-                ->cookie('cart', json_encode($cart), 60 * 24 * 7); // Set cookie for 1 week
+                ->cookie('cart', json_encode($cart), 60 * 24 * 7); 
         } else {
             return redirect()->back()->with('error', 'Product not found in cart.');
         }
@@ -119,7 +112,7 @@ class CartController extends Controller
         // Set the cart cookie to an empty array
         Cookie::queue(Cookie::forget('cart'));
 
-        // Redirect back with a success message
+        
         return redirect()->back()->with('success', 'Cart cleared successfully!');
     }
 

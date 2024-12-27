@@ -3,17 +3,24 @@
         <div class="row10">
             <div class="col-lg-8 silider-wrapp">
                 <div class="home-slider">
+                    
                     <div class="slider-owl owl-slick equal-container nav-center"
-     data-slick='{"autoplay":true, "autoplaySpeed":4000, "arrows":false, "dots":true, "infinite":true, "speed":1000, "rows":1}'
+     data-slick='{"autoplay":true, "autoplaySpeed":4000, "arrows":true, "dots":true, "infinite":true, "speed":1000, "rows":1}'
      data-responsive='[{"breakpoint":"2000","settings":{"slidesToShow":1}}]'>
     
     @foreach($discountedSubCategories as $subcategory)
         <div class="slider-item style7">
             <div class="slider-inner equal-element" style="background-image: url({{ asset('uploads/subcategory/' . $subcategory->image) }});   ">
                 <div class="slider-infor" style="height:625px !important;">
+                    @if($subcategory->discount > 0)
                     <h5 class="title-small">
                         Sale up to {{ $subcategory->discount }}% off!
                     </h5>
+                    @else
+                    <h5 class="title-small">
+                        Shop unique collection
+                    </h5>
+                    @endif
                     <h3 class="title-big">
                         {{ $subcategory->name }} Collection
                     </h3>
@@ -53,11 +60,17 @@
                     <div class="item-banner style8">
                         <div class="inner">
                             @foreach ($products->slice(25, 1) as $product)
-                            <div class="banner-content" style="background-image: url('{{ asset($product->product_images[0]->image) }}') !important;">                                <h3 class="title">Best Of<br/>Products</h3>
+                            <div class="banner-content" style="background-image: url('{{ asset($product->product_images[0]->image) }}') !important;">                               
+                                 <h3 class="title">Our top<br/>Product,</h3>
                                 <div class="description">
-                                    Cras pulvinar loresum dolor conse
+                                    built for quality and reliability
+                                    
                                 </div>
-                                <span class="price">$379.00</span>
+                                @if($product->discount)
+                                <a href="{{ route('product_details', $product->id) }}"> <span class="price">{{ number_format($product->price * (1 - $product->discount / 100), 2) }} JOD</span> </a>
+                                @else
+                                <a href="{{ route('product_details', $product->id) }}"> <span class="price">{{ $product->price }} JOD</span> </a>
+                                @endif
                             </div>
                             @endforeach
                         </div>
@@ -68,3 +81,27 @@
         </div>
     </div>
 </div>
+
+<style>
+
+.slick-prev, .slick-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    background: #ccc; /* Example style */
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+}
+.slick-prev {
+    left: -35px;
+}
+.slick-next {
+    right: -35px;
+}
+
+.slick-dots li button:before {
+    font-size:0px !important;
+}
+</style>

@@ -24,7 +24,7 @@
         <div class="checkout-wrapp">
             <div class="shipping-address-form-wrapp">
                 <div class="shipping-address-form  checkout-form">
-                    <form action="{{ route('order.store') }}" method="POST">
+                    <form action="{{ route('order.store') }}" method="POST" id="checkoutForm">
                         @csrf
                         <div class="row-col-1 row-col">
                             <div class="shipping-address">
@@ -77,11 +77,69 @@
                                 </p>
                     
                                 <p class="form-row">
-                                    <button type="submit" class="button btn-cart-to-checkout">Place Order</button>
+                                    <button type="button" onclick="showConfirmModal('checkout')" class="button btn-cart-to-checkout">Place Order</button>
                                 </p>
                             </div>
                         </div>
                     </form>
+
+                     <!-- Confirmation Modal -->
+                     <div id="confirmModal" class="custom-modal-overlay" style="display: none;">
+                        <div class="custom-modal">
+                            <div class="modal-header">
+                                <div class="icon-container">
+                                    <i class="fa fa-question-circle" style="font-size: 35px;"></i> <!-- Question Icon -->
+                                </div>
+                            </div>
+                            <div class="modal-body">
+                                <h2 id="modalTitle">Are you sure?</h2>
+                                <p id="modalMessage">Ensure all details are correct before proceeding.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="confirm-btn" onclick="closeConfirmModal()">Cancel</button>
+                                <button id="confirmButton" class="confirm-btn">Yes</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                    <script>
+                   function showConfirmModal(action) {
+    // Modal element references
+    const modalTitle = document.getElementById('modalTitle');
+    const modalMessage = document.getElementById('modalMessage');
+    const confirmButton = document.getElementById('confirmButton');
+
+    // Update modal content and actions based on the action
+    if (action === 'editProfile') {
+        modalTitle.textContent = 'Are you sure you want to update your profile?';
+        modalMessage.textContent = 'This action cannot be undone.';
+        confirmButton.onclick = function () {
+            submitForm('profileForm');
+        };
+    } else if (action === 'checkout') {
+        modalTitle.textContent = 'Are you sure you want to place this order?';
+        modalMessage.textContent = 'Ensure all details are correct before proceeding.';
+        confirmButton.onclick = function () {
+            submitForm('checkoutForm');
+        };
+    }
+
+    // Show modal
+    document.getElementById('confirmModal').style.display = 'flex';
+}
+
+// Close the confirmation modal
+function closeConfirmModal() {
+    document.getElementById('confirmModal').style.display = 'none';
+}
+
+// Submit the specific form when confirmed
+function submitForm(formId) {
+    document.getElementById(formId).submit();
+}
+
+                    </script>
 
                     <div class="row-col-2 row-col">
                         <div class="your-order">
@@ -215,21 +273,7 @@
                 
             </div>
            
-            <div class="end-checkout-wrapp">
-                <div class="end-checkout checkout-form">
-                    <div class="icon">
-                    </div>
-                    <h3 class="title-checkend">
-                        Congratulation! Your order has been processed.
-                    </h3>
-                    <div class="sub-title">
-                        Aenean dui mi, tempus non volutpat eget, molestie a orci.
-                        Nullam eget sem et eros laoreet rutrum.
-                        Quisque sem ante, feugiat quis lorem in.
-                    </div>
-                    <a href="#" class="button btn-return">Return to Store</a>
-                </div>
-            </div>
+  
         </div>
     </div>
 </div>

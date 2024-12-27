@@ -40,7 +40,7 @@ class UserController extends Controller
             'Lname' => 'required|string|min:3',
             'email' => 'required|email|unique:users,email,',
             'mobile' => 'required|numeric',
-            'password' => 'required|confirmed',
+            'password' => 'required|min:8|confirmed',
             'role' => 'required|string',
         ]);
 
@@ -66,45 +66,6 @@ class UserController extends Controller
        //
     }
 
-
-
-    // public function show_profile()
-    // {
-    //     $user = auth()->user();
-
-
-    //     if ($user->role === 'user') {
-
-    //         $adoptionRequests = $user->toAdoupt()->with('pet.pet_images')->get();
-    //         $UserAppointments = $user->appointments()->with('service.service_images')->get();
-
-    //         foreach ($UserAppointments as $appointment) {
-
-    //             // Calculate the total time for the appointment (in minutes)
-    //             $averageTime = $appointment->service->average_time;
-    //             $petNumber = $appointment->pet_number;
-    //             $totalMinutes = $averageTime * $petNumber;
-
-    //             // Calculate hours and minutes
-    //             $hours = floor($totalMinutes / 60);
-    //             $minutes = $totalMinutes % 60;
-
-    //             // Format the duration (e.g., "1h 30m")
-    //             $appointment->formattedDuration = ($hours > 0 ? $hours . 'h ' : '') . $minutes . 'm';
-    //         }
-
-    //         return view('profile', [
-    //             'user'=> $user ,
-    //             'adoptionRequests'=> $adoptionRequests,
-    //             'UserAppointments' => $UserAppointments,
-    //         ]);
-
-    //     } elseif (in_array($user->role, ['receptionist', 'store_manager', 'veterinarian', 'manager'])) {
-
-    //         return redirect()->route('profile_dash.show');
-    //     }
-
-    // }
 
 
     public function show_profile_dash()
@@ -193,17 +154,96 @@ class UserController extends Controller
 
 
     public function trash()
+    {
+         $deletedUsers = User::onlyTrashed()->get();
+         return view('dashboard.user.trash' , ['deletedUsers' => $deletedUsers]);
+    }
+
+    public function restore($id)
+    {
+        $user = User::withTrashed()->find($id);
+        $user->restore();
+        return redirect()->route('users.trash')->with('success', 'User restored successfully');
+    }
+
+
+
+public function profile()
 {
-    $deletedUsers = User::onlyTrashed()->get();
-    return view('dashboard.user.trash' , ['deletedUsers' => $deletedUsers]);
+    $user = auth()->user();
+
+    
+    if ($user->role === 'manager' || $user->role === 'employee') {
+      
+        return redirect()->route('profile_dash.show');
+    }
+
+    $orders = $user->orders()->with('orderDetails.product')->get();
+   
+    return view('profile', compact('user', 'orders'));
 }
 
-public function restore($id)
-{
-    $user = User::withTrashed()->find($id);
-    $user->restore();
-    return redirect()->route('users.trash')->with('success', 'User restored successfully');
-}
+
+ 
+
+    public function update_profile(Request $request)
+    {
+        $request->validate([
+          'Fname' => 'required|string|min:3|max:255',
+          'Lname' => 'required|string|min:3|max:255',
+          'email' => 'required|email|max:255|unique:users,email,' . auth()->id(),
+          'mobile' => 'required|numeric',
+          'current_password' => 'nullable|required_with:new_password',
+          'new_password' => 'nullable|min:8|confirmed',
+        ]);
+
+        $user = auth()->user();
+
+   
+        if ($request->filled('new_password')) {
+           if (!Hash::check($request->current_password, $user->password)) {
+               return back()->withErrors(['current_password' => 'The current password is incorrect.']);
+           }
+        $user->password = Hash::make($request->new_password);
+        }
+
+   
+        $user->update([
+          'Fname' => $request->input('Fname'),
+          'Lname' => $request->input('Lname'),
+          'email' => $request->input('email'),
+          'mobile' => $request->input('mobile'),
+        ]);
+
+        return back()->with('success', 'Account settings updated successfully.');
+    }
+
+    public function getOrderDetails($id)
+    {
+        try {
+            // Find the order with related details
+            $order = Order::with(['orderDetails.product'])->findOrFail($id);
+
+            // Return a JSON response with the order details
+            return response()->json([
+                'success' => true,
+                'details' => $order->orderDetails->map(function ($detail) {
+                    return [
+                        'product' => $detail->product->name,
+                        'quantity' => $detail->quantity,
+                        'price' => $detail->price,
+                        'discount' => $detail->discount,
+                        'total_price' => $detail->total_price,
+                    ];
+                }),
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Order details could not be retrieved.',
+            ], 500);
+        }
+    }
 
 
 }

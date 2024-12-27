@@ -72,20 +72,11 @@
                     </div>
                 </div>
 
-                <div class="header-language" style="padding-left: 20px;">
-                    <div class="stelina-language">
-                        <a href="#" class="active language-toggle" data-stelina="stelina-dropdown">
-									<span class="flaticon-user">
-										
-									</span>
-                        </a>
-                        
-                    </div>
-                </div>
+               
 
 
 
-                @if (Auth::user()->role == 'manager' || Auth::user()->role == 'employee' )
+                @if (Auth::user()->role == 'manager' )
                 <div class="header-language" style="padding-left: 20px;">
                     <div class="stelina-language">
                         <a href="{{ route('dashboard') }}" class="active language-toggle" data-stelina="stelina-dropdown">
@@ -97,6 +88,20 @@
                     </div>
                 </div>
                 @endif
+
+                @if ( Auth::user()->role == 'employee' )
+                <div class="header-language" style="padding-left: 20px;">
+                    <div class="stelina-language">
+                        <a href="{{route('categories.index')}}" class="active language-toggle" data-stelina="stelina-dropdown">
+									<span>
+										Dashboard
+									</span>
+                        </a>
+                        
+                    </div>
+                </div>
+                @endif
+
 
 
                
@@ -157,8 +162,22 @@
 
                         </div>
 
-                        
+                        @guest
 
+                        <div></div>
+
+                        @else
+                      
+                        
+                        <div class="block-account block-header stelina-dropdown">
+                            <a href="{{ route('profile') }}">
+                                <span class="flaticon-user"></span>
+                            </a>
+                        </div>
+                       
+
+                        @endguest
+                        
                       
                         <a class="menu-bar mobile-navigation menu-toggle" href="#">
                             <span></span>

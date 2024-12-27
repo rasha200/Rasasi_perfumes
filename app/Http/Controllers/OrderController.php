@@ -28,10 +28,10 @@ class OrderController extends Controller
     {
 
         if (!auth()->check()) {
-            // Store a session variable to remember that the user came from checkout
+           
             session(['from_checkout' => true]);
     
-            // Redirect back with an error message
+            
             return redirect()->route('cart.index')->with('error', 'Please log in to proceed with checkout.');
         }
         

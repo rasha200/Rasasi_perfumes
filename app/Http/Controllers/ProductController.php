@@ -106,8 +106,8 @@ class ProductController extends Controller
         $productImages = $product->product_images; 
         $relatedProducts = Product::where('subCategory_id', $product->subCategory_id)
         ->where('id', '!=', $product->id)
-        ->inRandomOrder() // Randomize order
-        ->take(12) // Limit the number of related products displayed
+        ->inRandomOrder() 
+        ->take(12) 
         ->get();
 
         return view('product_details' , [
@@ -187,33 +187,81 @@ class ProductController extends Controller
     }
 
 
-    public function productsBySubCategory($id)
+    public function productsByCategory($id, Request $request)
     {
-           // Fetch the subcategory
-           $subCategory = SubCategory::findOrFail($id);
-
-           // Fetch products with the specific subcategory ID
-           $products = Product::with('product_images')->where('subCategory_id', $id)->orderBy('name', 'asc')->get();
-
-           // Pass the products and subcategory to the view
-           return view('store', compact('products', 'subCategory'));
+        
+        $category = Category::findOrFail($id);
+        
+       
+        $maxPrice = Product::whereHas('subCategory', function ($query) use ($id) {
+            $query->where('category_id', $id);
+        })->max('price');
+    
+        
+        $query = Product::with('product_images')->whereHas('subCategory', function ($query) use ($id) {
+            $query->where('category_id', $id);
+        });
+    
+        // Check if min_price and max_price are provided
+        if ($request->has('min_price') && $request->has('max_price')) {
+            $minPrice = $request->query('min_price', 0);
+            $maxPrice = $request->query('max_price', $maxPrice); // Use the original max price
+    
+            $query->where(function ($query) use ($minPrice, $maxPrice) {
+                // Filter by original price range
+                $query->whereBetween('price', [$minPrice, $maxPrice])
+                      // Also filter by discounted price range (price after discount)
+                      ->orWhere(function ($query) use ($minPrice, $maxPrice) {
+                          $query->whereRaw('price - (price * discount / 100) BETWEEN ? AND ?', [$minPrice, $maxPrice]);
+                      });
+            });
+        }
+    
+        
+        $products = $query->orderBy('name', 'asc')->paginate(20);
+    
+        return view('store', compact('products', 'category', 'maxPrice'));
     }
+    
 
-    public function productsByCategory($id)
+    
+
+    public function productsBySubCategory($id, Request $request)
     {
-         // Fetch the category
-         $category = Category::findOrFail($id);
-
-         // Fetch products associated with any subcategory under this category
-         $products = Product::with('product_images')->whereHas('subCategory', function ($query) use ($id) {
-               $query->where('category_id', $id);
-         })->orderBy('name', 'asc')->get();
-
-         // Pass the category and products to the view
-        return view('store', compact('products', 'category'));
+        
+        $subCategory = SubCategory::findOrFail($id);
+    
+       
+        $maxPrice = Product::where('subCategory_id', $id)->max('price');
+    
+       
+        $query = Product::with('product_images')->where('subCategory_id', $id);
+    
+        // Check if min_price and max_price are provided
+        if ($request->has('min_price') && $request->has('max_price')) {
+            $minPrice = $request->query('min_price', 0);
+            $maxPrice = $request->query('max_price', $maxPrice); // Use the original max price
+    
+            $query->where(function ($query) use ($minPrice, $maxPrice) {
+                // Filter by original price range
+                $query->whereBetween('price', [$minPrice, $maxPrice])
+                      // Also filter by discounted price range (price after discount)
+                      ->orWhere(function ($query) use ($minPrice, $maxPrice) {
+                          $query->whereRaw('price - (price * discount / 100) BETWEEN ? AND ?', [$minPrice, $maxPrice]);
+                      });
+            });
+        }
+    
+       
+        $products = $query->orderBy('name', 'asc')->paginate(20);
+    
+        return view('store', compact('products', 'subCategory', 'maxPrice'));
     }
+    
+    
 
-
+    
+    
 
     /**
      * Remove the specified resource from storage.
