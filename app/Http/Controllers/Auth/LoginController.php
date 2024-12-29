@@ -39,11 +39,17 @@ class LoginController extends Controller
             return route('order.create');
         }
 
-        if (Auth::user()->role == 'manager' || Auth::user()->role == 'employee') {
-            return '/dashboard';
-            } else {
+
+
+        if (Auth::user()->role == 'manager') {
+            return route('dashboard');
+
+        } elseif (Auth::user()->role == 'employee') {
+            return route('categories.index');
+            
+        } else {
             return '/';
-            }
+        }
     }
     
 

@@ -19,6 +19,9 @@
             No Discount
         @endif</p>
 
+        <p><strong>Quantity:</strong> {{ $product->quantity }}</p>
+
+
         {{-- <p><strong>Quantity:</strong> {{ $product->quantity }}</p> --}}
         <p><strong>Sub category name:</strong> {{$product->subCategory->category->name}} - {{ $product->subCategory->name }}</p> 
         <div class="form-group">

@@ -2576,7 +2576,7 @@ blockquote .author .desc {
 /*        login         */
 /* -------------------- */
 .customer_login .title-login {
-	border: 1px solid #f1f1f1;
+	border: 1px solid #dedede;
 	margin: 0;
 	border-bottom: 0;
 	font-size: 18px;
@@ -2585,7 +2585,7 @@ blockquote .author .desc {
 	font-weight: 500;
 }
 .customer_login .login, .customer_login .register {
-	border: 1px solid #f1f1f1;
+	border: 1px solid #dedede;
 	padding: 25px 40px;
 }
 .login .social-account {
@@ -2624,7 +2624,7 @@ blockquote .author .desc {
 .customer_login input[type="password"] {
 	margin-bottom: 0;
 	width: 100%;
-	border-color: #f1f1f1;
+	border-color: #dedede;
 }
 .customer_login input[type="checkbox"] {
 	display: none;

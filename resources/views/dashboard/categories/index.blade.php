@@ -19,13 +19,13 @@
    
  
     
-    @if(session('delete'))
+@if(session('error'))
   
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-      <i class="bi bi-check-circle me-1"></i>
-      {{ session('delete') }}
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <i class="bi bi-exclamation-octagon me-1"></i>
+  {{ session('error') }}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
 @endif
 
     @if(session('success'))
@@ -128,7 +128,7 @@
           <div class="modal-body">
               <p><strong>Category Name:</strong> <span id="categoryName"></span></p>
               <div id="categoryImageContainer">
-                  <img id="categoryImage" src="" alt="Category Image" style="width: 100%; border-radius: 8px;">
+                  <img id="categoryImage" src="" alt="Category Image" style="width: 100%; border-radius: 8px;height:400px;">
               </div>
               <span id="noImageText" style="color: #666; font-style: italic; display: none;">No image</span>
           </div>

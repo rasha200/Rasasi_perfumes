@@ -7,10 +7,12 @@
 
 <div class="d-flex justify-content-between align-items-center mb-4">
 
-  <div class="pagetitle">
-    <h1></h1>
+  <div class="pagetitle" style="margin-top: 30px;">
+    <h1><i class="bi bi-grid"></i> Add new category</h1>
   </div>
-     
+  
+      
+      
 </div>
 
 @if ($errors->any())
@@ -27,7 +29,7 @@
 <div class="card">
   <div class="card-body">
     
-    <h5 class="card-title">Add new category</h5>
+    <h5 class="card-title"></h5>
                    
                     <form class="row g-3" action="{{ route('categories.store')}}" method="POST" enctype="multipart/form-data">
                         @csrf

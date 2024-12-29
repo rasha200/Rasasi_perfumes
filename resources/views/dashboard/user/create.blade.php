@@ -3,13 +3,16 @@
 
 @section('content')
 
-                    <div class="d-flex justify-content-between align-items-center mb-4">
+<div class="d-flex justify-content-between align-items-center mb-4">
 
-                      <div class="pagetitle">
-                        <h1></h1>
-                      </div>
-                         
-                    </div>
+  <div class="pagetitle" style="margin-top: 30px;">
+    <h1><i class="bi bi-people"></i> Add new user</h1>
+  </div>
+  
+       
+      
+</div>
+
                     @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -25,7 +28,7 @@
                       <div class="card">
                         <div class="card-body">
                           
-                          <h5 class="card-title">Add new user</h5>
+                          <h5 class="card-title"></h5>
 
                     <form class="row g-3" action="{{ route('users.store')}}" method="POST">
                         @csrf

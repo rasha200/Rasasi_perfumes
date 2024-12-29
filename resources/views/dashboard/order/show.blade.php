@@ -3,11 +3,20 @@
 
 @section('content')
 
-@if(session('delete'))
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+  <div class="pagetitle" style="margin-top: 30px;">
+    <h1><i class="bi bi-cart "></i> Order-number ({{ $order->id }}) </h1>
+  </div>
   
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-  <i class="bi bi-check-circle me-1"></i>
-  {{ session('delete') }}
+        
+</div>
+
+@if(session('error'))
+  
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <i class="bi bi-exclamation-octagon me-1"></i>
+  {{ session('error') }}
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 @endif
@@ -25,7 +34,7 @@
 <div class="card">
 <div class="card-body" style="border: 1px solid #e7dee9;">
         
-        <p align="center" style="margin-top: 50px;"><strong>{{ $order->id }}</strong> </p>
+        <p align="center" style="margin-top: 50px;"><strong></strong> </p>
 
    
 

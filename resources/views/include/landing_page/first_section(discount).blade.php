@@ -7,7 +7,7 @@
         data-slick='{"autoplay":false, "autoplaySpeed":1000, "arrows":true, "dots":true, "infinite":false, "speed":800, "rows":1}'
         data-responsive='[{"breakpoint":"2000","settings":{"slidesToShow":4}},{"breakpoint":"1200","settings":{"slidesToShow":3}},{"breakpoint":"992","settings":{"slidesToShow":2}},{"breakpoint":"480","settings":{"slidesToShow":1}}]'>
    
-             @foreach ($discountedProducts->slice(0, 7) as $product)
+             @foreach ($discountedProducts as $product)
              <div class="product-item style-5">
                 <div class="product-inner equal-element">
                   

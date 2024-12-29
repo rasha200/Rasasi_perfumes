@@ -67,9 +67,9 @@ Route::middleware(['auth'])->group(function () {
 
 // <!--==========================================  (contacts)  ===============================================================================================================-->
 Route::middleware(['auth', 'manager'])->group(function () {
-    Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index'); // List all contacts (dashboard)
-    Route::get('/contacts/{contact}', [ContactController::class, 'show'])->name('contacts.show'); // Show
-    Route::delete('/contacts/{contact}', [ContactController::class, 'destroy'])->name('contacts.destroy'); // Delete
+    Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index'); 
+    Route::get('/contacts/{contact}', [ContactController::class, 'show'])->name('contacts.show'); 
+    Route::delete('/contacts/{contact}', [ContactController::class, 'destroy'])->name('contacts.destroy'); 
 });
 
 
@@ -124,9 +124,6 @@ Route::middleware(['auth', 'role'])->group(function () {
     Route::put('/order/{order}', [OrderController::class, 'update'])->name('order.update');
     Route::delete('/order/{order}', [OrderController::class, 'destroy'])->name('order.destroy');
 });
-
-
-
 
 
 // Public routes

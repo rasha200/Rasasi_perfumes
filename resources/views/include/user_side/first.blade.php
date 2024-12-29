@@ -27,6 +27,7 @@
     <script src="{{asset("https://code.jquery.com/jquery-3.6.0.min.js")}}"></script>
     <link rel="stylesheet" type="text/css" href="{{asset("https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css")}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset("https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css")}}"/>
+    <link rel="stylesheet" href="{{asset("https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css")}}">
 
 </head>
 <body class="home">

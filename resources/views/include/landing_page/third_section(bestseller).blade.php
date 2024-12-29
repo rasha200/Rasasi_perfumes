@@ -1,14 +1,18 @@
  
         <div class="stelina-tabs  default rows-space-40">
             <div class="container">
-                <div class="tab-head">
+
+                <h3 class="custommenu-title-blog">
+                    Bestseller
+                </h3>
+                {{-- <div class="tab-head">
                     <ul class="tab-link">
                         <li class="active">
                             <a data-toggle="tab" aria-expanded="true" href="#bestseller">Bestseller</a>
                         </li>
                         
                     </ul>
-                </div>
+                </div> --}}
                 <div class="tab-container">
                     <div id="bestseller" class="tab-panel active">
                         <div class="stelina-product">

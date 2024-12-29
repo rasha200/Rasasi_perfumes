@@ -14,14 +14,14 @@
                     <div class="customer_login">
                         <div class="row">
                            
-                            <div class="col-lg-6 col-md-6 col-sm-12" style="margin-left: 280px !important; margin-top: 50px !important;">
+                            <div class="col-lg-6 col-md-6 col-sm-12" style="width: 70%;margin-left: 180px !important; margin-top: 50px !important; ">
                                 <div class="login-item">
                                     <h5 class="title-login">Register now</h5>
 
                     <form method="POST" action="{{ route('register') }}" class="register">
                         @csrf
 
-                      <p class="form-row form-row-wide">
+                      <p class="col-sm-6">
                             <label for="Fname" class="text">{{ __('First Name') }}</label>
 
                            
@@ -35,7 +35,7 @@
                            
                       </p>
 
-                        <p class="form-row form-row-wide">
+                        <p class="col-sm-6">
                             <label for="Lname" class="text">{{ __('Last Name') }}</label>
 
                             
@@ -49,7 +49,7 @@
                            
                         </p>
 
-                        <p class="form-row form-row-wide">
+                        <p class="col-sm-6">
                             <label for="email" class="text">{{ __('Email Address') }}</label>
 
                             
@@ -65,7 +65,7 @@
 
 
 
-                        <p class="form-row form-row-wide">
+                        <p class="col-sm-6">
                             <label for="mobile" class="text">{{ __('Mobile') }}</label>
 
                             
@@ -81,7 +81,7 @@
 
 
 
-                        <p class="form-row form-row-wide">
+                        <p class="col-sm-6">
                             <label for="password" class="text">{{ __('Password') }}</label>
 
                             
@@ -95,7 +95,7 @@
                            
                         </p>
 
-                        <p class="form-row form-row-wide">
+                        <p class="col-sm-6">
                             <label for="password-confirm" class="text">{{ __('Confirm Password') }}</label>
 
                             
@@ -103,7 +103,7 @@
                            
                         </p>
 
-                        <p class="form-row">
+                        <p class="form-row" style="margin-left: 15px;">
                                 <button type="submit" class="button-submit">
                                     {{ __('Register') }}
                                 </button>

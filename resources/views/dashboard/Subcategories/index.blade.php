@@ -19,13 +19,13 @@
     
  
     
-    @if(session('delete'))
+@if(session('error'))
   
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-      <i class="bi bi-check-circle me-1"></i>
-      {{ session('delete') }}
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <i class="bi bi-exclamation-octagon me-1"></i>
+  {{ session('error') }}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
 @endif
 
     @if(session('success'))
@@ -143,7 +143,7 @@
                 <p><strong>Category:</strong> <span id="subcategoryCategory"></span></p>
                 <p><strong>Discount:</strong> <span id="subcategoryDiscount"></span></p>
                 <div id="subcategoryImageContainer">
-                    <img id="subcategoryImage" src="" alt="Subcategory Image" style="width: 100%; border-radius: 8px;">
+                    <img id="subcategoryImage" src="" alt="Subcategory Image" style="width: 100%; border-radius: 8px; height:400px;">
                 </div>
                 <span id="noImageText" style="color: #666; font-style: italic; display: none;">No image</span>
             </div>

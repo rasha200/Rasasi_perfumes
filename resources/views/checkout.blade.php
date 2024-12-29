@@ -9,7 +9,7 @@
                 <div class="breadcrumb-trail breadcrumbs">
                     <ul class="trail-items breadcrumb">
                         <li class="trail-item trail-begin">
-                            <a href="#">Home</a>
+                           Home
                         </li>
                         <li class="trail-item trail-end active">
                             Checkout
@@ -21,6 +21,16 @@
         <h3 class="custom_blog_title">
             Checkout
         </h3>
+
+        @if ($errors->any())
+        <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+        </div>
+        @endif
         <div class="checkout-wrapp">
             <div class="shipping-address-form-wrapp">
                 <div class="shipping-address-form  checkout-form">
@@ -33,42 +43,42 @@
                                 <!-- Email Address -->
                                 <p class="form-row form-row-first">
                                     <label class="text">Email Address</label>
-                                    <input name="email" title="Email Address" type="email" class="input-text" style="border:1px solid rgb(172, 171, 171);" >
+                                    <input name="email" title="Email Address" type="email" class="input-text" value="{{ old('email') }}" style="border:1px solid rgb(172, 171, 171);" >
                                 </p>
                     
                                 <!-- Mobile number -->
                                 <p class="form-row form-row-last">
-                                    <label class="text">Mobile number</label>
-                                    <input name="mobile" title="Mobile number" type="text" class="input-text" style="border:1px solid rgb(172, 171, 171);" required>
+                                    <label class="text">Mobile number <span style="color:red;">*</span></label>
+                                    <input name="mobile" title="Mobile number" type="text" class="input-text" value="{{ old('mobile') }}" style="border:1px solid rgb(172, 171, 171);" required>
                                 </p>
                     
                                 <!-- City -->
                                 <p class="form-row forn-row-col forn-row-col-1">
-                                    <label class="text">City</label>
-                                    <input name="city" title="City" type="text" class="input-text" style="border:1px solid rgb(172, 171, 171);" required>
+                                    <label class="text">City <span style="color:red;">*</span></label>
+                                    <input name="city" title="City" type="text" class="input-text" value="{{ old('city') }}" style="border:1px solid rgb(172, 171, 171);" required>
                                 </p>
                     
                                 <!-- Street -->
                                 <p class="form-row forn-row-col forn-row-col-2">
-                                    <label class="text">Street</label>
-                                    <input name="street" title="Street" type="text" class="input-text" style="border:1px solid rgb(172, 171, 171);" required>
+                                    <label class="text">Street <span style="color:red;">*</span></label>
+                                    <input name="street" title="Street" type="text" class="input-text" value="{{ old('street') }}" style="border:1px solid rgb(172, 171, 171);" required>
                                 </p>
                     
                                 <!-- Building number -->
                                 <p class="form-row forn-row-col forn-row-col-3">
-                                    <label class="text">Building number</label>
-                                    <input name="building_number" title="Building number" type="text" class="input-text" style="border:1px solid rgb(172, 171, 171);" required>
+                                    <label class="text">Building number <span style="color:red;">*</span></label>
+                                    <input name="building_number" title="Building number" type="text" class="input-text" value="{{ old('building_number') }}" style="border:1px solid rgb(172, 171, 171);" required>
                                 </p>
                     
                                 <!-- Note -->
                                 <p class="form-row">
                                     <label class="text">Note</label>
-                                    <input name="note" title="Note" type="text" class="input-text" style="border:1px solid rgb(172, 171, 171);">
+                                    <input name="note" title="Note" type="text" class="input-text" value="{{ old('note') }}" style="border:1px solid rgb(172, 171, 171);">
                                 </p>
                     
                                 <!-- Payment Method -->
                                 <p class="form-row">
-                                    <label class="text">Payment</label>
+                                    <label class="text">Payment <span style="color:red;">*</span></label>
                                     <select name="payment_method" class="chosen-select" style="border:1px solid rgb(172, 171, 171); border-radius:30px;">
                                         <option value="cashOnDelivery">Cash on Delivery</option>
                                         <option value="stripe">Credit Card</option>
@@ -104,42 +114,44 @@
                     
 
                     <script>
-                   function showConfirmModal(action) {
-    // Modal element references
-    const modalTitle = document.getElementById('modalTitle');
-    const modalMessage = document.getElementById('modalMessage');
-    const confirmButton = document.getElementById('confirmButton');
-
-    // Update modal content and actions based on the action
-    if (action === 'editProfile') {
-        modalTitle.textContent = 'Are you sure you want to update your profile?';
-        modalMessage.textContent = 'This action cannot be undone.';
-        confirmButton.onclick = function () {
-            submitForm('profileForm');
-        };
-    } else if (action === 'checkout') {
-        modalTitle.textContent = 'Are you sure you want to place this order?';
-        modalMessage.textContent = 'Ensure all details are correct before proceeding.';
-        confirmButton.onclick = function () {
-            submitForm('checkoutForm');
-        };
-    }
-
-    // Show modal
-    document.getElementById('confirmModal').style.display = 'flex';
-}
-
-// Close the confirmation modal
-function closeConfirmModal() {
-    document.getElementById('confirmModal').style.display = 'none';
-}
-
-// Submit the specific form when confirmed
-function submitForm(formId) {
-    document.getElementById(formId).submit();
-}
-
-                    </script>
+                        // Show the confirmation modal only if form validation passes
+                        function showConfirmModal(action) {
+                            const form = document.getElementById('checkoutForm');
+                        
+                            // Check if the form is valid
+                            if (form.checkValidity()) {
+                                // Modal element references
+                                const modalTitle = document.getElementById('modalTitle');
+                                const modalMessage = document.getElementById('modalMessage');
+                                const confirmButton = document.getElementById('confirmButton');
+                        
+                                // Update modal content and actions based on the action
+                                if (action === 'checkout') {
+                                    modalTitle.textContent = 'Are you sure you want to place this order?';
+                                    modalMessage.textContent = 'Ensure all details are correct before proceeding.';
+                                    confirmButton.onclick = function () {
+                                        submitForm('checkoutForm');
+                                    };
+                                }
+                        
+                                // Show modal
+                                document.getElementById('confirmModal').style.display = 'flex';
+                            } else {
+                                // If form is not valid, show validation messages
+                                form.reportValidity();
+                            }
+                        }
+                        
+                        // Close the confirmation modal
+                        function closeConfirmModal() {
+                            document.getElementById('confirmModal').style.display = 'none';
+                        }
+                        
+                        // Submit the specific form when confirmed
+                        function submitForm(formId) {
+                            document.getElementById(formId).submit();
+                        }
+                        </script>
 
                     <div class="row-col-2 row-col">
                         <div class="your-order">

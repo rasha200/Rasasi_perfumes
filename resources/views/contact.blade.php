@@ -18,6 +18,8 @@
                 </div>
             </div>
         </div>
+
+      
         <div class="row">
             <div class="content-area content-contact col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="site-main">
@@ -25,6 +27,16 @@
                 </div>
             </div>
         </div>
+
+        @if ($errors->any())
+        <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+        </div>
+        @endif
     </div>
     <div class="page-main-content">
         <div class="google-map" style="height: 200px;"></div> 
@@ -42,38 +54,38 @@
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <p>
-                                                <span class="form-label">First Name *</span>
-                                                <input type="text" name="Fname" size="40" class="form-control form-control-name" required>
+                                                <span class="form-label">First Name <span style="color:red;">*</span></span>
+                                                <input type="text" name="Fname" size="40" class="form-control form-control-name" value="{{ old('Fname') }}" required>
                                             </p>
                                         </div>
                                         <div class="col-sm-6">
                                             <p>
-                                                <span class="form-label">Last Name *</span>
-                                                <input type="text" name="Lname" size="40" class="form-control form-control-name" required>
+                                                <span class="form-label">Last Name<span style="color:red;">*</span></span>
+                                                <input type="text" name="Lname" size="40" class="form-control form-control-name" value="{{ old('Lname') }}" required>
                                             </p>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <p>
-                                                <span class="form-label">Phone</span>
-                                                <input type="text" name="mobile" class="form-control form-control-phone" required>
+                                                <span class="form-label">Phone <span style="color:red;">*</span></span>
+                                                <input type="text" name="mobile" class="form-control form-control-phone" value="{{ old('mobile') }}" required>
                                             </p>
                                         </div>
                                         <div class="col-sm-6">
                                             <p>
-                                                <span class="form-label">Your Email *</span>
-                                                <input type="email" name="email" size="40" class="form-control form-control-email" required>
+                                                <span class="form-label">Your Email <span style="color:red;">*</span></span>
+                                                <input type="email" name="email" size="40" class="form-control form-control-email" value="{{ old('email') }}" required>
                                             </p>
                                         </div>
                                     </div>
                                     <p>
-                                        <span class="form-label">Your Message</span>
-                                        <textarea name="message" cols="40" rows="9" class="form-control your-textarea" required></textarea>
+                                        <span class="form-label">Subject <span style="color:red;">*</span></span>
+                                        <input type="text" name="subject" class="form-control" value="{{ old('subject') }}" required>
                                     </p>
                                     <p>
-                                        <span class="form-label">Subject</span>
-                                        <input type="text" name="subject" class="form-control" required>
+                                        <span class="form-label">Your Message <span style="color:red;">*</span></span>
+                                        <textarea name="message" cols="40" rows="9" class="form-control your-textarea" value="{{ old('message') }}" required></textarea>
                                     </p>
                                     <p>
                                         <input type="submit" value="SEND MESSAGE" class="form-control-submit button-submit">

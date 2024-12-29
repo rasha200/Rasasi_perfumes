@@ -20,10 +20,7 @@
             <div class="content-area shop-grid-content full-width col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="site-main">
 
-                    <div class="filter-container">
-                        <h3 class="custom_blog_title">
-                            Products
-                        </h3>
+                    
 
                         {{-- <div class="widget widget_filter_price">
                             <h4 class="widgettitle" style="font-size: 12px; margin: 0;">Price</h4>
@@ -93,111 +90,131 @@
                             <!-- Price filter aligned to the right -->
 
                             <div class="filter-button">
-                                <button type="button" id="openFilterModal">Filter by price</button>
+                                <button type="button" id="openFilterModal" >Filter by price</button>
                             </div>
                        
                         </div>
                     </div>
 
-                    <!-- Modal Structure -->
-                    <div id="customModal" class="custom-modal-overlay" style="display:none;">
-                        <div class="custom-modal">
-                            <div class="modal-header">
-                                <div class="icon-container">
-                                    <i class="fa fa-filter filter-icon"></i> <!-- Filter icon -->
-                                </div>
-                            </div>
-                            <div class="modal-body">
-                                <h2>Filter by Price</h2>
-                                <div class="widget widget_filter_price">
-                                    <form id="price-filter-form" action="{{ url()->current() }}" method="GET">
-                                        <div class="price-slider-wrapper" style="width: 400px; margin-top:50px;">
-                                            <!-- Slider -->
-                                            <div id="slider-range-price" data-label-result="Range:" data-min="0" data-max="{{ $maxPrice }}" data-unit="$" class="slider-range-price" data-value-min="{{ request('min_price', 0) }}" data-value-max="{{ request('max_price', $maxPrice) }}"></div>
-                                            <div class="price-slider-amount" style="font-size: 12px;">
-                                                <span class="from">{{ request('min_price', 0) }} JOD</span>
-                                                <span class="to">{{ request('max_price', $maxPrice) }} JOD</span>
-                                            </div>
-                                        </div>
+                 <!-- Modal Structure -->
+<div id="customModal" class="custom-modal-overlay" style="display:none;">
+    <div class="custom-modal">
+        <div class="modal-header">
+            <div class="icon-container">
+               
+            </div>
+        </div>
+        <div class="modal-body">
+            <h2>Filter by Price</h2>
+            <div class="widget widget_filter_price">
+                <!-- Updated filter form with price inputs -->
+                <form id="price-filter-form" action="{{ url()->current() }}" method="GET">
+                    <!-- New filter design with input fields for min_price and max_price -->
+                    <div class="price-slider-wrapper" style="display: flex; justify-content: space-between; width: 400px; margin-top: 20px; margin-bottom:30px;">
+                        <!-- Min Price Label and Input -->
+                        <div class="price-input-group" style="display: flex; flex-direction: column; width: 45%;">
+                            <label for="min_price" style="font-size: 12px; margin-bottom: 5px; text-align: left;">Min Price:</label>
+                            <input 
+                                type="number" 
+                                name="min_price" 
+                                id="min_price" 
+                                value="{{ request('min_price', 0) }}" 
+                                min="0" 
+                                style="width: 100%;"
+                            />
+                        </div>
                     
-                                        <!-- Hidden inputs for min_price and max_price -->
-                                        <input type="hidden" name="min_price" id="min_price" value="{{ request('min_price', 0) }}">
-                                        <input type="hidden" name="max_price" id="max_price" value="{{ request('max_price', $maxPrice) }}">
-                    
-                                        <!-- Button to trigger the filter application -->
-                                        <button class="close-modal-btn cancel-button">Cancel</button>
-                                        <button type="button" id="apply-filter" class="filter-button">Apply Filter</button>
-                                        
-                                    </form>
-                                </div>
-                            </div>
+                        <!-- Max Price Label and Input -->
+                        <div class="price-input-group" style="display: flex; flex-direction: column; width: 45%;">
+                            <label for="max_price" style="font-size: 12px; margin-bottom: 5px; text-align: left;">Max Price:</label>
+                            <input 
+                                type="number" 
+                                name="max_price" 
+                                id="max_price" 
+                                value="{{ request('max_price', $maxPrice) }}" 
+                                min="0" 
+                                style="width: 100%;"
+                            />
                         </div>
                     </div>
-
                     
-  <!---------------------- Filter price -------------------------------------->                   
+
+                    <button type="button" class="close-modal-btn cancel-button" style="font-size:13px; border-radius:30px;">Cancel</button>
+                    <button type="submit" id="apply-filter" class="filter-button">Apply Filter</button>
+                    
+                </form>
+            </div>
+        </div>
+       
+            
+     
+    </div>
+</div>
+
+
+
+<!-- Add the CSS for centering the modal -->
+<style>
+    /* Style to center the modal on the screen */
+    .custom-modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+        display: none; /* Hidden by default */
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+    }
+
+
+    
+
+</style>
+
 <script>
-    $(document).ready(function() {
 // Open modal when "Filter by price" button is clicked
-$('#openFilterModal').click(function() {
-$('#customModal').fadeIn();  // Show the modal
+document.getElementById('openFilterModal').addEventListener('click', function() {
+    document.getElementById('customModal').style.display = 'flex'; // Use flex to center the modal
 });
 
-// Close the modal when the user clicks "OK"
-$('.close-modal-btn').click(function() {
-$('#customModal').fadeOut();  // Hide the modal
+// Close modal when the "Cancel" button is clicked
+document.querySelector('.close-modal-btn').addEventListener('click', function() {
+    document.getElementById('customModal').style.display = 'none';
 });
 
-// Slider functionality
-const slider = $('#slider-range-price');
-const fromPrice = $('.price-slider-amount .from');
-const toPrice = $('.price-slider-amount .to');
-const minPriceInput = $('#min_price');
-const maxPriceInput = $('#max_price');
-const applyFilterButton = $('#apply-filter');
-const form = $('#price-filter-form');
+// Price filter logic (using input fields)
+document.addEventListener('DOMContentLoaded', function () {
+    const minPriceInput = document.getElementById('min_price');
+    const maxPriceInput = document.getElementById('max_price');
 
-// Initialize slider with initial values from data attributes
-const minPrice = parseInt(slider.data('value-min'));
-const maxPrice = parseInt(slider.data('value-max'));
+    // Sync input fields with the filter values
+    minPriceInput.addEventListener('input', function () {
+        const minPrice = parseInt(minPriceInput.value) || 0;
+        const maxPrice = parseInt(maxPriceInput.value) || 0;
+        updateURL(minPrice, maxPrice);
+    });
 
-// Initialize the slider (using jQuery UI slider)
-slider.slider({
-range: true,
-min: 0,
-max: maxPrice,
-values: [minPrice, maxPrice],
-slide: function (event, ui) {
-// Update displayed price range
-fromPrice.text(ui.values[0] + ' JOD');
-toPrice.text(ui.values[1] + ' JOD');
+    maxPriceInput.addEventListener('input', function () {
+        const minPrice = parseInt(minPriceInput.value) || 0;
+        const maxPrice = parseInt(maxPriceInput.value) || 0;
+        updateURL(minPrice, maxPrice);
+    });
 
-// Update hidden inputs on slider change
-minPriceInput.val(ui.values[0]);
-maxPriceInput.val(ui.values[1]);
-}
+    // Function to update the URL with the selected filter values
+    function updateURL(minPrice, maxPrice) {
+        const currentUrl = new URL(window.location.href);
+        currentUrl.searchParams.set('min_price', minPrice);
+        currentUrl.searchParams.set('max_price', maxPrice);
+        window.history.replaceState(null, '', currentUrl);
+    }
 });
+</script>
 
-// Update price labels based on initial values from hidden inputs
-const currentMinPrice = "{{ request('min_price', 0) }}";
-const currentMaxPrice = "{{ request('max_price', $maxPrice) }}";
-fromPrice.text(currentMinPrice + ' JOD');
-toPrice.text(currentMaxPrice + ' JOD');
+    
 
-// Add form submission event on Apply Filter button
-applyFilterButton.on('click', function () {
-// Make sure the hidden input values are always up-to-date before submitting the form
-minPriceInput.val(fromPrice.text().replace(' JOD', ''));
-maxPriceInput.val(toPrice.text().replace(' JOD', ''));
-
-console.log('Form Submitted with data:', minPriceInput.val(), maxPriceInput.val());
-
-// Submit the form manually
-form.submit();
-});
-});
-
- </script>
 
 
                     <ul class="row list-products auto-clear equal-container product-grid" id="product-container">

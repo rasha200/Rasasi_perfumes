@@ -44,11 +44,12 @@ class ProductController extends Controller
             'name' => 'required|string',
             'small_description' => 'required|string',
             'description' => 'required',
-            'price' => 'required',
             'old_price' => 'nullable',
+            'price' => 'required',
             'discount' => 'nullable|numeric|min:0|max:100',
             'quantity' => 'required|integer',
             'image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp,WEBP,AVIF|max:2048',
+            'subCategory_id' => 'required|exists:sub_categories,id',
         ]);
 
         $product = Product::create([
@@ -141,11 +142,12 @@ class ProductController extends Controller
             'name' => 'required|string',
             'small_description' => 'required|string',
             'description' => 'required',
-            'price' => 'required',
             'old_price' => 'nullable',
+            'price' => 'required',
             'discount' => 'nullable|numeric|min:0|max:100',
             'quantity' => 'required|integer',
             'image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp,WEBP,AVIF|max:2048',
+            'subCategory_id' => 'required|exists:sub_categories,id',
         ]);
 
     
@@ -154,8 +156,8 @@ class ProductController extends Controller
             'name'=>$request->input('name'),
             'small_description'=>$request->input('small_description'),
             'description'=>$request->input('description'),
-            'price'=>$request->input('price'),
             'old_price'=>$request->input('old_price'),
+            'price'=>$request->input('price'),
             'discount' => $request->input('discount'),
             'quantity'=>$request->input('quantity'),
             'subCategory_id'=>$request->input('subCategory_id'),
@@ -218,7 +220,7 @@ class ProductController extends Controller
         }
     
         
-        $products = $query->orderBy('name', 'asc')->paginate(20);
+        $products = $query->orderBy('name', 'asc')->paginate(16);
     
         return view('store', compact('products', 'category', 'maxPrice'));
     }
@@ -253,7 +255,7 @@ class ProductController extends Controller
         }
     
        
-        $products = $query->orderBy('name', 'asc')->paginate(20);
+        $products = $query->orderBy('name', 'asc')->paginate(16);
     
         return view('store', compact('products', 'subCategory', 'maxPrice'));
     }
@@ -268,6 +270,11 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+
+        if ($product->orderDetails()->exists()) {
+            return to_route('products.index')->with('error', 'Cannot delete a product with active orders.');
+        }
+    
         $product->delete(); 
         
         return to_route('products.index')->with('success', 'Product deleted');

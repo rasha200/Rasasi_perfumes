@@ -33,7 +33,7 @@ class ContactController extends Controller
         $validation = $request->validate([
             'Fname' => 'required|string',
             'Lname' => 'required|string',
-            'mobile' => 'required|numeric',
+            'mobile' => 'required|regex:/^(\+?\d{1,3}[- ]?)?\d{10}$/',
             'email' => 'required|email',
             'subject' => 'required|string',
             'message' => 'required',

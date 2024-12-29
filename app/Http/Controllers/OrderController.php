@@ -46,13 +46,13 @@ class OrderController extends Controller
     {
        
         $request->validate([
-            'email' => 'nullable|email',
-            'mobile' => 'required|string|max:13',
             'city' => 'required|string',
             'street' => 'required|string',
             'building_number' => 'required|string',
-            'payment_method' => 'required|in:paypal,stripe,cashOnDelivery',
+            'mobile' => 'required|regex:/^(\+?\d{1,3}[- ]?)?\d{10}$/',
+            'email' => 'nullable|email',
             'note' => 'nullable|string|max:255',
+            'payment_method' => 'required|in:paypal,stripe,cashOnDelivery',
         ]);
     
       

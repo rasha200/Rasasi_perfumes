@@ -2,6 +2,18 @@
 
 
 @section('content')
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="pagetitle" style="margin-top: 30px;">
+        <h1><i class="bi bi-envelope"></i> Contact</h1>
+    </div>
+
+    <!-- <a href="">
+        <button type="button" class="btn btn-outline-info">
+            <i class="zmdi zmdi-plus"></i> Add new contact
+        </button>
+    </a> -->
+</div>
+
 <div class="card shadow-sm rounded-lg">
     <div class="card-body" style="border: 1px solid #e7dee9; background-color: #f9fafb; border-radius: 10px;">
 

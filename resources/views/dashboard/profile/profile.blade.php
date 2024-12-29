@@ -12,13 +12,31 @@
     </nav> -->
 </div><!-- End Page Title -->
 
+@if(session('error'))
+  
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <i class="bi bi-exclamation-octagon me-1"></i>
+  {{ session('error') }}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+@endif
+
+@if(session('success'))
+   
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <i class="bi bi-check-circle me-1"></i>
+  {{ session('success') }}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+@endif
+
 <section class="section profile">
     <div class="row" >
         <!-- Profile Card -->
         <div class="col-xl-4" >
             <div class="card">
                 <div class="card-body profile-card pt-4 d-flex flex-column align-items-center" style="height: 420px;">
-                    <img src="{{ auth()->user()->profile_image ? asset('storage/' . auth()->user()->profile_image) : 'assets/img/profile-img.jpg' }}" alt="Profile" class="rounded-circle" style="width: 100px; height: 100px; margin-top:40px;margin-right:160px;">
+                    <img src="{{ auth()->user()->profile_image ? asset('storage/' . auth()->user()->profile_image) : 'assets/img/abstract-user-flat-3.png' }}" alt="Profile" class="rounded-circle" style="width: 100px; height: 100px; margin-top:40px;margin-right:160px;">
                     <h2 class="text-start w-70" style="margin-right:100px;">{{ auth()->user()->Fname }} {{ auth()->user()->Lname }}</h2>
                     <p class="text-start w70" style="margin-top:20px;"><b>Email:</b> {{ auth()->user()->email }}</p>
                     <p class="text-start w-70" style="margin-top:5px; margin-right:90px;"><b>Mobile:</b> {{ auth()->user()->mobile }}</p>

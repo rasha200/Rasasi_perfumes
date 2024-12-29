@@ -39,7 +39,7 @@ class UserController extends Controller
             'Fname' => 'required|string|min:3',
             'Lname' => 'required|string|min:3',
             'email' => 'required|email|unique:users,email,',
-            'mobile' => 'required|numeric',
+            'mobile' => 'required|regex:/^(\+?\d{1,3}[- ]?)?\d{10}$/',
             'password' => 'required|min:8|confirmed',
             'role' => 'required|string',
         ]);
@@ -91,7 +91,7 @@ class UserController extends Controller
             'Fname' => 'required|string|min:3',
             'Lname' => 'required|string|min:3',
             'email' => 'required|email|unique:users,email,' . $id,
-            'mobile' => 'required|numeric',
+            'mobile' => 'required|regex:/^(\+?\d{1,3}[- ]?)?\d{10}$/',
             'role' => 'required|string',
         ]);
 
@@ -118,7 +118,7 @@ class UserController extends Controller
             'Fname' => 'required|string|min:3',
             'Lname' => 'required|string|min:3',
             'email' => 'required|email|unique:users,email,' . auth()->id(), // Ensure unique email except for current user
-            'mobile' => 'required|numeric',
+            'mobile' => 'required|regex:/^(\+?\d{1,3}[- ]?)?\d{10}$/',
         ]);
 
         // Get the authenticated user
@@ -145,6 +145,11 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         $user = User::findOrFail($id);
+
+        if ($user->orders()->exists()) {
+            return to_route('users.index')->with('error', 'Cannot delete a user with active orders.');
+        }
+        
         $user->delete();
 
         return to_route('users.index')->with('success', 'User deleted');
@@ -153,18 +158,18 @@ class UserController extends Controller
 
 
 
-    public function trash()
-    {
-         $deletedUsers = User::onlyTrashed()->get();
-         return view('dashboard.user.trash' , ['deletedUsers' => $deletedUsers]);
-    }
+    // public function trash()
+    // {
+    //      $deletedUsers = User::onlyTrashed()->get();
+    //      return view('dashboard.user.trash' , ['deletedUsers' => $deletedUsers]);
+    // }
 
-    public function restore($id)
-    {
-        $user = User::withTrashed()->find($id);
-        $user->restore();
-        return redirect()->route('users.trash')->with('success', 'User restored successfully');
-    }
+    // public function restore($id)
+    // {
+    //     $user = User::withTrashed()->find($id);
+    //     $user->restore();
+    //     return redirect()->route('users.trash')->with('success', 'User restored successfully');
+    // }
 
 
 
@@ -178,7 +183,7 @@ public function profile()
         return redirect()->route('profile_dash.show');
     }
 
-    $orders = $user->orders()->with('orderDetails.product')->get();
+    $orders = $user->orders()->with('orderDetails.product')->orderBy('created_at', 'desc')->get();
    
     return view('profile', compact('user', 'orders'));
 }
@@ -192,7 +197,7 @@ public function profile()
           'Fname' => 'required|string|min:3|max:255',
           'Lname' => 'required|string|min:3|max:255',
           'email' => 'required|email|max:255|unique:users,email,' . auth()->id(),
-          'mobile' => 'required|numeric',
+          'mobile' => 'required|regex:/^(\+?\d{1,3}[- ]?)?\d{10}$/',
           'current_password' => 'nullable|required_with:new_password',
           'new_password' => 'nullable|min:8|confirmed',
         ]);

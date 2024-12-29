@@ -50,7 +50,7 @@ class HomeController extends Controller
 
        $discountedProducts = Product::where('discount', '>', 0)
         ->inRandomOrder() 
-        ->limit(8) 
+        ->limit(12) 
         ->get();
 
        $latestProduct = Product::latest()->take(9)->get();
