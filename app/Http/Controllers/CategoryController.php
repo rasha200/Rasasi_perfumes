@@ -107,6 +107,19 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
+
+        $hasOrders = $category->subCategories()
+        ->whereHas('products', function ($query) {
+            // Check if the product has any related orderDetails
+            $query->whereHas('orderDetails');
+        })
+        ->exists();
+
+        if ($hasOrders) {
+           return redirect()->back()->with('error', 'Cannot delete category as it has subcategories with products in orders.');
+        }
+
+        
         $category->delete(); 
         
         return to_route('categories.index')->with('success', 'Category deleted');

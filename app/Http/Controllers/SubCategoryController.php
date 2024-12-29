@@ -122,7 +122,17 @@ class SubCategoryController extends Controller
      */
     public function destroy(SubCategory $subCategory)
     {
+
+         // Check if the subcategory has products with order details (i.e., related to orders)
+         $hasOrders = $subCategory->products()->whereHas('orderDetails')->exists();
+
+         if ($hasOrders) {
+            return redirect()->back()->with('error', 'Cannot delete subcategory as it has products in orders.');
+        }
+
         $subCategory->delete(); 
         
         return to_route('subCategories.index')->with('success', 'Sub category deleted');
-    }}
+    }
+
+}
